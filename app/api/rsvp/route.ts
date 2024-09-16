@@ -30,7 +30,6 @@ const appendSpreadsheet = async (row : RSVP) => {
       await doc.loadInfo();
         
       const sheet = doc.sheetsById[Number(SHEET_ID ?? 0)];
-      console.log(sheet);
       await sheet.addRow(row);
     } catch (e) {
       console.error('Error: ', e);
@@ -40,12 +39,21 @@ const appendSpreadsheet = async (row : RSVP) => {
 export async function POST(request: Request) {
     const { nama, jumlahTamu } = await request.json();
 
-    await appendSpreadsheet({
-        nama,
-        jumlahTamu
-    })
+    try{
+        await appendSpreadsheet({
+            nama,
+            jumlahTamu
+        })
+    }
+    catch(e : any){
+        return Response.json({
+            success: false,
+            message: e?.message
+        })
+    }
 
     return Response.json({
-        nama
+        success: true,
+        message: "Success"
     })
 }
