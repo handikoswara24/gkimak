@@ -1,10 +1,11 @@
 import RSVPComponent from "@/components/RSVP/RSVPComponent";
-import Image from "next/image";
+import Song from "@/components/RSVP/Song";
 
 export default function Home() {
   return (
     <div>
       <RSVPComponent />
+      <Song />
     </div>
   );
 }
