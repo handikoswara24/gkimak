@@ -48,7 +48,7 @@ const RSVPComponent = () => {
                         <label htmlFor="nama" className='-mt-[0.35rem]'>Nama</label>
                     </FloatLabel>
                     <FloatLabel>
-                        <InputText type='number' keyfilter={"int"} className='rounded-xl w-full text-sm p-2 text-black' autoComplete='off' id="jumlahTamu" value={rsvp.jumlahTamu?.toString() ?? ""}
+                        <InputText type='number' keyfilter={"int"} className='rounded-xl w-full text-sm p-2 text-black' autoComplete='off' id="jumlahTamu" value={rsvp.jumlahTamu?.toString() == "0" ? "" : rsvp.jumlahTamu?.toString()}
                             onChange={(e) => onChangeJumlahTamu(e)} />
                         <label htmlFor="jumlahTamu" className='-mt-[0.35rem]'>Jumlah Tamu</label>
                     </FloatLabel>
