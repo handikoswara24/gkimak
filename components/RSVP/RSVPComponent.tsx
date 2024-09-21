@@ -30,25 +30,28 @@ const RSVPComponent = () => {
     }
 
     const onChangeJumlahTamu = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if(e.target.value.startsWith("0") || rsvp.jumlahTamu == 0){
+        if (e.target.value.startsWith("0") || rsvp.jumlahTamu == 0) {
             e.target.value = e.target.value.replace("0", "");
         }
-        
+
         if (e.target.value != null || e.target.value != undefined || e.target.value != "") {
-            setRSVP({...rsvp, jumlahTamu: Number(e.target.value)})
+            setRSVP({ ...rsvp, jumlahTamu: Number(e.target.value) })
         }
     }
     return (
-        <form onSubmit={onSubmit} className='mt-10'>
+        <form onSubmit={onSubmit} className='pt-10'>
+            <div className='text-center text-2xl mb-4'>
+                RSVP
+            </div>
             <div className='flex justify-center w-full'>
                 <div className='w-96 space-y-10'>
                     <FloatLabel>
-                        <InputText className='rounded-xl w-full text-sm p-2 text-black' autoComplete='off' id="nama" value={rsvp.nama}
+                        <InputText className='rounded-xl w-full text-sm p-2 text-black border border-slate-700' autoComplete='off' id="nama" value={rsvp.nama}
                             onChange={(e) => setRSVP({ ...rsvp, nama: e.target.value })} />
                         <label htmlFor="nama" className='-mt-[0.35rem]'>Nama</label>
                     </FloatLabel>
                     <FloatLabel>
-                        <InputText type='number' keyfilter={"int"} className='rounded-xl w-full text-sm p-2 text-black' autoComplete='off' id="jumlahTamu" value={rsvp.jumlahTamu?.toString() == "0" ? "" : rsvp.jumlahTamu?.toString()}
+                        <InputText type='number' keyfilter={"int"} className='rounded-xl w-full text-sm p-2 text-black border border-slate-700' autoComplete='off' id="jumlahTamu" value={rsvp.jumlahTamu?.toString() == "0" ? "" : rsvp.jumlahTamu?.toString()}
                             onChange={(e) => onChangeJumlahTamu(e)} />
                         <label htmlFor="jumlahTamu" className='-mt-[0.35rem]'>Jumlah Tamu</label>
                     </FloatLabel>
