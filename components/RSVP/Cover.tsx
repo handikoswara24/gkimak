@@ -21,7 +21,7 @@ const Cover = ({onPlay} : CoverProps) => {
             <motion.div className='absolute top-0 left-0 right-0 bottom-0 bg-cover' animate={{ y: "75%", transitionDuration: "1s" }}>
 
             </motion.div>
-            <div className='w-96 z-20 relative'>
+            <div className='w-96 z-20 relative min-h-48'>
                 <motion.div className='flex justify-center items-center absolute top-0' animate={{ opacity: 0, transitionDuration: "1s" }} >
                     <img src="https://res.cloudinary.com/dsntwgt8f/image/upload/v1726918528/gkim%20ak/hiu3ivedh9qpxugme0km.png" className='w-2/5' />
                     <div className='text-black text-center text-xl'>

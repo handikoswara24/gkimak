@@ -16,6 +16,9 @@ const config: Config = {
         cover: "#95ADAC",
         orange: "#DAB88B"
       },
+      fontFamily: {
+        montserrat: ["var(--font-montserrat)"]
+      }
     },
   },
   plugins: [],
