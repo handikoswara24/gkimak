@@ -25,3 +25,7 @@ body {
     text-wrap: balance;
   }
 }
+
+.photoswiper .swiper-slide-active{
+  scale: 1.35
+}

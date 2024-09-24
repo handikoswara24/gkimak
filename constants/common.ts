@@ -1,3 +1,13 @@
 export const SONGURL = "https://res.cloudinary.com/dsntwgt8f/video/upload/v1727046324/gkim%20ak/grfgsyszsybhdnouklcg.mp3";
 export const HEADERIMAGE = "https://res.cloudinary.com/dsntwgt8f/image/upload/v1726929568/gkim%20ak/gmvtgxieylewtijpntxv.jpg";
 export const CHURCHIMAGE = "https://res.cloudinary.com/dsntwgt8f/image/upload/v1727048667/gkim%20ak/groqmuual7cfib9cngig.jpg";
+export const PHOTO1 = "https://res.cloudinary.com/dsntwgt8f/image/upload/v1727046410/gkim%20ak/wu7l0knabxhoaceg23ap.jpg";
+export const PHOTO2 = "https://res.cloudinary.com/dsntwgt8f/image/upload/v1727046410/gkim%20ak/dvycyl9d1vio8hsi3kjc.jpg";
+export const PHOTO3 = "https://res.cloudinary.com/dsntwgt8f/image/upload/v1727046407/gkim%20ak/ctsbr02ehltco6pvxn7k.jpg";
+export const PHOTO4 = "https://res.cloudinary.com/dsntwgt8f/image/upload/v1727086223/gkim%20ak/semtred5ropyi1dwf2hm.jpg";
+export const PHOTO5 = "https://res.cloudinary.com/dsntwgt8f/image/upload/v1727046416/gkim%20ak/jlewjhm0niykfhiattvd.jpg";
+export const PHOTO6 = "https://res.cloudinary.com/dsntwgt8f/image/upload/v1727046433/gkim%20ak/fmnxj7lmnrsgn6rkggtf.jpg";
+export const PHOTO7 = "https://res.cloudinary.com/dsntwgt8f/image/upload/v1727046433/gkim%20ak/veoxnampicmsdyrietwn.jpg";
+export const PHOTO8 = "https://res.cloudinary.com/dsntwgt8f/image/upload/v1727046426/gkim%20ak/xw2xvq5ol3iyhannd8ez.jpg";
+export const PHOTO9 = "https://res.cloudinary.com/dsntwgt8f/image/upload/v1727046374/gkim%20ak/lgvwlmoqleceggyx9fh0.jpg";
+export const PHOTO10 = "https://res.cloudinary.com/dsntwgt8f/image/upload/v1727046372/gkim%20ak/ks1t1scrzrg6uw53ydqj.jpg";

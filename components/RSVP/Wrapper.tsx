@@ -11,6 +11,7 @@ import coverAtom from "@/store/coverAtom";
 import { useAtom } from "jotai";
 import { useRef, useState } from "react";
 import Timer from "../Timer/Timer";
+import Photos from "./Photos";
 
 const Wrapper = () => {
     const [cover] = useAtom(coverAtom);
@@ -38,6 +39,7 @@ const Wrapper = () => {
                         <Header />
                         <TimeAndPlace />
                         <Timer />
+                        <Photos />
                         <RSVPComponent />
                         <div className="fixed bottom-4 right-4 rounded-full bg-slate-400 cursor-pointer p-4" onClick={() => onSilent()}>
                             {muted && <SpeakerIcon className="size-6" />}
