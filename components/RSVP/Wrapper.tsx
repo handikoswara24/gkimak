@@ -54,7 +54,7 @@ const Wrapper = () => {
                         </Element>
                         <Menu />
                         <Footer />
-                        <div className="fixed bottom-4 right-4 rounded-full bg-slate-400 cursor-pointer p-4" onClick={() => onSilent()}>
+                        <div className="fixed bottom-16 z-40 right-4 rounded-full bg-slate-400 cursor-pointer p-4" onClick={() => onSilent()}>
                             {muted && <SpeakerIcon className="size-6" />}
                             {!muted && <SpeakerXIcon className="size-6" />}
                         </div>
