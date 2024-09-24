@@ -40,27 +40,29 @@ const RSVPComponent = () => {
     }
     return (
         <form onSubmit={onSubmit} className='pt-10'>
-            <div className='text-center text-2xl mb-4'>
-                RSVP
-            </div>
-            <div className='flex justify-center w-full'>
-                <div className='w-96 space-y-10'>
-                    <FloatLabel>
-                        <InputText className='rounded-xl w-full text-sm p-2 text-black border border-slate-700' autoComplete='off' id="nama" value={rsvp.nama}
-                            onChange={(e) => setRSVP({ ...rsvp, nama: e.target.value })} />
-                        <label htmlFor="nama" className='-mt-[0.35rem]'>Nama</label>
-                    </FloatLabel>
-                    <FloatLabel>
-                        <InputText type='number' keyfilter={"int"} className='rounded-xl w-full text-sm p-2 text-black border border-slate-700' autoComplete='off' id="jumlahTamu" value={rsvp.jumlahTamu?.toString() == "0" ? "" : rsvp.jumlahTamu?.toString()}
-                            onChange={(e) => onChangeJumlahTamu(e)} />
-                        <label htmlFor="jumlahTamu" className='-mt-[0.35rem]'>Jumlah Tamu</label>
-                    </FloatLabel>
-                    <div className='mt-4'>
-                        <Button type='submit' disabled={rsvp.jumlahTamu === null || !rsvp.nama || rsvp.jumlahTamu == undefined || isLoading}
-                            loading={isLoading}
-                            className='w-full border border-blue-400 text-blue-400 py-2 rounded-xl disabled:border-slate-300 disabled:text-slate-300 disabled:hover:bg-transparent disabled:hover:text-slate-300 hover:text-white hover:bg-blue-400'>
-                            Submit
-                        </Button>
+            <div className='border border-slate-300 rounded-lg mx-4 py-10'>
+                <div className='text-center text-3xl mb-4'>
+                    RSVP
+                </div>
+                <div className='flex justify-center w-full'>
+                    <div className='w-96 space-y-10'>
+                        <FloatLabel>
+                            <InputText className='rounded-xl w-full text-sm p-2 text-black border border-slate-700' autoComplete='off' id="nama" value={rsvp.nama}
+                                onChange={(e) => setRSVP({ ...rsvp, nama: e.target.value })} />
+                            <label htmlFor="nama" className='-mt-[0.35rem]'>Nama</label>
+                        </FloatLabel>
+                        <FloatLabel>
+                            <InputText type='number' keyfilter={"int"} className='rounded-xl w-full text-sm p-2 text-black border border-slate-700' autoComplete='off' id="jumlahTamu" value={rsvp.jumlahTamu?.toString() == "0" ? "" : rsvp.jumlahTamu?.toString()}
+                                onChange={(e) => onChangeJumlahTamu(e)} />
+                            <label htmlFor="jumlahTamu" className='-mt-[0.35rem]'>Jumlah Tamu</label>
+                        </FloatLabel>
+                        <div className='mt-4'>
+                            <Button type='submit' disabled={rsvp.jumlahTamu === null || !rsvp.nama || rsvp.jumlahTamu == undefined || isLoading}
+                                loading={isLoading}
+                                className='w-full border border-blue-400 text-blue-400 py-2 rounded-xl disabled:border-slate-300 disabled:text-slate-300 disabled:hover:bg-transparent disabled:hover:text-slate-300 hover:text-white hover:bg-blue-400'>
+                                Konfirmasi
+                            </Button>
+                        </div>
                     </div>
                 </div>
             </div>

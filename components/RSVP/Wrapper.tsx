@@ -12,6 +12,9 @@ import { useAtom } from "jotai";
 import { useRef, useState } from "react";
 import Timer from "../Timer/Timer";
 import Photos from "./Photos";
+import { Element } from "react-scroll";
+import Menu from "./Menu";
+import Footer from "./Footer";
 
 const Wrapper = () => {
     const [cover] = useAtom(coverAtom);
@@ -29,18 +32,28 @@ const Wrapper = () => {
         }
     }
     return (
-        <div className="bg-white text-black font-montserrat">
+        <div className="bg-white text-black font-montserrat pb-10">
             <div className="mx-auto max-w-md">
                 {cover == 0 && (
                     <Cover onPlay={onPlay} />
                 )}
                 {cover == 1 && (
                     <div className="pb-6">
-                        <Header />
-                        <TimeAndPlace />
-                        <Timer />
-                        <Photos />
-                        <RSVPComponent />
+                        <Element name="home">
+                            <Header />
+                        </Element>
+                        <Element name="acara">
+                            <TimeAndPlace />
+                            <Timer />
+                        </Element>
+                        <Element name="photo">
+                            <Photos />
+                        </Element>
+                        <Element name="rsvp">
+                            <RSVPComponent />
+                        </Element>
+                        <Menu />
+                        <Footer />
                         <div className="fixed bottom-4 right-4 rounded-full bg-slate-400 cursor-pointer p-4" onClick={() => onSilent()}>
                             {muted && <SpeakerIcon className="size-6" />}
                             {!muted && <SpeakerXIcon className="size-6" />}
