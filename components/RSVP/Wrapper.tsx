@@ -32,7 +32,7 @@ const Wrapper = () => {
         }
     }
     return (
-        <div className="bg-white text-black font-montserrat pb-10">
+        <div className="bg-white text-black font-montserrat">
             <div className="mx-auto max-w-md">
                 {cover == 0 && (
                     <Cover onPlay={onPlay} />

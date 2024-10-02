@@ -5,8 +5,8 @@ const TimeAndPlace = () => {
         <>
             <div className='flex justify-center mt-4 mx-4'>
                 <div className='border-2 rounded-xl border-orange'>
-                    <div className='mt-8 border-t border-orange text-xl text-center py-4'>
-                        HUT ke 35 GKIm Amanat Kristus
+                    <div className='mt-8 border-t border-orange text-xl text-center py-4 font-bold'>
+                        HUT 35<sup>th</sup> GKIm Amanat Kristus
                     </div>
                     <div className='flex items-center px-8 pb-6'>
                         <div className='text-3xl font-semibold pr-8 space-y-2'>
@@ -25,18 +25,18 @@ const TimeAndPlace = () => {
                                 <div>
                                     Tanggal dan Waktu
                                 </div>
-                                <div className='font-semibold'>
+                                <div className='font-bold text-xl'>
                                     Kamis 17 Oktober 2024
                                 </div>
-                                <div className='font-semibold'>
-                                    17.00 WIB
+                                <div className='font-bold text-xl'>
+                                    18.00 WIB
                                 </div>
                             </div>
                             <div className='pt-4'>
                                 <div>
                                     Tempat
                                 </div>
-                                <div className='font-semibold'>
+                                <div className='font-bold text-xl'>
                                     GKIm Amanat Kristus
                                 </div>
                                 <div>

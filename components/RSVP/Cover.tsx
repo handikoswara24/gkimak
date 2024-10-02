@@ -6,10 +6,10 @@ import { useAtom } from 'jotai'
 import React, { useRef } from 'react'
 
 type CoverProps = {
-    onPlay : () => void
+    onPlay: () => void
 }
 
-const Cover = ({onPlay} : CoverProps) => {
+const Cover = ({ onPlay }: CoverProps) => {
     const [, setCover] = useAtom(coverAtom);
 
     const onOpen = () => {
@@ -34,10 +34,23 @@ const Cover = ({onPlay} : CoverProps) => {
                     </div>
                 </motion.div>
                 <motion.div className='flex justify-center items-center absolute top-0 text-black w-full' animate={{ opacity: 1 }} initial={{ opacity: 0 }} transition={{ delay: 1 }}>
-                    <div className='flex flex-col justify-center items-center border border-orange p-4 rounded-xl'>
-                        <img src="https://res.cloudinary.com/dsntwgt8f/image/upload/v1726918528/gkim%20ak/hiu3ivedh9qpxugme0km.png" className='w-20' />
-                        <div className='mt-3 border border-orange rounded-xl py-2 px-4 cursor-pointer hover:text-white hover:bg-orange' onClick={() => onOpen()}>
-                            Buka Undangan
+                    <div>
+                        <div className='text-center text-3xl mb-6 space-y-3 font-bold'>
+                            <div>
+                                Pengucapan Syukur
+                            </div>
+                            <div>
+                                HUT 35<sup>th</sup>
+                            </div>
+                            <div>
+                                GKIm Amanat Kristus
+                            </div>
+                        </div>
+                        <div className='flex flex-col justify-center items-center border border-orange p-4 rounded-xl'>
+                            <img src="https://res.cloudinary.com/dsntwgt8f/image/upload/v1726918528/gkim%20ak/hiu3ivedh9qpxugme0km.png" className='w-20' />
+                            <div className='mt-3 border border-orange rounded-xl py-2 px-4 cursor-pointer hover:text-white hover:bg-orange' onClick={() => onOpen()}>
+                                Buka Undangan
+                            </div>
                         </div>
                     </div>
                 </motion.div>

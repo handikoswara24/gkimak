@@ -4,11 +4,11 @@ import React from 'react'
 import TimerHooks from './TimerHooks'
 
 const Timer = () => {
-    const { days, hours, minutes, seconds } = TimerHooks(new Date(2024, 9, 17, 17))
+    const { days, hours, minutes, seconds } = TimerHooks(new Date(2024, 9, 17, 18))
     return (
         <div className='bg-cover p-4 mt-8'>
             <div className='text-white text-xs text-center mb-4'>
-                Hitung Mundur Menuju HUT ke 35 GKIm Amanat Kristus
+                Hitung Mundur Menuju HUT 35<sup>th</sup> GKIm Amanat Kristus
             </div>
             <div className='flex justify-center gap-x-4 font-montserrat'>
                 <div className='text-center text-orange bg-white rounded-xl px-4 py-2 min-w-16'>
