@@ -18,7 +18,7 @@ const Cover = ({ onPlay }: CoverProps) => {
     }
     return (
         <div className='w-full h-screen flex justify-center items-center relative bg-white max-h-screen overflow-hidden'>
-            <motion.div className='absolute top-0 left-0 right-0 bottom-0 bg-cover' animate={{ y: "75%", transitionDuration: "1s" }}>
+            <motion.div className='absolute top-0 left-0 right-0 bottom-0 bg-cover' animate={{ y: "83%", transitionDuration: "1s" }}>
 
             </motion.div>
             <div className='w-96 z-20 relative min-h-48'>
