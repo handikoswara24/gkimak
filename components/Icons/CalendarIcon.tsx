@@ -1,4 +1,4 @@
-import { IconType } from '@/type/common'
+import { IconType } from '@/types/common'
 import React from 'react'
 
 const CalendarIcon = ({ className }: IconType) => {

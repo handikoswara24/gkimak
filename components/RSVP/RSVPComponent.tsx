@@ -1,6 +1,6 @@
 'use client'
 
-import { RSVP } from '@/type/rsvp'
+import { RSVP } from '@/types/rsvp'
 import React, { useState } from 'react'
 import { FloatLabel } from 'primereact/floatlabel'
 import { InputText } from 'primereact/inputtext'

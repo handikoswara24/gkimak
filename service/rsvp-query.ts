@@ -1,6 +1,6 @@
-import { RSVP } from "@/type/rsvp";
+import { RSVP } from "@/types/rsvp";
 import http from "./base-query";
-import { ResultType } from "@/type/common";
+import { ResultType } from "@/types/common";
 import { useMutation } from "react-query";
 
 const addRSVP = async (rsvp: RSVP) => {

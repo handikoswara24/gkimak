@@ -1,4 +1,4 @@
-import { RSVP } from '@/type/rsvp';
+import { RSVP } from '@/types/rsvp';
 import { JWT } from 'google-auth-library';
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 
