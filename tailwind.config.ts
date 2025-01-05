@@ -13,6 +13,7 @@ const config: Config = {
   theme: {
     fontFamily: {
       satoshi: ["Satoshi", "sans-serif"],
+      montserrat: ["var(--font-montserrat)"]
     },
     screens: {
       "2xsm": "375px",
@@ -22,6 +23,10 @@ const config: Config = {
     },
     extend: {
       colors: {
+        background: "var(--background)",
+        foreground: "var(--foreground)",
+        cover: "#95ADAC",
+        orange: "#DAB88B",
         current: "currentColor",
         transparent: "transparent",
         white: "#FFFFFF",

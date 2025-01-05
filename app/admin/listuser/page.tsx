@@ -1,8 +1,9 @@
+import ListUser from '@/components/User/ListUser'
 import React from 'react'
 
 const ListUserPage = () => {
   return (
-    <div>ListUserPage</div>
+    <ListUser />
   )
 }
 

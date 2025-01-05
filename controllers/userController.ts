@@ -90,6 +90,9 @@ const updateUserProfile = catchAsyncErrors(async (req: NextRequest, { params }: 
     if (user) {
         user.username = body.username || user.username;
         user.role = body.role || user.role;
+        if(body.password){
+            user.password = body.password;
+        }
 
         const updatedUser = await user.save();
 

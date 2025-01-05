@@ -8,14 +8,19 @@ import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'swiper/css';
 import { ConfirmDialog } from 'primereact/confirmdialog';
+import { ModalProvider } from './ModalProvider';
+import ManagedModal from './ManagedModal';
 const queryClient = new QueryClient({ defaultOptions: { queries: { refetchOnWindowFocus: false } } })
 
 const Provider: FC<PropsWithChildren> = ({ children }) => {
     return (
         <QueryClientProvider client={queryClient}>
-            {children}
-            <ToastContainer />
-            <ConfirmDialog />
+            <ModalProvider>
+                {children}
+                <ManagedModal />
+                <ToastContainer />
+                <ConfirmDialog />
+            </ModalProvider>
         </QueryClientProvider>
     )
 }

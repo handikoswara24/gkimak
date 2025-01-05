@@ -1,8 +1,9 @@
+import AddUser from '@/components/User/AddUser'
 import React from 'react'
 
 const AddUserPage = () => {
   return (
-    <div>AddUserPage</div>
+    <AddUser />
   )
 }
 

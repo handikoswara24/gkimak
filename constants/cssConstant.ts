@@ -1,0 +1,2 @@
+export const acceptClassName = "border border-blue-500 outline-none bg-blue-500 text-white px-4 ml-3 py-2";
+export const rejectClassName = "border border-blue-500 outline-none text-blue-500 bg-white px-4 ml-3 py-2";

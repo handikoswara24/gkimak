@@ -33,6 +33,11 @@ export type LoginOutput = {
     token: string
 }
 
+export type UserCreateResponse = {
+    _id : string,
+    username : string
+}
+
 export interface IUserDocument extends Document {
     username: string,
     password: string,

@@ -6,3 +6,7 @@ export type ResultType = {
 export type IconType = {
     className : string
 }
+
+export type MessageType = {
+    message : string
+}
