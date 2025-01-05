@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import ClickOutside from "./ClickOutside";
 import SidebarItem from "./SidebarItem";
 import useLocalStorage from "../utils/useLocalStorage";
+import BookIcon from "../Icons/BookIcon";
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -41,6 +42,18 @@ const menuGroups = [
         children: [
           { label: "List Users", route: "/admin/listuser" },
           { label: "Add User", route: "/admin/adduser" },
+        ]
+      },
+      {
+        icon: (
+          <BookIcon className="size-6" />
+        ),
+        label: "Renungan Harian",
+        route: "#",
+        roles: ["admin"],
+        children: [
+          { label: "List Renungan Harian", route: "/admin/renunganharian" },
+          { label: "Add Renungan Harian", route: "/admin/addrenunganharian" },
         ]
       },
     ],
