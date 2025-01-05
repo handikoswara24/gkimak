@@ -4,6 +4,7 @@ import { Document } from 'mongoose';
 
 export type User = {
     username: string,
+    name: string,
     role: string,
     _id: string,
 }
@@ -15,6 +16,7 @@ export type ListUser = {
 export type UserInput = {
     username: string,
     password: string,
+    name: string,
     role?: string
 }
 
@@ -27,12 +29,14 @@ export type LoginOutput = {
     _id: string,
     username: string,
     role: string,
+    name: string,
     token: string
 }
 
 export interface IUserDocument extends Document {
     username: string,
     password: string,
+    name: string,
     role: string,
 }
 

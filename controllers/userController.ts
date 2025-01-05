@@ -7,7 +7,7 @@ import { Pagination } from "@/types/pagination";
 
 const registerUser = catchAsyncErrors(async (req: NextRequest) => {
     const body = await req.json();
-    const { username, password, role } = body;
+    const { username, password, role, name } = body;
 
     if (username) {
         const userExists = await User.findOne({ username })
@@ -20,7 +20,8 @@ const registerUser = catchAsyncErrors(async (req: NextRequest) => {
     const user = await User.create({
         username,
         password,
-        role
+        role,
+        name
     })
 
     if (user) {
@@ -42,6 +43,7 @@ const authAdmin = catchAsyncErrors(async (req: NextRequest) => {
         return NextResponse.json({
             _id: user._id,
             username: user.username,
+            name: user.name,
             role: user.role,
             token: generateToken(user._id.toString()),
         });
