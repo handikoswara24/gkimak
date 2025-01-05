@@ -32,7 +32,7 @@ const UserForm = ({ id, user }: UserFormProps) => {
       updateUser(userData, {
         onSuccess: (data) => {
           toast.success("Success update user!");
-          queryClient.invalidateQueries({ queryKey: ["AllUser"] })
+          queryClient.invalidateQueries({ queryKey: ["alluser"] })
           closeModal();
         },
         onError: (err: any) => {

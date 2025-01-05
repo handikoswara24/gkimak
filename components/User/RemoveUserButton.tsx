@@ -25,7 +25,7 @@ const RemoveUserButton = ({ data }: RemoveUserProps) => {
                 deleteUser(id, {
                     onSuccess: () => {
                         toast.success("Success delete user");
-                        queryClient.invalidateQueries(['AllUser']);
+                        queryClient.invalidateQueries(['alluser']);
                     },
                     onError: (err) => {
                         toast.error("Error when delete user");

@@ -41,7 +41,7 @@ const updateUser = async (id: string, user: UserInput) => {
 const deleteUser = async (id: string) => {
     const token = localStorage.getItem(TOKEN)?.replaceAll('"', "") ?? "";
 
-    const result = await http.delete<MessageType>(`/api/users/${id}`, {
+    const result = await http.delete<MessageType>(`/api/user/${id}`, {
         headers: {
             Authorization: `Bearer ${token}`,
         }
