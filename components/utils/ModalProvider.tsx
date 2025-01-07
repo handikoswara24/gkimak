@@ -3,7 +3,7 @@
 import React, { useContext, PropsWithChildren, createContext, useReducer } from 'react';
 
 type MODAL_VIEWS = "QRUSER" 
-                  | "GUESTFORM"
+                  | "RENUNGANFORM"
                   | "USERFORM"
 
 type State = {

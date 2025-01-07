@@ -1,8 +1,8 @@
 import { createEdgeRouter } from "next-connect";
-import { deleteUser, updateUserProfile } from "@/controllers/userController";
 import { admin, protect } from "@/middlewares/auth";
 import { NextRequestWithUser } from "@/types/user";
 import dbConnect from "@/utils/dbConnect";
+import { deleteRenungan, updateRenungan } from "@/controllers/renunganHarianController";
 
 interface RequestContext {
     params: {
@@ -12,8 +12,8 @@ interface RequestContext {
 
 const router = createEdgeRouter<NextRequestWithUser, RequestContext>();
 dbConnect();
-router.use(protect).put(updateUserProfile);
-router.use(protect).delete(deleteUser);
+router.use(protect).put(updateRenungan);
+router.use(protect).delete(deleteRenungan);
 export async function PUT(request: NextRequestWithUser, ctx: RequestContext): Promise<any> {
     return router.run(request, ctx);
 }
