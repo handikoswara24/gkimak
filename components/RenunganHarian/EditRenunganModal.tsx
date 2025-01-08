@@ -1,3 +1,4 @@
+'use client'
 import { RenunganHarianInput } from '@/types/renunganharian'
 import React from 'react'
 import RenunganHarianForm from './RenunganHarianForm'

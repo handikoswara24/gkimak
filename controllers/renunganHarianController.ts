@@ -33,6 +33,7 @@ const addRenungan = catchAsyncErrors(async (req: NextRequest) => {
         date: body.date,
         title: body.title,
         slug: Slugtify(body.title),
+        verse: body.verse,
         image
     })
 
@@ -129,6 +130,7 @@ const updateRenungan = catchAsyncErrors(async (req: NextRequest, { params }: { p
     renungan.author =  body.author;
     renungan.date = body.date;
     renungan.title = body.title;
+    renungan.verse = body.verse;
     renungan.slug = Slugtify(body.title);
     await renungan.save();
 

@@ -5,5 +5,6 @@ export const DEFAULTRENUNGANHARIAN : RenunganHarianInput = {
     content: "",
     date: new Date(new Date().setHours(0,0,0,0)),
     image: [],
-    title: ""
+    title: "",
+    verse: ""
 }

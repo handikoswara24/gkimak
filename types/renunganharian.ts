@@ -6,6 +6,7 @@ export type RenunganHarianType = {
     date: Date,
     author: string,
     title: string,
+    verse: string,
     image: ImageRenungan[],
 }
 
@@ -19,6 +20,7 @@ export type RenunganHarianInput = {
     date: Date,
     author: string,
     title: string,
+    verse: string,
     image: string[],
 }
 
@@ -32,6 +34,7 @@ export interface IRenunganHarianDocument extends Document {
     date: Date,
     author: string,
     title: string,
+    verse: string,
     image: ImageRenungan[]
 }
 

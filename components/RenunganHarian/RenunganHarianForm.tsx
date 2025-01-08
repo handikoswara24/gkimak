@@ -2,7 +2,6 @@
 
 import { RenunganHarianInput } from '@/types/renunganharian';
 import React, { useEffect, useMemo, useRef, useState } from 'react'
-import QuillEditor from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { FloatLabel } from 'primereact/floatlabel'
 import { InputText } from 'primereact/inputtext'
@@ -15,13 +14,14 @@ import { useQueryClient } from 'react-query';
 import { useModalAction } from '../utils/ModalProvider';
 import { useAddRenunganMutation, useUpdateRenunganMutation } from '@/service/renungan-query';
 import { toast } from 'react-toastify';
-import { DEFAULTRENUNGANHARIAN } from '@/constants/renunganHarianConstant';
+import dynamic from 'next/dynamic';
 
 type RenunganHarianFormType = {
   data: RenunganHarianInput,
   id?: string
 }
 
+const QuillEditor = dynamic(() => import("react-quill"), { ssr: false });
 
 const RenunganHarianForm = ({ data, id }: RenunganHarianFormType) => {
   const queryClient = useQueryClient();
@@ -157,24 +157,30 @@ const RenunganHarianForm = ({ data, id }: RenunganHarianFormType) => {
           <div className=''>
             <FloatLabel>
               <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="title" value={value.title} onChange={(e) => setValue({ ...value, title: e.target.value })} />
-              <label htmlFor="title" className='-mt-[0.35rem]'>Title</label>
+              <label htmlFor="title" className='-mt-[0.35rem]'>Judul</label>
+            </FloatLabel>
+          </div>
+          <div className=''>
+            <FloatLabel>
+              <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="verse" value={value.verse} onChange={(e) => setValue({ ...value, verse: e.target.value })} />
+              <label htmlFor="verse" className='-mt-[0.35rem]'>Ayat</label>
             </FloatLabel>
           </div>
           <div className=''>
             <FloatLabel>
               <Calendar className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="date" value={new Date(value.date)} onChange={(e) => setValue({ ...value, date: e.value ?? new Date() })}></Calendar>
-              <label htmlFor="date" className='-mt-[0.35rem]'>Date</label>
+              <label htmlFor="date" className='-mt-[0.35rem]'>Tanggal</label>
             </FloatLabel>
           </div>
           <div className=''>
             <FloatLabel>
               <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="author" value={value.author} onChange={(e) => setValue({ ...value, author: e.target.value })} />
-              <label htmlFor="title" className='-mt-[0.35rem]'>Author</label>
+              <label htmlFor="title" className='-mt-[0.35rem]'>Pembuat</label>
             </FloatLabel>
           </div>
         </div>
         <div className='mt-2'>
-          <label className='pl-2 text-xs text-slate-500'>Editor Content</label>
+          <label className='pl-2 text-xs text-slate-500'>Konten</label>
           <QuillEditor
             //@ts-ignore
             ref={(el) => (quill.current = el)}

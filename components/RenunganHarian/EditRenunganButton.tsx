@@ -1,3 +1,4 @@
+'use client'
 import { RenunganHarianInput, RenunganHarianType } from '@/types/renunganharian'
 import React from 'react'
 import { useModalAction } from '../utils/ModalProvider'
@@ -12,7 +13,8 @@ const EditRenunganButton = ({data} : EditRenunganProps) => {
         content: data.content,
         date: data.date,
         image: data.image.map(e => e.url),
-        title: data.title
+        title: data.title,
+        verse: data.verse
     }
     return (
         <div className="mr-3">

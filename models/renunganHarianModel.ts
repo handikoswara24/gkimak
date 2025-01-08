@@ -17,6 +17,9 @@ const renunganHarianModel = new mongoose.Schema({
     slug: {
         type: String
     },
+    verse: {
+        type: String
+    },
     image : [{
         url : {
             type: String

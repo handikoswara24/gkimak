@@ -1,4 +1,4 @@
-
+'use client'
 import { acceptClassName, rejectClassName } from '@/constants/cssConstant'
 import { useDeleteRenunganMutation } from '@/service/renungan-query'
 import { RenunganHarianType } from '@/types/renunganharian'

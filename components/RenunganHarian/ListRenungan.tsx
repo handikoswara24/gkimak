@@ -36,9 +36,10 @@ const ListRenungan = () => {
             {!(isFetching || isLoading) && (
                 <div>
                     <DataTable value={data?.renungan} className='text-xs'>
-                        <Column field="title" header="Title"></Column>
-                        <Column field="author" header="Author"></Column>
-                        <Column body={DateFormat} header="Date"></Column>
+                        <Column field="title" header="Judul"></Column>
+                        <Column field="verse" header="Ayat"></Column>
+                        <Column field="author" header="Pembuat"></Column>
+                        <Column body={DateFormat} header="Tangal"></Column>
                         <Column header="Action" body={ButtonRenungan} className='w-24'></Column>
                     </DataTable>
                     <Paginator first={page - 1} style={{ scale: 0.8 }} rows={numberPerPage}
