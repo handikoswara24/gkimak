@@ -1,0 +1,28 @@
+import { useGetAllRenungan } from '@/service/renungan-query'
+import { ProgressSpinner } from 'primereact/progressspinner';
+import React, { useState } from 'react'
+import RenunganCard from './RenunganCard';
+
+const RenunganCardWrapper = () => {
+    const [page, setPage] = useState(1);
+    const { data, isLoading, isFetching } = useGetAllRenungan(page, 20);
+
+    if (isLoading || isFetching) {
+        return (
+            <div className='flex justify-center'>
+                <ProgressSpinner className='size-10' />
+            </div>
+        )
+    }
+    return (
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-4 gap-4'>
+            {data?.renungan && data.renungan.map((d) => {
+                return (
+                    <RenunganCard data={d} />
+                )
+            })}
+        </div>
+    )
+}
+
+export default RenunganCardWrapper

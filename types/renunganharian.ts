@@ -8,6 +8,7 @@ export type RenunganHarianType = {
     title: string,
     verse: string,
     image: ImageRenungan[],
+    slug: string
 }
 
 export type ListRenungan = {
@@ -35,7 +36,8 @@ export interface IRenunganHarianDocument extends Document {
     author: string,
     title: string,
     verse: string,
-    image: ImageRenungan[]
+    image: ImageRenungan[],
+    slug: string
 }
 
 export interface IRenunganHarian extends Document {
