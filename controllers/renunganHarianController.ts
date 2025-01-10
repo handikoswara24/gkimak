@@ -161,6 +161,22 @@ const deleteRenungan = catchAsyncErrors(async (req: NextRequest, { params }: { p
     }
 });
 
+const getRenunganBySlug = catchAsyncErrors(async (req: NextRequest, { params }: { params: { slug: string } }) => {
+    const slug = params.slug;
+
+    if(!slug){
+        throw new ErrorHandler("Renungan Not Found", 404);
+    }
+
+    const renungan = await RenunganHarianModel.findOne({slug});
+
+    if(!renungan){
+        throw new ErrorHandler("Renungan Not Found", 404);
+    }
+
+    return NextResponse.json(renungan);
+});
+
 const template = catchAsyncErrors(async (req: NextRequest) => {
     return NextResponse.json({
 
@@ -172,5 +188,6 @@ export {
     updateRenungan,
     getAllRenungan,
     deleteRenungan,
-    getAllRenunganAdmin
+    getAllRenunganAdmin,
+    getRenunganBySlug
 }
