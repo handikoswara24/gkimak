@@ -6,9 +6,9 @@ type EditRenunganProps = {
     data: RenunganHarianType
 }
 
-const EditRenunganButton = ({data} : EditRenunganProps) => {
+const EditRenunganButton = ({ data }: EditRenunganProps) => {
     const { openModal } = useModalAction();
-    const renungan : RenunganHarianInput = {
+    const renungan: RenunganHarianInput = {
         author: data.author,
         content: data.content,
         date: data.date,
@@ -18,7 +18,7 @@ const EditRenunganButton = ({data} : EditRenunganProps) => {
     }
     return (
         <div className="mr-3">
-            <i className="pi pi-user-edit text-lg text-blue-300 cursor-pointer" onClick={() => openModal("RENUNGANFORM", {id: data._id, renungan})}></i>
+            <i className="pi pi-user-edit text-lg text-blue-300 cursor-pointer" onClick={() => openModal("RENUNGANFORM", { id: data._id, renungan })}></i>
         </div>
     )
 }
