@@ -56,25 +56,29 @@ const UserForm = ({ id, user }: UserFormProps) => {
     <form className='mt-12 space-y-8 text-xs' onSubmit={onSubmit}>
       <div className=''>
         <FloatLabel>
-          <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="username" value={userData?.username} onChange={(e) => setUserData({ ...userData, username: e.target.value })} />
+          <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="username"
+            value={userData?.username} onChange={(e) => setUserData({ ...userData, username: e.target.value })} autoComplete='off' />
           <label htmlFor="username" className='-mt-[0.35rem]'>Username</label>
         </FloatLabel>
       </div>
       <div className=''>
         <FloatLabel>
-          <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="name" value={userData?.name} onChange={(e) => setUserData({ ...userData, name: e.target.value })} />
+          <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="name"
+            value={userData?.name} onChange={(e) => setUserData({ ...userData, name: e.target.value })} autoComplete='off' />
           <label htmlFor="name" className='-mt-[0.35rem]'>Name</label>
         </FloatLabel>
       </div>
       <div className=''>
         <FloatLabel>
-          <InputText type='password' className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="password" value={userData?.password} onChange={(e) => setUserData({ ...userData, password: e.target.value })} />
+          <InputText type='password' className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="password"
+            value={userData?.password} onChange={(e) => setUserData({ ...userData, password: e.target.value })} autoComplete='off' />
           <label htmlFor="password" className='-mt-[0.35rem]'>Password</label>
         </FloatLabel>
       </div>
       <div className=''>
         <FloatLabel>
-          <InputText type="text" className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="role" value={userData?.role ?? ""} onChange={(e) => setUserData({ ...userData, role: e.target.value })} />
+          <InputText type="text" className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="role"
+            value={userData?.role ?? ""} onChange={(e) => setUserData({ ...userData, role: e.target.value })} autoComplete='off' />
           <label htmlFor="role" className='-mt-[0.35rem]'>Role</label>
         </FloatLabel>
       </div>

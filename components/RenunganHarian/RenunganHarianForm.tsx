@@ -28,7 +28,7 @@ const RenunganHarianForm = ({ data, id }: RenunganHarianFormType) => {
   const { closeModal } = useModalAction();
   const [updateImage, setUpdateImage] = useState(false);
   const [user] = useAtom(userDataAtom);
-  const [value, setValue] = useState({...data});
+  const [value, setValue] = useState({ ...data });
   const { mutate: addRenungan, isLoading: loadingAdd } = useAddRenunganMutation();
   const { mutate: updateRenungan, isLoading: loadingUpdate } = useUpdateRenunganMutation(id ?? "");
 
@@ -93,7 +93,7 @@ const RenunganHarianForm = ({ data, id }: RenunganHarianFormType) => {
   ];
 
   const resetData = () => {
-    setValue({...data, author: user?.name ?? ""})
+    setValue({ ...data, author: user?.name ?? "" })
   }
 
   const onSubmit = (e: React.FormEvent) => {
@@ -104,8 +104,8 @@ const RenunganHarianForm = ({ data, id }: RenunganHarianFormType) => {
     }
 
     if (id) {
-      const input = {...value};
-      if(!updateImage){
+      const input = { ...value };
+      if (!updateImage) {
         input.image = [];
       }
       updateRenungan(input, {
@@ -120,7 +120,7 @@ const RenunganHarianForm = ({ data, id }: RenunganHarianFormType) => {
       })
     }
     else {
-      const input = {...value};
+      const input = { ...value };
       resetData();
       addRenungan(input, {
         onSuccess: (data) => {
@@ -138,7 +138,7 @@ const RenunganHarianForm = ({ data, id }: RenunganHarianFormType) => {
 
   return (
     <div>
-      <div className='h-3 font-semibold mb-10' onClick={() => {console.log(value, data); resetData()}}>Renungan Harian</div>
+      <div className='h-3 font-semibold mb-10'>Renungan Harian</div>
       <form onSubmit={onSubmit}>
         <div className='mb-8'>
           <div className='pl-2 text-xs text-slate-500'>
@@ -156,25 +156,29 @@ const RenunganHarianForm = ({ data, id }: RenunganHarianFormType) => {
         <div className='space-y-8'>
           <div className=''>
             <FloatLabel>
-              <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="title" value={value.title} onChange={(e) => setValue({ ...value, title: e.target.value })} />
+              <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="title" value={value.title}
+                onChange={(e) => setValue({ ...value, title: e.target.value })} autoComplete='off' />
               <label htmlFor="title" className='-mt-[0.35rem]'>Judul</label>
             </FloatLabel>
           </div>
           <div className=''>
             <FloatLabel>
-              <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="verse" value={value.verse} onChange={(e) => setValue({ ...value, verse: e.target.value })} />
+              <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="verse" value={value.verse}
+                onChange={(e) => setValue({ ...value, verse: e.target.value })} autoComplete='off' />
               <label htmlFor="verse" className='-mt-[0.35rem]'>Ayat</label>
             </FloatLabel>
           </div>
           <div className=''>
             <FloatLabel>
-              <Calendar className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="date" value={new Date(value.date)} onChange={(e) => setValue({ ...value, date: e.value ?? new Date() })}></Calendar>
+              <Calendar className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="date" value={new Date(value.date)}
+                onChange={(e) => setValue({ ...value, date: e.value ?? new Date() })}></Calendar>
               <label htmlFor="date" className='-mt-[0.35rem]'>Tanggal</label>
             </FloatLabel>
           </div>
           <div className=''>
             <FloatLabel>
-              <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="author" value={value.author} onChange={(e) => setValue({ ...value, author: e.target.value })} />
+              <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="author" value={value.author}
+                onChange={(e) => setValue({ ...value, author: e.target.value })} autoComplete='off' />
               <label htmlFor="title" className='-mt-[0.35rem]'>Pembuat</label>
             </FloatLabel>
           </div>

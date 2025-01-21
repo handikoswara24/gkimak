@@ -12,10 +12,12 @@ const ManagedModal = () => {
     const { closeModal } = useModalAction();
     const EditUserForm = dynamic(() => import("@components/User/EditUserModal"));
     const EditRenunganForm = dynamic(() => import("@components/RenunganHarian/EditRenunganModal"));
+    const EditJemaatForm = dynamic(() => import("@components/Jemaat/EditJemaatModal"));
     return (
         <Sidebar visible={isOpen} fullScreen onHide={closeModal} blockScroll className={view?.toLocaleLowerCase() + "modalcustom"}>
             {view == "USERFORM" && <EditUserForm id={data.id} user={data.userInput} />}
             {view == "RENUNGANFORM" && <EditRenunganForm id={data.id} renungan={data.renungan} />}
+            {view == "JEMAATFORM" && <EditJemaatForm id={data.id} jemaat={data.jemaat} />}
         </Sidebar>
     )
 }

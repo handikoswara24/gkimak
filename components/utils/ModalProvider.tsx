@@ -5,6 +5,7 @@ import React, { useContext, PropsWithChildren, createContext, useReducer } from 
 type MODAL_VIEWS = "QRUSER" 
                   | "RENUNGANFORM"
                   | "USERFORM"
+                  | "JEMAATFORM"
 
 type State = {
     view?: MODAL_VIEWS,
