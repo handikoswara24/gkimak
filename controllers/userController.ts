@@ -57,7 +57,27 @@ const authAdmin = catchAsyncErrors(async (req: NextRequest) => {
 const getAllUser = catchAsyncErrors(async (req: NextRequest) => {
     const page = Number(req.nextUrl.searchParams.get("page") ?? 1);
     const numberPerPage = Number(req.nextUrl.searchParams.get("numberPerPage") ?? 20);
-    const users = await User.find({}).select("-password")
+    const search = req.nextUrl.searchParams.get("search") ?? "";
+    let query = {};
+
+    if(search){
+        query = {
+            "$or" : [
+                {
+                    username : {
+                        $regex : search
+                    }
+                },
+                {
+                    name: {
+                        $regex : search
+                    }
+                }
+            ]
+        }
+    }
+
+    const users = await User.find(query).select("-password")
         .skip((page - 1) * numberPerPage).limit(numberPerPage);
     const total = await User.countDocuments();
     const pagination: Pagination = {
@@ -88,6 +108,7 @@ const updateUserProfile = catchAsyncErrors(async (req: NextRequest, { params }: 
     const user = await User.findById(params.id);
     const body = await req.json();
     if (user) {
+        user.name = body.name || user.name;
         user.username = body.username || user.username;
         user.role = body.role || user.role;
         if(body.password){

@@ -4,9 +4,9 @@ import { ListUser, UserCreateResponse, UserInput } from "@/types/user";
 import { useMutation, useQuery } from "react-query";
 import { MessageType } from "@/types/common";
 
-const getAllUser = async (page : number, numberPerPage : number) => {
+const getAllUser = async (page : number, numberPerPage : number, search: string) => {
     const token = localStorage.getItem(TOKEN)?.replaceAll('"', "") ?? "";
-    const result = await http.get<ListUser>(`/api/user?page=${page}&numberPerPage=${numberPerPage}`, {
+    const result = await http.get<ListUser>(`/api/user?page=${page}&numberPerPage=${numberPerPage}&search=${search}`, {
         headers: {
             Authorization: `Bearer ${token}`,
         }
@@ -64,8 +64,8 @@ const resetPassword = async (id : string) => {
     return result.data;
 }
 
-export const useGetAllUser = (page : number, numberPerPage : number) => {
-    return useQuery(["alluser", page, numberPerPage], () => getAllUser(page, numberPerPage))
+export const useGetAllUser = (page : number, numberPerPage : number, search: string) => {
+    return useQuery(["alluser", page, numberPerPage, search], () => getAllUser(page, numberPerPage, search))
 }
 
 export const useAddUserMutation = () => {

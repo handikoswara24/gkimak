@@ -7,20 +7,29 @@ import { Column } from 'primereact/column';
 import { Paginator } from 'primereact/paginator';
 import React, { useState } from 'react'
 import UserButtons from './UserButtons';
+import SearchBox from '../UI/SearchBox';
 
 const ListUser = () => {
     const [page, setPage] = useState(1);
     const [numberPerPage, setNumberPerPage] = useState(20);
-    const { data, isLoading, isFetching } = useGetAllUser(page, numberPerPage);
-    const ButtonUser = (data : User) => {
+    const [search, setSearch] = useState("");
+    const { data, isLoading, isFetching } = useGetAllUser(page, numberPerPage, search);
+    const ButtonUser = (data: User) => {
         return (
-            <UserButtons data={data}/>
+            <UserButtons data={data} />
         )
+    }
+
+    const onSearch = (input: string) => {
+        setSearch(input)
     }
 
     return (
         <div>
             <h1 className='mb-4 font-semibold text-xl'>Users</h1>
+            <div>
+                <SearchBox onClickSearch={onSearch} />
+            </div>
             {(isFetching || isLoading) && (
                 <div className='w-full flex justify-center'>
                     <ProgressSpinner className='w-8 h-8' />
@@ -34,9 +43,9 @@ const ListUser = () => {
                         <Column field="role" header="Role"></Column>
                         <Column header="Action" body={ButtonUser} className='w-24'></Column>
                     </DataTable>
-                    <Paginator first={page - 1} style={{scale: 0.8}} rows={numberPerPage} 
-                        totalRecords={data?.pagination.total}  
-                        onPageChange={(event) => {setPage(event.page + 1)}} />
+                    <Paginator first={page - 1} style={{ scale: 0.8 }} rows={numberPerPage}
+                        totalRecords={data?.pagination.total}
+                        onPageChange={(event) => { setPage(event.page + 1) }} />
                 </div>
             )}
         </div>
