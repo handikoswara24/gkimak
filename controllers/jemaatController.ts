@@ -21,9 +21,33 @@ const addJemaat = catchAsyncErrors(async (req: NextRequest) => {
 const getAllJemaat = catchAsyncErrors(async (req: NextRequest) => {
     const page = Number(req.nextUrl.searchParams.get("page") ?? 1);
     const numberPerPage = Number(req.nextUrl.searchParams.get("numberPerPage") ?? 20);
-    const jemaat = await Jemaat.find({
-
-    }).skip((page - 1) * numberPerPage).limit(numberPerPage);
+    const search = req.nextUrl.searchParams.get("search") ?? "";
+    let query = {};
+    if (search) {
+        query = {
+            "$or": [
+                {
+                    nama: {
+                        $regex: search,
+                        '$options': 'i'
+                    }
+                },
+                {
+                    telepon: {
+                        $regex: search,
+                        '$options': 'i'
+                    }
+                },
+                {
+                    nomorAnggota: {
+                        $regex: search,
+                        '$options': 'i'
+                    }
+                }
+            ]
+        }
+    }
+    const jemaat = await Jemaat.find(query).skip((page - 1) * numberPerPage).limit(numberPerPage);
     const total = await Jemaat.countDocuments();
     const pagination: Pagination = {
         numberPerPage,
@@ -71,7 +95,7 @@ const deleteJemaat = catchAsyncErrors(async (req: NextRequest, { params }: { par
 const getJemaatByPhone = catchAsyncErrors(async (req: NextRequest) => {
     const body = await req.json() as GetJemaatInput;
 
-    const jemaat = await Jemaat.findOne({telepon: body.telepon});
+    const jemaat = await Jemaat.findOne({ telepon: body.telepon });
 
     return NextResponse.json({
         nama: jemaat.nama,

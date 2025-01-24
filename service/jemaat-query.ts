@@ -4,9 +4,9 @@ import { useMutation, useQuery } from "react-query";
 import { MessageType } from "@/types/common";
 import { GetJemaatInput, JemaatInput, JemaatType, ListJemmat } from "@/types/jemaat";
 
-const getAllJemaat = async (page : number, numberPerPage : number) => {
+const getAllJemaat = async (page : number, numberPerPage : number, search: string) => {
     const token = localStorage.getItem(TOKEN)?.replaceAll('"', "") ?? "";
-    const result = await http.get<ListJemmat>(`/api/jemaat?page=${page}&numberPerPage=${numberPerPage}`, {
+    const result = await http.get<ListJemmat>(`/api/jemaat?page=${page}&numberPerPage=${numberPerPage}&search=${search}`, {
         headers: {
             Authorization: `Bearer ${token}`,
         }
@@ -62,8 +62,8 @@ const deleteJemaat = async (id: string) => {
 }
 
 
-export const useGetAllJemaat = (page : number, numberPerPage : number) => {
-    return useQuery(["allJemaat", page, numberPerPage], () => getAllJemaat(page, numberPerPage))
+export const useGetAllJemaat = (page : number, numberPerPage : number, search: string) => {
+    return useQuery(["allJemaat", page, numberPerPage, search], () => getAllJemaat(page, numberPerPage, search))
 }
 
 export const useJemaatByPhoneMutation = () => {

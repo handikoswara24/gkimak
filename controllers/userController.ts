@@ -65,12 +65,14 @@ const getAllUser = catchAsyncErrors(async (req: NextRequest) => {
             "$or" : [
                 {
                     username : {
-                        $regex : search
+                        $regex : search,
+                        '$options' : 'i'
                     }
                 },
                 {
                     name: {
-                        $regex : search
+                        $regex : search,
+                        '$options' : 'i'
                     }
                 }
             ]

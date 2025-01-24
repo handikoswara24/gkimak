@@ -7,16 +7,22 @@ import { ProgressSpinner } from 'primereact/progressspinner';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Paginator } from 'primereact/paginator';
+import SearchBox from '../UI/SearchBox';
 
 const ListRenungan = () => {
     const [page, setPage] = useState(1);
     const [numberPerPage, setNumberPerPage] = useState(20);
-    const { data, isFetching, isLoading } = useGetAllRenunganAdmin(page, numberPerPage);
+    const [search, setSearch] = useState("");
+    const { data, isFetching, isLoading } = useGetAllRenunganAdmin(page, numberPerPage, search);
 
     const ButtonRenungan = (data: RenunganHarianType) => {
         return (
             <RenunganButtons data={data} />
         )
+    }
+
+    const onSearch = (input: string) => {
+        setSearch(input)
     }
 
     const DateFormat = (data: RenunganHarianType) => {
@@ -28,6 +34,9 @@ const ListRenungan = () => {
     return (
         <div>
             <h1 className='mb-4 font-semibold text-xl'>Renungan</h1>
+            <div>
+                <SearchBox onClickSearch={onSearch} />
+            </div>
             {(isFetching || isLoading) && (
                 <div className='w-full flex justify-center'>
                     <ProgressSpinner className='w-8 h-8' />

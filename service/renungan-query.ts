@@ -10,9 +10,9 @@ const getAllRenungan = async (page : number, numberPerPage : number) => {
     return result.data;
 }
 
-const getAllRenunganAdmin = async (page : number, numberPerPage : number) => {
+const getAllRenunganAdmin = async (page : number, numberPerPage : number, search: string) => {
     const token = localStorage.getItem(TOKEN)?.replaceAll('"', "") ?? "";
-    const result = await http.get<ListRenungan>(`/api/renungan/admin?page=${page}&numberPerPage=${numberPerPage}`, {
+    const result = await http.get<ListRenungan>(`/api/renungan/admin?page=${page}&numberPerPage=${numberPerPage}&search=${search}`, {
         headers: {
             Authorization: `Bearer ${token}`,
         }
@@ -61,8 +61,8 @@ export const useGetAllRenungan = (page : number, numberPerPage : number) => {
     return useQuery(["allRenungan", page, numberPerPage], () => getAllRenungan(page, numberPerPage))
 }
 
-export const useGetAllRenunganAdmin = (page : number, numberPerPage : number) => {
-    return useQuery(["allRenunganAdmin", page, numberPerPage], () => getAllRenunganAdmin(page, numberPerPage))
+export const useGetAllRenunganAdmin = (page : number, numberPerPage : number, search: string) => {
+    return useQuery(["allRenunganAdmin", page, numberPerPage, search], () => getAllRenunganAdmin(page, numberPerPage, search))
 }
 
 export const useAddRenunganMutation = () => {

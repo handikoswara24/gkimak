@@ -65,7 +65,34 @@ const getAllRenungan = catchAsyncErrors(async (req: NextRequest) => {
 const getAllRenunganAdmin = catchAsyncErrors(async (req: NextRequest) => {
     const page = Number(req.nextUrl.searchParams.get("page") ?? 1);
     const numberPerPage = Number(req.nextUrl.searchParams.get("numberPerPage") ?? 20);
-    const renungan = await RenunganHarianModel.find({}).sort({date: -1})
+    const search = req.nextUrl.searchParams.get("search") ?? "";
+    let query = {};
+    if(search){
+        query = {
+            "$or" : [
+                {
+                    author : {
+                        $regex : search,
+                        '$options' : 'i'
+                    }
+                },
+                {
+                    title: {
+                        $regex : search,
+                        '$options' : 'i'
+                    }
+                },
+                {
+                    verse: {
+                        $regex : search,
+                        '$options' : 'i'
+                    }
+                }
+            ]
+        }
+    }
+
+    const renungan = await RenunganHarianModel.find(query).sort({date: -1})
         .skip((page - 1) * numberPerPage).limit(numberPerPage);
     const total = await RenunganHarianModel.countDocuments();
     const pagination: Pagination = {

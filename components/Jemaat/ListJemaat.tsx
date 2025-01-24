@@ -7,11 +7,13 @@ import { Paginator } from 'primereact/paginator';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import React, { useState } from 'react'
 import JemaatButtons from './JemaatButtons';
+import SearchBox from '../UI/SearchBox';
 
 const ListJemaat = () => {
     const [page, setPage] = useState(1);
     const [numberPerPage, setNumberPerPage] = useState(20);
-    const { data, isLoading, isFetching } = useGetAllJemaat(page, numberPerPage);
+    const [search, setSearch] = useState("");
+    const { data, isLoading, isFetching } = useGetAllJemaat(page, numberPerPage, search);
 
     const ButtonRenungan = (data: JemaatType) => {
         return (
@@ -19,9 +21,16 @@ const ListJemaat = () => {
         )
     }
 
+    const onSearch = (input: string) => {
+        setSearch(input)
+    }
+
     return (
         <div>
             <h1 className='mb-4 font-semibold text-xl'>Jemaat</h1>
+            <div>
+                <SearchBox onClickSearch={onSearch} />
+            </div>
             {(isFetching || isLoading) && (
                 <div className='w-full flex justify-center'>
                     <ProgressSpinner className='w-8 h-8' />
