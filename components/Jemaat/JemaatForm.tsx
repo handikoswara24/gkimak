@@ -56,7 +56,9 @@ const JemaatForm = ({ id, input }: JemaatFromProps) => {
     }
     return (
         <div>
-            <div className='h-3 font-semibold mb-10'>Jemaat</div>
+            {!id && (
+                <div className='h-3 font-semibold mb-10'>Jemaat</div>
+            )}
             <form className='mt-12 space-y-8 text-xs' onSubmit={onSubmit}>
                 <div className=''>
                     <FloatLabel>

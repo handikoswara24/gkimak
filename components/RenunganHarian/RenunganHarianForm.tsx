@@ -196,7 +196,7 @@ const RenunganHarianForm = ({ data, id }: RenunganHarianFormType) => {
             onChange={(content) => setValue({ ...value, content: content })}
           />
         </div>
-        <div className='mt-14'>
+        <div className='mt-28'>
           <Button type='submit' disabled={!value.author || !value.content || !value.title || !value.date || loadingAdd || loadingUpdate}
             loading={loadingAdd || loadingUpdate}
             className='w-full border border-blue-400 text-blue-400 py-2 rounded-xl disabled:border-slate-300 disabled:text-slate-300 disabled:hover:bg-transparent disabled:hover:text-slate-300 hover:text-white hover:bg-blue-400'>

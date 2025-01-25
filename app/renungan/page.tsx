@@ -1,5 +1,10 @@
 import ListRenunganPage from '@/components/RenunganHarian/ListRenunganPage'
+import { Metadata } from 'next'
 import React from 'react'
+
+export const metadata: Metadata = {
+  title: 'GKim Amanat Kristus - Renungan Harian',
+}
 
 const RenunganPage = () => {
   return (
