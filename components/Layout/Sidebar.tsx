@@ -6,6 +6,7 @@ import ClickOutside from "./ClickOutside";
 import SidebarItem from "./SidebarItem";
 import useLocalStorage from "../utils/useLocalStorage";
 import BookIcon from "../Icons/BookIcon";
+import SettingIcon from "../Icons/SettingIcon";
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -83,6 +84,15 @@ const menuGroups = [
           { label: "List Jemaat", route: "/admin/jemaat" },
           { label: "Add Jemaat", route: "/admin/addjemaat" },
         ]
+      },
+      {
+        icon: (
+          <SettingIcon className="size-6" />
+        ),
+        label: "Setting",
+        route: "/admin/setting",
+        roles: ["admin"],
+        children: null
       },
     ],
   },
