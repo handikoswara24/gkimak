@@ -62,10 +62,16 @@ const Homepage = ({ setting }: HomepageProps) => {
                         <div className="home__data">
                             <span className="home__data-subtitle">Welcome Home</span>
                             <h1 className="home__data-title">A Place To <br /><b>Belong, Believe, </b><br /> and <b>Become.</b></h1>
-                            <span className="home__data-verse">"Firman-Mu itu pelita bagi kakiku dan terang bagi jalanku."
-                                <br />– Mazmur 119:105</span>
+                            <span className="home__data-verse">
+                                <div className='line-height'>
+                                    "Firman-Mu itu pelita bagi kakiku dan terang bagi jalanku."
+                                </div>
+                                <div className='line-height'>
+                                    – Mazmur 119:105
+                                </div>
+                            </span>
                         </div>
-                        <div className="home__social !pt-8">
+                        <div className="home__social">
                             <a href="https://www.facebook.com/p/GKIm-Jemaat-Amanat-Kristus-100067535020856/" target="_blank" className="home__social-link">
                                 <i className="ri-facebook-box-fill"></i>
                             </a>
