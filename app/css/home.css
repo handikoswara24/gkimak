@@ -173,7 +173,7 @@ input {
 
 /*=============== REUSABLE CSS CLASSES ===============*/
 .section {
-  padding: 4.5rem 0 2.5rem;
+  padding: 2.5rem 0 2.5rem;
 }
 
 .section__title {
@@ -188,13 +188,13 @@ input {
   color: var(--title-color);
   text-align: center;
   margin-bottom: var(--mb-2);
-  padding: 0 20rem;
+  padding: 0 1.5rem;
 }
 
 .container {
   max-width: 968px;
-  margin-left: var(--mb-1);
-  margin-right: var(--mb-1);
+  padding-left: var(--mb-1);
+  padding-right: var(--mb-1);
 }
 
 .grid {
@@ -323,8 +323,8 @@ input {
 
 .home__social {
   display: flex;
-  flex-direction: column;
-  row-gap: 1.5rem;
+  flex-direction: row;
+  column-gap: 1.5rem;
   padding-top: 5rem;
 }
 
@@ -380,7 +380,7 @@ input {
   position: absolute;
   right: 0;
   bottom: 1rem;
-  width: 228px;
+  width: 172px;
 }
 
 .home__info-title {
@@ -490,7 +490,7 @@ input {
   background: white;
   border-radius: 0.5rem;
   position: relative;
-  width: 350px;
+  /* width: 350px; */
   margin: 1rem;
   transition: 250ms all ease-in-out;
   cursor: pointer;
@@ -586,7 +586,6 @@ input {
   padding: 30px 8%;
   background-color: var(--body-clr);
   width: 100%;
-  min-height: 100vh;
 }
 .portfolio .section-head{
   max-width: 700px;
@@ -958,6 +957,7 @@ div.gallery .item:hover img{
   }
   .home__info {
     bottom: 3rem;
+    width: 228px;
   }
 
   .about__container {

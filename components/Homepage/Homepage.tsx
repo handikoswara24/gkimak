@@ -25,7 +25,7 @@ const Homepage = ({ setting }: HomepageProps) => {
                 <nav className="nav container">
                     <img src="/images/logo.png" className="nav__logo" />
                     <div className="nav__menu" id="nav-menu">
-                        <ul className="nav__list">
+                        {/* <ul className="nav__list">
                             <li className="nav__item">
                                 <i className="ri-home-9-line nav__icon"></i>
                                 <a href="#home" className="nav__link active-link">Home</a>
@@ -39,19 +39,19 @@ const Homepage = ({ setting }: HomepageProps) => {
                             <li className="nav__item">
                                 <a href="#place" className="nav__link">Places</a>
                             </li>
-                        </ul>
+                        </ul> */}
 
-                        <div className="nav__dark">
+                        {/* <div className="nav__dark">
                             <span className="change-theme-name">Dark mode</span>
                             <i className="ri-moon-line change-theme" id="theme-button"></i>
-                        </div>
+                        </div> */}
 
-                        <i className="ri-close-line nav__close" id="nav-close"></i>
+                        {/* <i className="ri-close-line nav__close" id="nav-close"></i> */}
                     </div>
 
-                    <div className="nav__toggle" id="nav-toggle">
+                    {/* <div className="nav__toggle" id="nav-toggle">
                         <i className="ri-function-line"></i>
-                    </div>
+                    </div> */}
                 </nav>
             </header>
             <main className="main">
@@ -61,7 +61,7 @@ const Homepage = ({ setting }: HomepageProps) => {
                     <div className="home__container container !pb-8">
                         <div className="home__data">
                             <span className="home__data-subtitle">Welcome Home</span>
-                            <h1 className="home__data-title">A Place To <br /><b>Belong, Believe, </b><br /> and <b>Become.</b></h1>
+                            <h1 className="home__data-title">A Place To <b>Belong, Believe, </b> and <b>Become.</b></h1>
                             <span className="home__data-verse">
                                 <div className='line-height'>
                                     "Firman-Mu itu pelita bagi kakiku dan terang bagi jalanku."
@@ -102,7 +102,7 @@ const Homepage = ({ setting }: HomepageProps) => {
                 <section className="about section" id="about">
                     <div className="about__container container grid">
                         <div className="about__data">
-                            <h2 className="section__title about__title">More Information <br /> About Our Church</h2>
+                            <h2 className="section__title about__title">More Information About Our Church</h2>
                             <p className="about__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                                 Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                                 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -119,7 +119,7 @@ const Homepage = ({ setting }: HomepageProps) => {
                 </section>
 
                 <section className="discover section" id="discover">
-                    <h2 className="section__title">Discover Our Church <br /> Moments of Faith and Community </h2>
+                    <h2 className="section__title">Discover Our Church Moments of Faith and Community </h2>
 
                     <div className="portfolio">
                         <main className="mainContainer">
@@ -179,84 +179,81 @@ const Homepage = ({ setting }: HomepageProps) => {
                 </section>
 
 
-                <section className="place section" id="place">
+                <section className="place section container" id="place">
                     <h2 className="section__title">Daily Devotional</h2>
                     <p className="section__subtitle">Start your day with inspiration and encouragement from God's Word.
                         Our daily devotionals provide short reflections, meaningful scriptures, and practical applications
                         to help you grow in faith and walk closer with God every day.
-                        <br />Take a moment to pause, reflect, and connect with Him.</p>
+                        Take a moment to pause, reflect, and connect with Him.</p>
 
                     <div className="renungan section" id="renungan">
-                        <div className="place__container container grid">
+                        <div className="!grid grid-cols-1 md:grid-cols-2 !gap-4 lg:grid-cols-3">
+                            <div className="card">
+                                <div className="card-banner">
+                                    <p className="category-tag popular">Daily Fresh </p>
+                                    <img className="banner-img" src='https://images.unsplash.com/photo-1515879218367-8466d910aaa4?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt='' />
+                                </div>
+                                <div className="card-body">
+                                    <p className="blog-hashtag">#18 January 2025 #renunganharian</p>
+                                    <h2 className="blog-title">Lorem ipsum dolor sit amet </h2>
+                                    <p className="blog-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                        Vivamus at tellus in purus viverra ultricies, et viverra arcu cursus.
+                                        Aenean at est id lorem commodo semper ut vel elit.</p>
 
-                            <div className="wrapper">
-                                <div className="card">
-                                    <div className="card-banner">
-                                        <p className="category-tag popular">Daily Fresh </p>
-                                        <img className="banner-img" src='https://images.unsplash.com/photo-1515879218367-8466d910aaa4?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt='' />
-                                    </div>
-                                    <div className="card-body">
-                                        <p className="blog-hashtag">#18 January 2025 #renunganharian</p>
-                                        <h2 className="blog-title">Lorem ipsum dolor sit amet </h2>
-                                        <p className="blog-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                            Vivamus at tellus in purus viverra ultricies, et viverra arcu cursus.
-                                            Aenean at est id lorem commodo semper ut vel elit.</p>
-
-                                        <div className="card-profile">
-                                            <img className="profile-img" src='https://images.unsplash.com/photo-1554780336-390462301acf?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt='' />
-                                            <div className="card-profile-info">
-                                                <h3 className="profile-name">Ev. Nawa Agustina</h3>
-                                            </div>
+                                    <div className="card-profile">
+                                        <img className="profile-img" src='https://images.unsplash.com/photo-1554780336-390462301acf?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt='' />
+                                        <div className="card-profile-info">
+                                            <h3 className="profile-name">Ev. Nawa Agustina</h3>
                                         </div>
                                     </div>
                                 </div>
-
-                                <div className="card">
-                                    <div className="card-banner">
-                                        <p className="category-tag technology"></p>
-                                        <img className="banner-img" src='https://images.unsplash.com/photo-1413708617479-50918bc877eb?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt='' />
-                                    </div>
-                                    <div className="card-body">
-                                        <p className="blog-hashtag">#17 January 2025 #renunganharian</p>
-                                        <h2 className="blog-title">Lorem ipsum dolor sit amet</h2>
-                                        <p className="blog-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                            Vivamus at tellus in purus viverra ultricies, et viverra arcu cursus.
-                                            Aenean at est id lorem commodo semper ut vel elit.</p>
-
-                                        <div className="card-profile">
-                                            <img className="profile-img" src='https://images.unsplash.com/photo-1532332248682-206cc786359f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt='' />
-                                            <div className="card-profile-info">
-                                                <h3 className="profile-name">Pdt. Victor K. Pamungsu</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="card">
-                                    <div className="card-banner">
-                                        <p className="category-tag psychology"></p>
-                                        <img className="banner-img" src='https://images.unsplash.com/photo-1592496001020-d31bd830651f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt='' />
-                                    </div>
-                                    <div className="card-body">
-                                        <p className="blog-hashtag">#16 January 2025 #renunganharian</p>
-                                        <h2 className="blog-title">Lorem ipsum dolor sit amet</h2>
-                                        <p className="blog-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                            Vivamus at tellus in purus viverra ultricies, et viverra arcu cursus.
-                                            Aenean at est id lorem commodo semper ut vel elit.</p>
-
-                                        <div className="card-profile">
-                                            <img className="profile-img" src='https://images.unsplash.com/photo-1569913486515-b74bf7751574?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt='' />
-                                            <div className="card-profile-info">
-                                                <h3 className="profile-name">Pnt. Hanny Setiawan</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
+
+                            <div className="card">
+                                <div className="card-banner">
+                                    <p className="category-tag technology"></p>
+                                    <img className="banner-img" src='https://images.unsplash.com/photo-1413708617479-50918bc877eb?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt='' />
+                                </div>
+                                <div className="card-body">
+                                    <p className="blog-hashtag">#17 January 2025 #renunganharian</p>
+                                    <h2 className="blog-title">Lorem ipsum dolor sit amet</h2>
+                                    <p className="blog-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                        Vivamus at tellus in purus viverra ultricies, et viverra arcu cursus.
+                                        Aenean at est id lorem commodo semper ut vel elit.</p>
+
+                                    <div className="card-profile">
+                                        <img className="profile-img" src='https://images.unsplash.com/photo-1532332248682-206cc786359f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt='' />
+                                        <div className="card-profile-info">
+                                            <h3 className="profile-name">Pdt. Victor K. Pamungsu</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="card">
+                                <div className="card-banner">
+                                    <p className="category-tag psychology"></p>
+                                    <img className="banner-img" src='https://images.unsplash.com/photo-1592496001020-d31bd830651f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt='' />
+                                </div>
+                                <div className="card-body">
+                                    <p className="blog-hashtag">#16 January 2025 #renunganharian</p>
+                                    <h2 className="blog-title">Lorem ipsum dolor sit amet</h2>
+                                    <p className="blog-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                        Vivamus at tellus in purus viverra ultricies, et viverra arcu cursus.
+                                        Aenean at est id lorem commodo semper ut vel elit.</p>
+
+                                    <div className="card-profile">
+                                        <img className="profile-img" src='https://images.unsplash.com/photo-1569913486515-b74bf7751574?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt='' />
+                                        <div className="card-profile-info">
+                                            <h3 className="profile-name">Pnt. Hanny Setiawan</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </section>
@@ -266,7 +263,7 @@ const Homepage = ({ setting }: HomepageProps) => {
 
                     <div className="video__container container">
                         <p className="video__description">Yuk, bergabung bersama kami dalam Ibadah Minggu secara live!
-                            <br />Rasakan kehadiran Tuhan di mana pun Anda berada.
+                             Rasakan kehadiran Tuhan di mana pun Anda berada.
                         </p>
                         <div className="video__content">
                             <iframe className='w-full h-100' src={`https://www.youtube.com/embed/${setting.watchIdLive}`} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
@@ -275,7 +272,7 @@ const Homepage = ({ setting }: HomepageProps) => {
 
                 </section>
 
-                <section className="subscribe section">
+                {/* <section className="subscribe section">
                     <div className="subscribe__bg">
                         <div className="subscribe__container container">
                             <h2 className="section__title subscribe__title">Jangan Lupa Subscribe Youtube Kita</h2>
@@ -291,7 +288,7 @@ const Homepage = ({ setting }: HomepageProps) => {
                             </form>
                         </div>
                     </div>
-                </section>
+                </section> */}
             </main >
             <footer className="footer section">
                 <div className="footer__container container grid">
@@ -299,8 +296,8 @@ const Homepage = ({ setting }: HomepageProps) => {
                         <div className="footer__data">
                             <img src="/images/logo.png" className="footer__logo" />
                             <h3 className="footer__title">GKIm Amanat Kristus</h3>
-                            <p className="footer__description">Jl. Raya Kopo No. 246, <br /> Bandung, Jawa Barat.</p>
-                            <p className="footer__description">gkimamanatkristus@gmail.com <br />+62 812 2159 8380</p>
+                            <p className="footer__description">Jl. Raya Kopo No. 246, Bandung, Jawa Barat.</p>
+                            <p className="footer__description">gkimamanatkristus@gmail.com +62 812 2159 8380</p>
                             <div>
                                 <a href="https://www.facebook.com/p/GKIm-Jemaat-Amanat-Kristus-100067535020856/" target="_blank" className="footer__social">
                                     <i className="ri-facebook-box-fill"></i>
@@ -347,7 +344,7 @@ const Homepage = ({ setting }: HomepageProps) => {
                             </ul>
                         </div>
 
-                        <div className="footer__data">
+                        {/* <div className="footer__data">
                             <h3 className="footer__subtitle">Our Ministry</h3>
                             <ul>
                                 <li className="footer__item">
@@ -357,7 +354,7 @@ const Homepage = ({ setting }: HomepageProps) => {
                                     <a href="" className="footer__link">GKIm Family</a>
                                 </li>
                             </ul>
-                        </div>
+                        </div> */}
                     </div>
 
                     <div className="footer__rights">
