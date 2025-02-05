@@ -1,14 +1,17 @@
 'use client'
 
+import { ListRenungan } from '@/types/renunganharian'
 import { SettingType } from '@/types/setting'
 import React, { useEffect, useState } from 'react'
 
 type HomepageProps = {
-    setting: SettingType
+    setting: SettingType,
+    renungan: ListRenungan
 }
 
-const Homepage = ({ setting }: HomepageProps) => {
+const Homepage = ({ setting, renungan }: HomepageProps) => {
     const [scroll, setScroll] = useState(false);
+    console.log(renungan)
     useEffect(() => {
         window.addEventListener("scroll", (e) => {
             if (window.scrollY == 0) {
@@ -296,14 +299,14 @@ const Homepage = ({ setting }: HomepageProps) => {
                         <div className="footer__data">
                             <img src="/images/logo.png" className="footer__logo" />
                             <h3 className="footer__title">GKIm Amanat Kristus</h3>
-                            <p className="footer__description">
+                            <div className="footer__description">
                                 <div>Jl. Raya Kopo No. 246,</div>
                                 <div>Bandung, Jawa Barat.</div>
-                            </p>
-                            <p className="footer__description">
+                            </div>
+                            <div className="footer__description">
                                 <div>gkimamanatkristus@gmail.com</div>
                                 <div>+62 812 2159 8380</div>
-                            </p>
+                            </div>
                             <div>
                                 <a href="https://www.facebook.com/p/GKIm-Jemaat-Amanat-Kristus-100067535020856/" target="_blank" className="footer__social">
                                     <i className="ri-facebook-box-fill"></i>
