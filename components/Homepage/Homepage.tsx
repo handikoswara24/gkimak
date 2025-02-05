@@ -61,7 +61,7 @@ const Homepage = ({ setting }: HomepageProps) => {
                     <div className="home__container container !pb-8">
                         <div className="home__data">
                             <span className="home__data-subtitle">Welcome Home</span>
-                            <h1 className="home__data-title">A Place To <b>Belong, Believe, </b> and <b>Become.</b></h1>
+                            <h1 className="home__data-title">A Place To <b className='block'>Belong, Believe, </b> and <b>Become.</b></h1>
                             <span className="home__data-verse">
                                 <div className='line-height'>
                                     "Firman-Mu itu pelita bagi kakiku dan terang bagi jalanku."
@@ -263,7 +263,7 @@ const Homepage = ({ setting }: HomepageProps) => {
 
                     <div className="video__container container">
                         <p className="video__description">Yuk, bergabung bersama kami dalam Ibadah Minggu secara live!
-                             Rasakan kehadiran Tuhan di mana pun Anda berada.
+                            Rasakan kehadiran Tuhan di mana pun Anda berada.
                         </p>
                         <div className="video__content">
                             <iframe className='w-full h-100' src={`https://www.youtube.com/embed/${setting.watchIdLive}`} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
@@ -296,8 +296,14 @@ const Homepage = ({ setting }: HomepageProps) => {
                         <div className="footer__data">
                             <img src="/images/logo.png" className="footer__logo" />
                             <h3 className="footer__title">GKIm Amanat Kristus</h3>
-                            <p className="footer__description">Jl. Raya Kopo No. 246, Bandung, Jawa Barat.</p>
-                            <p className="footer__description">gkimamanatkristus@gmail.com +62 812 2159 8380</p>
+                            <p className="footer__description">
+                                <div>Jl. Raya Kopo No. 246,</div>
+                                <div>Bandung, Jawa Barat.</div>
+                            </p>
+                            <p className="footer__description">
+                                <div>gkimamanatkristus@gmail.com</div>
+                                <div>+62 812 2159 8380</div>
+                            </p>
                             <div>
                                 <a href="https://www.facebook.com/p/GKIm-Jemaat-Amanat-Kristus-100067535020856/" target="_blank" className="footer__social">
                                     <i className="ri-facebook-box-fill"></i>
