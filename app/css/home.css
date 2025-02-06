@@ -339,7 +339,7 @@ input {
   height: calc(100vh - var(--header-height));
   align-content: center;
   row-gap: 3rem;
-  padding-top: 7rem;
+  padding-top: 2rem;
 }
 
 
@@ -899,6 +899,9 @@ div.gallery .item:hover img{
   .nav__link {
     color: var(--white-color);
     text-transform: initial;
+  }
+  .home__container{
+    padding-top: 7rem;
   }
   .nav__link:hover {
     color: var(--white-color);

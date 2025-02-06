@@ -3,6 +3,7 @@
 import { ListRenungan } from '@/types/renunganharian'
 import { SettingType } from '@/types/setting'
 import React, { useEffect, useState } from 'react'
+import RenunganWrapper from './RenunganWrapper'
 
 type HomepageProps = {
     setting: SettingType,
@@ -11,7 +12,6 @@ type HomepageProps = {
 
 const Homepage = ({ setting, renungan }: HomepageProps) => {
     const [scroll, setScroll] = useState(false);
-    console.log(renungan)
     useEffect(() => {
         window.addEventListener("scroll", (e) => {
             if (window.scrollY == 0) {
@@ -181,85 +181,7 @@ const Homepage = ({ setting, renungan }: HomepageProps) => {
                     </div>
                 </section>
 
-
-                <section className="place section container" id="place">
-                    <h2 className="section__title">Daily Devotional</h2>
-                    <p className="section__subtitle">Start your day with inspiration and encouragement from God's Word.
-                        Our daily devotionals provide short reflections, meaningful scriptures, and practical applications
-                        to help you grow in faith and walk closer with God every day.
-                        Take a moment to pause, reflect, and connect with Him.</p>
-
-                    <div className="renungan section" id="renungan">
-                        <div className="!grid grid-cols-1 md:grid-cols-2 !gap-4 lg:grid-cols-3">
-                            <div className="card">
-                                <div className="card-banner">
-                                    <p className="category-tag popular">Daily Fresh </p>
-                                    <img className="banner-img" src='https://images.unsplash.com/photo-1515879218367-8466d910aaa4?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt='' />
-                                </div>
-                                <div className="card-body">
-                                    <p className="blog-hashtag">#18 January 2025 #renunganharian</p>
-                                    <h2 className="blog-title">Lorem ipsum dolor sit amet </h2>
-                                    <p className="blog-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                        Vivamus at tellus in purus viverra ultricies, et viverra arcu cursus.
-                                        Aenean at est id lorem commodo semper ut vel elit.</p>
-
-                                    <div className="card-profile">
-                                        <img className="profile-img" src='https://images.unsplash.com/photo-1554780336-390462301acf?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt='' />
-                                        <div className="card-profile-info">
-                                            <h3 className="profile-name">Ev. Nawa Agustina</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="card">
-                                <div className="card-banner">
-                                    <p className="category-tag technology"></p>
-                                    <img className="banner-img" src='https://images.unsplash.com/photo-1413708617479-50918bc877eb?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt='' />
-                                </div>
-                                <div className="card-body">
-                                    <p className="blog-hashtag">#17 January 2025 #renunganharian</p>
-                                    <h2 className="blog-title">Lorem ipsum dolor sit amet</h2>
-                                    <p className="blog-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                        Vivamus at tellus in purus viverra ultricies, et viverra arcu cursus.
-                                        Aenean at est id lorem commodo semper ut vel elit.</p>
-
-                                    <div className="card-profile">
-                                        <img className="profile-img" src='https://images.unsplash.com/photo-1532332248682-206cc786359f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt='' />
-                                        <div className="card-profile-info">
-                                            <h3 className="profile-name">Pdt. Victor K. Pamungsu</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="card">
-                                <div className="card-banner">
-                                    <p className="category-tag psychology"></p>
-                                    <img className="banner-img" src='https://images.unsplash.com/photo-1592496001020-d31bd830651f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt='' />
-                                </div>
-                                <div className="card-body">
-                                    <p className="blog-hashtag">#16 January 2025 #renunganharian</p>
-                                    <h2 className="blog-title">Lorem ipsum dolor sit amet</h2>
-                                    <p className="blog-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                        Vivamus at tellus in purus viverra ultricies, et viverra arcu cursus.
-                                        Aenean at est id lorem commodo semper ut vel elit.</p>
-
-                                    <div className="card-profile">
-                                        <img className="profile-img" src='https://images.unsplash.com/photo-1569913486515-b74bf7751574?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt='' />
-                                        <div className="card-profile-info">
-                                            <h3 className="profile-name">Pnt. Hanny Setiawan</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </section>
+                <RenunganWrapper renungan={renungan} setting={setting} />
 
                 <section className="video section">
                     <h2 className="section__title">Live Youtube</h2>
