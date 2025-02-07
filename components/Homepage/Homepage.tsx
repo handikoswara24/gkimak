@@ -63,14 +63,14 @@ const Homepage = ({ setting, renungan }: HomepageProps) => {
 
                     <div className="home__container container !pb-8">
                         <div className="home__data">
-                            <span className="home__data-subtitle">Welcome Home</span>
-                            <h1 className="home__data-title">A Place To <b className='block'>Belong, Believe, </b> and <b>Become.</b></h1>
+                            <span className="home__data-subtitle">{setting.welcomeText}</span>
+                            <h1 className="home__data-title" dangerouslySetInnerHTML={{__html: setting.title}}></h1>
                             <span className="home__data-verse">
                                 <div className='line-height'>
-                                    "Firman-Mu itu pelita bagi kakiku dan terang bagi jalanku."
+                                    {setting.isiAyat}
                                 </div>
                                 <div className='line-height'>
-                                    – Mazmur 119:105
+                                    – {setting.ayat}
                                 </div>
                             </span>
                         </div>

@@ -5,6 +5,18 @@ const settingSchema = new mongoose.Schema({
     watchIdLive: {
         type: String
     },
+    welcomeText: {
+        type: String
+    },
+    title: {
+        type: String
+    },
+    ayat: {
+        type: String
+    },
+    isiAyat: {
+        type: String
+    }
 },{
     timestamps: true
 })

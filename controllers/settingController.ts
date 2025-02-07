@@ -11,6 +11,10 @@ const addUpdateSetting = catchAsyncErrors(async (req: NextRequest) => {
 
     if(setting){
         setting.watchIdLive = body.watchIdLive || setting.watchIdLive;
+        setting.welcomeText = body.welcomeText || setting.welcomeText;
+        setting.title = body.title || setting.title;
+        setting.ayat = body.ayat || setting.ayat;
+        setting.isiAyat = body.isiAyat || setting.isiAyat;
 
         await setting.save();
     }
@@ -33,8 +37,12 @@ const getSetting = catchAsyncErrors(async (req: NextRequest) => {
         })
     }
 
-    return NextResponse.json({
-        watchIdLive: setting.watchIdLive
+    return NextResponse.json<SettingType>({
+        ayat: setting.ayat ?? DEFAULTSETTING.ayat,
+        isiAyat: setting.isiAyat ?? DEFAULTSETTING.isiAyat,
+        title: setting.title ?? DEFAULTSETTING.title,
+        watchIdLive: setting.watchIdLive ?? DEFAULTSETTING.watchIdLive,
+        welcomeText: setting.welcomeText ?? DEFAULTSETTING.welcomeText
     });
 });
 

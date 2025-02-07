@@ -23,7 +23,7 @@ const RenunganWrapper = ({ setting, renungan }: RenunganWrapperProps) => {
                 <div className="!grid grid-cols-1 md:grid-cols-2 !gap-4 lg:grid-cols-3">
                     {renungan.renungan.map((r,i) => {
                         return (
-                            <RenunganCard data={r} isFirst={i == 0} />
+                            <RenunganCard key={r._id} data={r} isFirst={i == 0} />
                         )
                     })}
                 </div>
