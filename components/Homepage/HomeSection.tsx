@@ -10,7 +10,7 @@ const HomeSection = ({ setting }: HomeSectionProps) => {
         <section className="home" id="home">
             <img src="/images/home1.png" alt="" className="home__img" />
 
-            <div className="home__container container !pb-8">
+            <div className="home__container container">
                 <div className="home__data">
                     <span className="home__data-subtitle">{setting.welcomeText}</span>
                     <h1 className="home__data-title" dangerouslySetInnerHTML={{ __html: setting.title }}></h1>
@@ -34,20 +34,6 @@ const HomeSection = ({ setting }: HomeSectionProps) => {
                         <i className="ri-youtube-fill"></i>
                     </a>
                 </div>
-
-                <div className="home__info">
-                    <div>
-                        <span className="home__info-title">The best place to visit</span>
-                        <a href="about.html" className="button button--flex button--link home__info-button">
-                            More <i className="ri-arrow-right-line"></i>
-                        </a>
-                    </div>
-
-                    <div className="home__info-overlay">
-                        <img src="/images/home2.jpg" alt="" className="home__info-img" />
-                    </div>
-                </div>
-
             </div>
         </section>
     )

@@ -1,5 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react'
+import ThemeButton from './ThemeButton';
 
 const Header = () => {
     const [scroll, setScroll] = useState(false);
@@ -21,25 +22,33 @@ const Header = () => {
                 <div className={`nav__menu ${open ? "show-menu" : ""}`} id="nav-menu">
                     <ul className="nav__list">
                         <li className="nav__item">
-                            <i className="ri-home-9-line nav__icon"></i>
-                            <a href="#" className="nav__link active-link">Home</a>
+                            <a href="#" className="nav__link active-link">
+                                <span className="nav__name">Home</span>
+                            </a>
                         </li>
                         <li className="nav__item">
-                            <a href="#" className="nav__link">About</a>
+                            <a href="about.html" className="nav__link">
+                                <span className="nav__name">Tentang</span>
+                            </a>
                         </li>
                         <li className="nav__item">
-                            <a href="#" className="nav__link">Discover</a>
+                            <a href="devotion.html" className="nav__link">
+                                <span className="nav__name">Renungan</span>
+                            </a>
                         </li>
                         <li className="nav__item">
-                            <a href="#" className="nav__link">Places</a>
+                            <a href="warta.html" className="nav__link">
+                                <span className="nav__name">Warta</span>
+                            </a>
+                        </li>
+                        <li className="nav__item">
+                            <a href="https://youtube.com/@GKImAmanat/streams" className="nav__link">
+                                <span className="nav__name">Live</span>
+                            </a>
                         </li>
                     </ul>
 
-                    {/* <div className="nav__dark">
-                            <span className="change-theme-name">Dark mode</span>
-                            <i className="ri-moon-line change-theme" id="theme-button"></i>
-                        </div> */}
-
+                    <ThemeButton />
                     <i className="ri-close-line nav__close" id="nav-close" onClick={() => setOpen(false)}></i>
                 </div>
 
