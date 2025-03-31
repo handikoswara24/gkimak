@@ -17,7 +17,7 @@ const Header = () => {
     }, [])
     return (
         <header className={`header ${scroll ? "scroll-header" : ""}`} id="header">
-            <nav className="nav container">
+            <nav className="nav container-custom">
                 <img src="/images/logo.png" className="nav__logo" />
                 <div className={`nav__menu ${open ? "show-menu" : ""}`} id="nav-menu">
                     <ul className="nav__list">

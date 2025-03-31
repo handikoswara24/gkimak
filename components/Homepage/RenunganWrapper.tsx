@@ -12,7 +12,7 @@ const RenunganWrapper = ({ setting, renungan }: RenunganWrapperProps) => {
     const router = useRouter();
     return (
         <section className="devotion section" id="devotion">
-            <div className="devotion__container container grid">
+            <div className="devotion__container container-custom grid">
                 <div className="devotion__data">
                     <h2 className="section__title dev__title">Renungan Harian</h2>
                     <p className="devotion__description">
@@ -45,9 +45,9 @@ const RenunganWrapper = ({ setting, renungan }: RenunganWrapperProps) => {
                             }
                             return (
                                 <div onClick={() => router.push(`/renungan/${renungan.renungan[0].slug}`)}
-                                    className="devotion__article border border-solid border-slate-400 cursor-pointer rounded-lg hover:scale-105 transition-transform">
-                                    <div className='w-2/5'>
-                                        <img src={r.image[0].url} alt="" className='!h-full rounded-l-lg' />
+                                    className="devotion__article w-auto border border-solid border-slate-400 cursor-pointer rounded-lg hover:scale-105 transition-transform">
+                                    <div className='md:w-2/5 w-full'>
+                                        <img src={r.image[0].url} alt="" className='!h-full md:rounded-l-lg w-full rounded-t-lg' />
                                     </div>
 
                                     <div className="devotion__content">

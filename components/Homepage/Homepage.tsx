@@ -21,7 +21,7 @@ const Homepage = ({ setting, renungan }: HomepageProps) => {
                 <HomeSection setting={setting} />
 
                 <section className="about section" id="about">
-                    <div className="about__container container grid">
+                    <div className="about__container container-custom grid">
                         <div className="about__data">
                             <h2 className="section__title about__title">Tentang Gereja Kami</h2>
                             <p className="about__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -47,7 +47,7 @@ const Homepage = ({ setting, renungan }: HomepageProps) => {
                 <section className="video section">
                     <h2 className="section__title">Live Tour</h2>
 
-                    <div className="video__container container">
+                    <div className="video__container container-custom">
                         <p className="video__description">Ikuti ibadah gereja kami secara live dan rasakan kehangatan komunitas kami secara langsung.
                         </p>
                         <div className="video__content">

@@ -179,7 +179,7 @@ input {
   margin-bottom: var(--mb-2);
 }
 
-.container {
+.container-custom {
   max-width: 968px;
   margin-left: var(--mb-1);
   margin-right: var(--mb-1);
@@ -485,13 +485,12 @@ input {
   overflow: hidden;
   border-radius: 0.5rem;
   position: relative;
-  width: 500px;
   margin: 1rem;
   transition: 250ms all ease-in-out;
   cursor: pointer;
   border: 0.5px solid var(--first-color);
-
 }
+
 .card__left:hover{
   transform: scale(1.05);
 }
@@ -532,7 +531,6 @@ input {
 }
 
 .devotion__article{
-  width: 500px;
   display: flex;
   flex-direction: row;
   margin: 0.8rem;
@@ -824,9 +822,7 @@ div.gallery__content .item:hover img{
 
 @media screen and (max-width: 768px) {
   .devotion__article{
-    margin: 20px;
     flex-direction: column;
-    width: 100%;
     border-bottom-left-radius: 12px;
   }
   .devotion__content{
@@ -932,7 +928,7 @@ div.gallery__content .item:hover img{
 
 /* For large devices */
 @media screen and (min-width: 1024px) {
-  .container {
+  .container-custom {
     margin-left: auto;
     margin-right: auto;
   }
@@ -969,7 +965,7 @@ div.gallery__content .item:hover img{
 }
 
 @media screen and (min-width: 1200px) {
-  .container {
+  .container-custom {
     max-width: 1024px;
   }
 }

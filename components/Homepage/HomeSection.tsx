@@ -10,7 +10,7 @@ const HomeSection = ({ setting }: HomeSectionProps) => {
         <section className="home" id="home">
             <img src="/images/home1.png" alt="" className="home__img" />
 
-            <div className="home__container container">
+            <div className="home__container container-custom">
                 <div className="home__data !mt-20">
                     <span className="home__data-subtitle">{setting.welcomeText}</span>
                     <h1 className="home__data-title" dangerouslySetInnerHTML={{ __html: setting.title }}></h1>
