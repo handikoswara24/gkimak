@@ -1,0 +1,105 @@
+import React from 'react'
+import { Fade, Slide } from 'react-awesome-reveal'
+
+const AboutChurch = () => {
+    return (
+        <section className="product section container-custom" id="products">
+            <h2 className="section__title-center">
+                Get to Know Our Church Leaders
+            </h2>
+
+            <p className="product__description">
+                Inilah para pemimpin gereja kami yang melayani dengan iman dan dedikasi untuk membimbing serta mendukung jemaat.
+                Kenali mereka dan visi pelayanannya.
+            </p>
+
+            <div className="product__container grid">
+                <Fade duration={1200}>
+                    <Slide duration={1200} direction='down'>
+                        <article className="product__card">
+                            <div className="product__circle"></div>
+
+                            <img src="/images/blog-p-1.jpg" alt="" className="product__img" />
+
+                            <h3 className="product__title">Pnt. Tjepy</h3>
+                            <span className="product__price">Lorem Ipsun</span>
+
+                        </article>
+                    </Slide>
+                </Fade>
+
+                <Fade duration={1200}>
+                    <Slide duration={1300} direction='down'>
+                        <article className="product__card">
+                            <div className="product__circle"></div>
+
+                            <img src="/images/blog-p-2.jpg" alt="" className="product__img" />
+
+                            <h3 className="product__title">Pnt Hanny</h3>
+                            <span className="product__price">Lorem Ipsun</span>
+
+                        </article>
+                    </Slide>
+                </Fade>
+
+                <Fade duration={1200}>
+                    <Slide duration={1400} direction='down'>
+                        <article className="product__card">
+                            <div className="product__circle"></div>
+
+                            <img src="/images/blog-p-3.jpg" alt="" className="product__img" />
+
+                            <h3 className="product__title">Pnt. Indra</h3>
+                            <span className="product__price">Lorem Ipsun</span>
+
+                        </article>
+                    </Slide>
+                </Fade>
+
+                <Fade duration={1200}>
+                    <Slide duration={1200} direction='down'>
+                        <article className="product__card">
+                            <div className="product__circle"></div>
+
+                            <img src="/images/blog-p-4.jpg" alt="" className="product__img" />
+
+                            <h3 className="product__title">Pnt. Ie Wun</h3>
+                            <span className="product__price">Lorem Ipsun</span>
+
+                        </article>
+                    </Slide>
+                </Fade>
+
+                <Fade duration={1200}>
+                    <Slide duration={1300} direction='down'>=
+                        <article className="product__card">
+                            <div className="product__circle"></div>
+
+                            <img src="/images/blog-p-5.jpg" alt="" className="product__img" />
+
+                            <h3 className="product__title">Pdt. Victor</h3>
+                            <span className="product__price">Lorem Ipsun</span>
+
+                        </article>
+                    </Slide>
+                </Fade>
+
+                <Fade duration={1200}>
+                    <Slide duration={1400} direction='down'>
+                        <article className="product__card">
+                            <div className="product__circle"></div>
+
+                            <img src="/images/blog-p-6.jpg" alt="" className="product__img" />
+
+                            <h3 className="product__title">Ev. Nawa</h3>
+                            <span className="product__price">Lorem Ipsun</span>
+
+                        </article>
+                    </Slide>
+                </Fade>
+            </div>
+        </section>
+    )
+}
+
+export default AboutChurch

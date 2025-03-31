@@ -1,6 +1,6 @@
 import { ListRenungan } from '@/types/renunganharian'
 import { SettingType } from '@/types/setting'
-import React from 'react'
+import React, { Fragment } from 'react'
 import { useRouter } from 'next/navigation'
 
 type RenunganWrapperProps = {
@@ -40,11 +40,13 @@ const RenunganWrapper = ({ setting, renungan }: RenunganWrapperProps) => {
                         {renungan.renungan.map((r, index) => {
                             if (index == 0) {
                                 return (
-                                    <></>
+                                    <Fragment key={r._id}>
+
+                                    </Fragment>
                                 )
                             }
                             return (
-                                <div onClick={() => router.push(`/renungan/${renungan.renungan[0].slug}`)}
+                                <div onClick={() => router.push(`/renungan/${r.slug}`)} key={r._id}
                                     className="devotion__article w-auto border border-solid border-slate-400 cursor-pointer rounded-lg hover:scale-105 transition-transform">
                                     <div className='md:w-2/5 w-full'>
                                         <img src={r.image[0].url} alt="" className='!h-full md:rounded-l-lg w-full rounded-t-lg' />

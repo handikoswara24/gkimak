@@ -229,7 +229,7 @@ input {
   font-size: 1.5rem;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
   .nav__menu {
     position: fixed;
     background-color: var(--body-color);
@@ -839,7 +839,7 @@ div.gallery__content .item:hover img{
 }
 
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 769px) {
   body {
     margin: 0;
   }

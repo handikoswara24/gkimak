@@ -1,8 +1,11 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import ThemeButton from './ThemeButton';
+import { usePathname } from 'next/navigation'
+import Link from 'next/link'
 
 const Header = () => {
+    const pathname = usePathname()
     const [scroll, setScroll] = useState(false);
     const [open, setOpen] = useState(false);
     useEffect(() => {
@@ -22,22 +25,22 @@ const Header = () => {
                 <div className={`nav__menu ${open ? "show-menu" : ""}`} id="nav-menu">
                     <ul className="nav__list">
                         <li className="nav__item">
-                            <a href="#" className="nav__link active-link">
+                            <a href="/test" className={`nav__link ${pathname === "/" || pathname.includes("test") ? "active-link" : ""}`}>
                                 <span className="nav__name">Home</span>
                             </a>
                         </li>
                         <li className="nav__item">
-                            <a href="about.html" className="nav__link">
+                            <a href="/about" className={`nav__link ${pathname.includes("about") ? "active-link" : ""}`}>
                                 <span className="nav__name">Tentang</span>
                             </a>
                         </li>
                         <li className="nav__item">
-                            <a href="devotion.html" className="nav__link">
+                            <a href="/renungan" className={`nav__link ${pathname.includes("renungan") ? "active-link" : ""}`}>
                                 <span className="nav__name">Renungan</span>
                             </a>
                         </li>
                         <li className="nav__item">
-                            <a href="warta.html" className="nav__link">
+                            <a href="/warta" className={`nav__link ${pathname.includes("warta") ? "active-link" : ""}`}>
                                 <span className="nav__name">Warta</span>
                             </a>
                         </li>

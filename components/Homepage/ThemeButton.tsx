@@ -16,6 +16,7 @@ const ThemeButton = () => {
         const selectedTheme = localStorage.getItem('selected-theme')
         const selectedIcon = localStorage.getItem('selected-icon')
         document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme);
+        document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove']("dark");
         if (selectedIcon && selectedIcon !== "ri-moon-line") {
             setCurrentClass("ri-sun-line");
         }
@@ -24,6 +25,7 @@ const ThemeButton = () => {
     const onClickIcon = () => {
         // Add or remove the dark / icon theme
         document.body.classList.toggle(darkTheme)
+        document.body.classList.toggle("dark")
         if (currentClass === "ri-moon-line") {
             setCurrentClass("ri-sun-line");
             localStorage.setItem('selected-icon', "ri-sun-line");
