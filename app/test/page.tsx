@@ -25,7 +25,7 @@ const TestPage = async () => {
 
 
 export const metadata: Metadata = {
-    title: 'GKim Amanat Kristus - Renungan Harian',
+    title: 'GKim Amanat Kristus',
     
 }
 
