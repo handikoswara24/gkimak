@@ -6,18 +6,10 @@ const Footer = () => {
             <div className="footer__container container grid">
                 <div className="footer__content grid">
                     <div className="footer__data">
-                        <img src="/images/logo.png" className="footer__logo" />
                         <h3 className="footer__title">GKIm Amanat Kristus</h3>
-                        <div className="footer__description">
-                            <div>Jl. Raya Kopo No. 246,</div>
-                            <div>Bandung, Jawa Barat.</div>
-                        </div>
-                        <div className="footer__description">
-                            <div>gkimamanatkristus@gmail.com</div>
-                            <div>+62 812 2159 8380</div>
-                        </div>
+                        <p className="footer__description">Jalan Raya Kopo No. 246, Bandung. </p>
                         <div>
-                            <a href="https://www.facebook.com/p/GKIm-Jemaat-Amanat-Kristus-100067535020856/" target="_blank" className="footer__social">
+                            <a href="https://www.facebook.com/GKIm-Jemaat-Amanat-Kristus-100067535020856/" target="_blank" className="footer__social">
                                 <i className="ri-facebook-box-fill"></i>
                             </a>
                             <a href="https://www.instagram.com/gkimamanat" target="_blank" className="footer__social">
@@ -28,55 +20,55 @@ const Footer = () => {
                             </a>
                         </div>
                     </div>
-
+    
                     <div className="footer__data">
-                        <h3 className="footer__subtitle">Quick Links</h3>
+                        <h3 className="footer__subtitle">Tentang</h3>
                         <ul>
                             <li className="footer__item">
-                                <a href="" className="footer__link">Galery</a>
+                                <a href="about.html" className="footer__link">Tentang Kami</a>
                             </li>
+                            <li className="footer__item">
+                                <a href="about.html" className="footer__link">Visi Misi</a>
+                            </li>
+                            <li className="footer__item">
+                                <a href="about.html" className="footer__link">Hubungi Kami</a>
+                            </li>
+                        </ul>
+                    </div>
+    
+                    <div className="footer__data">
+                        <h3 className="footer__subtitle">Renungan</h3>
+                        <ul>
+                            <li className="footer__item">
+                                <a href="devotion.html" className="footer__link">Ayat Harian</a>
+                            </li>
+                            <li className="footer__item">
+                                <a href="devotion.html" className="footer__link">Renungan Terkini</a>
+                            </li>
+                            <li className="footer__item">
+                                <a href="devotion.html" className="footer__link">Refleksi Diri</a>
+                            </li>
+                        </ul>
+                    </div>
+    
+                    <div className="footer__data">
+                        <h3 className="footer__subtitle">Warta</h3>
+                        <ul>
                             <li className="footer__item">
                                 <a href="" className="footer__link">Event</a>
                             </li>
                             <li className="footer__item">
-                                <a href="" className="footer__link">Offering</a>
+                                <a href="" className="footer__link">Jadwal Pelayanan</a>
                             </li>
                             <li className="footer__item">
-                                <a href="" className="footer__link">Live</a>
+                                <a href="" className="footer__link">Kebaktian</a>
                             </li>
                         </ul>
                     </div>
-
-                    <div className="footer__data">
-                        <h3 className="footer__subtitle">About Us</h3>
-                        <ul>
-                            <li className="footer__item">
-                                <a href="" className="footer__link">Our Church</a>
-                            </li>
-                            <li className="footer__item">
-                                <a href="" className="footer__link">Our Location</a>
-                            </li>
-                            <li className="footer__item">
-                                <a href="" className="footer__link">Contact Us</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    {/* <div className="footer__data">
-                <h3 className="footer__subtitle">Our Ministry</h3>
-                <ul>
-                    <li className="footer__item">
-                        <a href="" className="footer__link">Pendaftaran Jemaat</a>
-                    </li>
-                    <li className="footer__item">
-                        <a href="" className="footer__link">GKIm Family</a>
-                    </li>
-                </ul>
-            </div> */}
                 </div>
 
                 <div className="footer__rights">
-                    <p className="footer__copy">&#169; 2025 GKIm Amanat Kristus. All Rigths Reserved.</p>
+                    <p className="footer__copy">&#169; {new Date().getFullYear()} GKIm-Jemaat-Amanat-Kristus. All Rigths Reserved.</p>
                 </div>
             </div>
         </footer>

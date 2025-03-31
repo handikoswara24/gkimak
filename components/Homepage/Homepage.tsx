@@ -2,7 +2,7 @@
 
 import { ListRenungan } from '@/types/renunganharian'
 import { SettingType } from '@/types/setting'
-import React  from 'react'
+import React from 'react'
 import RenunganWrapper from './RenunganWrapper'
 import Header from './Header'
 import HomeSection from './HomeSection'
@@ -23,15 +23,18 @@ const Homepage = ({ setting, renungan }: HomepageProps) => {
                 <section className="about section" id="about">
                     <div className="about__container container grid">
                         <div className="about__data">
-                            <h2 className="section__title about__title">More Information About Our Church</h2>
+                            <h2 className="section__title about__title">Tentang Gereja Kami</h2>
                             <p className="about__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                                 Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            </p>
-                            <a href="#" className="button">Read more</a>
+                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                            <a href="about.html" className="button">Baca lebih lanjut</a>
                         </div>
 
                         <div className="about__img">
+                            <div className="about__img-overlay">
+                                <img src="/images/about1.jpg" alt="" className="about__img-one" />
+                            </div>
+
                             <div className="about__img-overlay">
                                 <img src="/images/about2.jpg" alt="" className="about__img-two" />
                             </div>
@@ -39,74 +42,13 @@ const Homepage = ({ setting, renungan }: HomepageProps) => {
                     </div>
                 </section>
 
-                <section className="discover section" id="discover">
-                    <h2 className="section__title">Discover Our Church Moments of Faith and Community </h2>
-
-                    <div className="portfolio">
-                        <main className="mainContainer">
-                            <div className="button-group">
-                                <button className="button active" data-filter="*">All</button>
-                                <button className="button" data-filter=".design">Design</button>
-                                <button className="button" data-filter=".development">Development</button>
-                                <button className="button" data-filter=".logo">Logo</button>
-                            </div>
-
-                            <div className="gallery">
-
-
-                                <div className="item design">
-                                    <img src="/images/design1.jpg" />
-                                    <div className="overlay">
-
-                                    </div>
-                                </div>
-
-                                <div className="item design">
-                                    <img src="/images/design2.jpg" />
-                                    <div className="overlay">
-
-                                    </div>
-                                </div>
-                                <div className="item development">
-                                    <img src="/images/website1.jpg" />
-                                    <div className="overlay">
-
-                                    </div>
-                                </div>
-
-                                <div className="item development">
-                                    <img src="/images/website2.jpg" />
-                                    <div className="overlay">
-
-                                    </div>
-                                </div>
-
-                                <div className="item development">
-                                    <img src="/images/website3.jpg" />
-                                    <div className="overlay">
-
-                                    </div>
-                                </div>
-
-                                <div className="item logo">
-                                    <img src="/images/logo1.jpg" />
-                                    <div className="overlay">
-
-                                    </div>
-                                </div>
-                            </div>
-                        </main>
-                    </div>
-                </section>
-
                 <RenunganWrapper renungan={renungan} setting={setting} />
 
                 <section className="video section">
-                    <h2 className="section__title">Live Youtube</h2>
+                    <h2 className="section__title">Live Tour</h2>
 
                     <div className="video__container container">
-                        <p className="video__description">Yuk, bergabung bersama kami dalam Ibadah Minggu secara live!
-                            Rasakan kehadiran Tuhan di mana pun Anda berada.
+                        <p className="video__description">Ikuti ibadah gereja kami secara live dan rasakan kehangatan komunitas kami secara langsung.
                         </p>
                         <div className="video__content">
                             <iframe className='w-full h-100' src={`https://www.youtube.com/embed/${setting.watchIdLive}`} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
@@ -115,23 +57,44 @@ const Homepage = ({ setting, renungan }: HomepageProps) => {
 
                 </section>
 
-                {/* <section className="subscribe section">
-                    <div className="subscribe__bg">
-                        <div className="subscribe__container container">
-                            <h2 className="section__title subscribe__title">Jangan Lupa Subscribe Youtube Kita</h2>
-                            <p className="subscribe__description">Dapatkan inspirasi, firman Tuhan, dan pesan-pesan penuh kasih setiap minggunya!
-                            </p>
+                <section className="gallery section" id="gallery">
+                    <h2 className="section__title">Kenangan Berharga di Gereja </h2>
 
-                            <form action="" className="subscribe__form">
-                                <input type="text" placeholder="Enter email" className="subscribe__input" />
+                    <div className="gallery__container">
+                        <div className="button-group">
+                            <button className="button active" data-filter="*">Semua</button>
+                            <button className="button" data-filter=".bajem">Bajem</button>
+                            <button className="button" data-filter=".natal">Natal</button>
+                            <button className="button" data-filter=".other">Other</button>
+                        </div>
 
-                                <button className="button">
-                                    Subscribe
-                                </button>
-                            </form>
+                        <div className="gallery__content">
+                            <div className="item bajem">
+                                <img src="/images/blog-p-1.jpg" />
+                            </div>
+
+                            <div className="item bajem">
+                                <img src="/images/blog-p-2.jpg" />
+                            </div>
+
+                            <div className="item bajem">
+                                <img src="/images/blog-p-3.jpg" />
+                            </div>
+
+                            <div className="item natal">
+                                <img src="/images/blog-p-4.jpg" />
+                            </div>
+
+                            <div className="item natal">
+                                <img src="/images/blog-p-5.jpg" />
+                            </div>
+
+                            <div className="item other">
+                                <img src="/images/blog-p-6.jpg" />
+                            </div>
                         </div>
                     </div>
-                </section> */}
+                </section>
             </main >
             <Footer />
         </>

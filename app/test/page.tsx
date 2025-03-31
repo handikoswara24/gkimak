@@ -7,7 +7,7 @@ const TestPage = async () => {
     const fetchData = await fetch(`${process.env.BASE_URL}/api/setting`, {
         cache: 'no-cache'
     });
-    const renunganFetch = await fetch(`${process.env.BASE_URL}/api/renungan?page=1&numberPerPage=3`, {
+    const renunganFetch = await fetch(`${process.env.BASE_URL}/api/renungan?page=1&numberPerPage=4`, {
         cache: 'no-cache'
     });
 

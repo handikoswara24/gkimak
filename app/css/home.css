@@ -3,6 +3,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@500;600;700&display=swap");
 @import url("https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css");
 
+
 /*=============== VARIABLES CSS ===============*/
 :root {
   --header-height: 3rem;
@@ -13,17 +14,18 @@
   --hue-color: 190;
 
   /* HSL color mode */
-  --first-color: hsl(var(--hue-color), 64%, 22%);
-  --first-color-second: hsl(var(--hue-color), 64%, 22%);
-  --first-color-alt: hsl(var(--hue-color), 64%, 15%);
-  --title-color: hsl(var(--hue-color), 64%, 18%);
-  --text-color: hsl(var(--hue-color), 24%, 35%);
+  --first-color: #8C4F8C;
+  --first-color-second: #5E375E;
+  --first-color-alt: #5E375E;
+  --first-color-ligten: #DAB6DA;
+  --title-color: #402840;
+  --text-color: #5E375E;
   --text-color-light: hsl(var(--hue-color), 8%, 60%);
   --input-color: hsl(var(--hue-color), 24%, 97%);
-  --body-color: hsl(var(--hue-color), 100%, 99%);
-  --white-color: #FFF;
-  --scroll-bar-color: hsl(var(--hue-color), 12%, 90%);
-  --scroll-thumb-color: hsl(var(--hue-color), 12%, 75%);
+  --body-color: #F8F9FA;
+  --white-color: #F8F9FA;
+  --scroll-bar-color: #8C4F8C;
+  --scroll-thumb-color: #8C4F8C;
 
   /*========== Font and typography ==========*/
   --body-font: 'Open Sans', sans-serif;
@@ -36,10 +38,7 @@
   --small-font-size: .813rem;
   --smaller-font-size: .75rem;
 
-  --cover-height: 36rem;
-
   /*========== Font weight ==========*/
-  --font-light: 400;
   --font-medium: 500;
   --font-semi-bold: 600;
 
@@ -128,10 +127,6 @@ body {
   color: var(--text-color);
 }
 
-.home {
-  min-height: var(--cover-height);
-}
-
 h1, h2, h3 {
   color: var(--title-color);
   font-weight: var(--font-semi-bold);
@@ -173,7 +168,7 @@ input {
 
 /*=============== REUSABLE CSS CLASSES ===============*/
 .section {
-  padding: 2.5rem 0 2.5rem;
+  padding: 4.5rem 0 2.5rem;
 }
 
 .section__title {
@@ -184,17 +179,10 @@ input {
   margin-bottom: var(--mb-2);
 }
 
-.section__subtitle {
-  color: var(--title-color);
-  text-align: center;
-  margin-bottom: var(--mb-2);
-  padding: 0 1.5rem;
-}
-
 .container {
   max-width: 968px;
-  padding-left: var(--mb-1);
-  padding-right: var(--mb-1);
+  margin-left: var(--mb-1);
+  margin-right: var(--mb-1);
 }
 
 .grid {
@@ -225,8 +213,7 @@ input {
 }
 
 .nav__logo {
-  font-weight: var(--font-semi-bold);
-  width: 38px;
+  width: 2.5rem;
 }
 
 .nav__toggle {
@@ -236,6 +223,10 @@ input {
 
 .nav__menu {
   position: relative;
+}
+
+.nav__icon {
+  font-size: 1.5rem;
 }
 
 @media screen and (max-width: 767px) {
@@ -315,23 +306,9 @@ input {
   top: 0;
   left: 0;
   width: 100%;
-  height: var(--cover-height);
+  height: 100vh;
   object-fit: cover;
-  object-position: 50%;
-  
-}
-
-.home__social {
-  display: flex;
-  flex-direction: row;
-  column-gap: 1.5rem;
-  padding-top: 5rem;
-}
-
-.home__social-link {
-  font-size: 1.3rem;
-  width: max-content;
-  color: var(--white-color)
+  object-position: 83%;
 }
 
 .home__container {
@@ -339,15 +316,13 @@ input {
   height: calc(100vh - var(--header-height));
   align-content: center;
   row-gap: 3rem;
-  padding-top: 2rem;
 }
 
-
-
 .home__data-subtitle, 
-.home__data-title,
+.home__data-title, 
 .home__data-verse,
 .home__social-link, 
+.about__social-link,
 .home__info {
   color: var(--white-color);
 }
@@ -362,13 +337,25 @@ input {
   font-size: var(--biggest-font-size);
   font-weight: var(--font-medium);
   margin-bottom: var(--mb-2-5);
-  line-height: 5rem;
 }
 
 .home__data-verse {
   font-weight: var(--font-light);
-  margin-bottom: var(--mb-2-5);
+  margin-bottom: var(--mb-0-5);
   font-style: italic;
+}
+
+.home__social,
+.about__social {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.5rem;
+}
+
+.home__social-link,
+.about__social-link {
+  font-size: 1.2rem;
+  width: max-content;
 }
 
 .home__info {
@@ -380,7 +367,7 @@ input {
   position: absolute;
   right: 0;
   bottom: 1rem;
-  width: 172px;
+  width: 228px;
 }
 
 .home__info-title {
@@ -406,9 +393,6 @@ input {
 .home__info-img:hover {
   transform: var(--img-scale);
 }
-
-
-
 
 /*=============== BUTTONS ===============*/
 .button {
@@ -460,88 +444,64 @@ input {
 }
 
 .about__img-overlay {
-  display: flex;
   overflow: var(--img-hidden);
-  justify-content: center;
+}
+
+.about__img-one {
+  width: 130px;
 }
 
 .about__img-two {
   width: 180px;
+}
+
+.about__img-one, 
+.about__img-two {
   transition: var(--img-transition);
 }
 
- 
+.about__img-one:hover, 
 .about__img-two:hover {
   transform: var(--img-scale);
 }
 
-/*========== RENUNGAN ==========*/
-
-
-.wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+.about__social{
+  flex-direction: row;
+  align-self: flex-end;
+  margin-bottom: 3rem;
+  column-gap: 2.5rem;
 }
-  
-.card {
+
+/*=============== DEVOTION ===============*/
+.devotion__data {
+  text-align: center;
+}
+
+.devotion__maincard{
+  display: grid;
+}
+
+.card__left{
   overflow: hidden;
-  box-shadow: 0px 2px 20px var(--clr-gray-light);
-  background: white;
   border-radius: 0.5rem;
   position: relative;
-  /* width: 350px; */
+  width: 500px;
   margin: 1rem;
   transition: 250ms all ease-in-out;
   cursor: pointer;
-  border: 0.1px solid var(--first-color);
+  border: 0.5px solid var(--first-color);
+
 }
-  
-.card:hover {
+.card__left:hover{
   transform: scale(1.05);
-  box-shadow: 0px 2px 40px var(--clr-gray-light);
 }
-  
-.banner-img {
-  position: absolute;
-  object-fit: cover;
-  height: 14rem;
-  width: 100%;
-}
-  
-.category-tag {
-  font-size: 0.8rem;
-  font-weight: bold;
-  color: white;
-  background: red;
-  padding: 0.5rem 1.3rem 0.5rem 1rem;
-  text-transform: uppercase;
-  position: absolute;
-  z-index: 1;
-  top: 1rem;
-  border-radius: 0 2rem 2rem 0;
-}
-  
-.popular {
-  background: var(--clr-popular);
-}
-  
-.technology {
-  background: var(--clr-technology);
-}
-  
-.psychology {
-  background: var(--clr-psychology);
-}
-  
 .card-body {
   margin: 15rem 1rem 1rem 1rem;
 }
   
-.blog-hashtag {
+.blog-date {
   font-size: 0.9rem;
   font-weight: 500;
-  color: var(--clr-link);
 }
   
 .blog-title {
@@ -550,54 +510,102 @@ input {
 }
   
 .blog-description {
-  color: var(--clr-gray-med);
-  font-size: 0.9rem;
-}
-  
-.card-profile {
-  display: flex;
-  margin-top: 2rem;
-  align-items: center;
-}
-  
-.profile-img {
-  width: 40px;
-  height: 40px;
-  object-fit: cover;
-  border-radius: 50%;
-}
-  
-.card-profile-info {
-  margin-left: 1rem;
-}
-  
-.profile-name {
-  font-size: 1rem;
-}
-  
-.profile-followers {
-  color: var(--clr-gray-med);
   font-size: 0.9rem;
 }
 
+.devotion__description{
+  text-align: center;
+  margin-bottom: var(--mb-2-5);
+}
+
+.devotion__left{
+  margin: 20px;
+  flex-direction: column;
+  width: 100%;
+  border-bottom-left-radius: 12px;
+}
+.banner-img{
+  position: absolute;
+  object-fit: cover;
+  height: 14rem;
+  width: 100%;
+}
+
+.devotion__article{
+  width: 500px;
+  display: flex;
+  flex-direction: row;
+  margin: 0.8rem;
+}
+
+.devotion__img{
+  width: 45%;
+  height: auto;
+  background-image: url(/images/blog-p-4.jpg);
+  background-size: cover;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+.devotion__content{
+  width: 55%;
+  height: 100%;
+  padding: 15px;
+  border-left-color: transparent;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.devotion__title{
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--first-color-second);
+}
+
+.devotion__subtitle,
+.devotion__date{
+  color: var(--first-color-second);
+  font-size: 0.8rem;
+}
+
+/*=============== VIDEO ===============*/
+.video__container {
+  padding-bottom: 1rem;
+}
+
+.video__description {
+  text-align: center;
+  margin-bottom: var(--mb-2-5);
+}
+
+.video__content {
+  position: relative;
+}
+
+.video__button {
+  position: absolute;
+  right: 1rem;
+  bottom: -1rem;
+  padding: 1rem 1.5rem;
+}
+
+.video__button-icon {
+  font-size: 1.2rem;
+}
+
 /*=============== GALLERY ===============*/
-.portfolio{
+.gallery__container{
   width: 100%;
   padding: 30px 8%;
-  background-color: var(--body-clr);
   width: 100%;
+  min-height: 100vh;
 }
 .portfolio .section-head{
   max-width: 700px;
   margin: 0px auto 25px;
   text-align: center;
 }
-.section-head h1{
-  position: relative;
-  font-size: 32px;
-  margin: 10px 0px 30px;
-  color: var(--primary-clr);
-}
+
 .button-group{
   text-align: center;
   margin-bottom: 40px;
@@ -606,7 +614,7 @@ input {
   display: inline-block;
   padding: 10px 20px;
   margin: 5px;
-  background-color: var(--clr-gray-light);
+  background-color: var(--white-color);
   color: var(--first-color);
   font-style: 12px;
   font-weight: 800;
@@ -626,12 +634,12 @@ input {
   background-color: var(--first-color);
   color: var(--white-color);
 }
-div.gallery{
+div.gallery__content{
   width: 100%;
   display: flex;
   flex-wrap: wrap;
 }
-div.gallery .item{
+div.gallery__content .item{
   position: relative;
   margin: 4px;
   width: calc(33.33% - 8px);
@@ -645,7 +653,7 @@ div.gallery .item{
   display: block;
   transition: 0.3s;
 }
-div.gallery .item:hover img{
+div.gallery__content .item:hover img{
   transform: scale(1.15);
 }
 .item .overlay{
@@ -674,73 +682,22 @@ div.gallery .item:hover img{
 }
 .item .overlay a:hover{
   transform: scale(1.05);
-  box-shadow: 0px 2px 40px var(--clr-gray-light);
 }
 
 
 @media(max-width: 1024px){
-  div.gallery .item{
+  div.gallery__content .item{
     width: calc(50% - 8px);
   }
 }
 
 @media(max-width: 600px){
-  div.gallery .item{
+  div.gallery__content .item{
     width: 100%;
     margin: 4px 0px;
   }
 }
 
-/*=============== VIDEO ===============*/
-.video__container {
-  padding-bottom: 1rem;
-}
-
-.video__description {
-  text-align: center;
-  margin-bottom: var(--mb-2-5);
-}
-
-.video__content {
-  position: relative;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-}
-
-/*=============== SUBSCRIBE ===============*/
-.subscribe__bg {
-  background-color: var(--first-color-second);
-  padding: 2.5rem 0;
-}
-
-.subscribe__title, 
-.subscribe__description {
-  color: var(--white-color);
-}
-
-.subscribe__description {
-  text-align: center;
-  margin-bottom: var(--mb-2-5);
-}
-
-.subscribe__form {
-  background-color: var(--input-color);
-  padding: .5rem;
-  display: flex;
-  justify-content: space-between;
-}
-
-.subscribe__input {
-  width: 70%;
-  padding-right: .5rem;
-  background-color: var(--input-color);
-  color: var(--text-color);
-}
-
-.subscribe__input::placeholder {
-  color: var(--text-color);
-}
 
 /*=============== FOOTER ===============*/
 .footer__container {
@@ -787,10 +744,6 @@ div.gallery .item:hover img{
   color: var(--title-color);
 }
 
-.footer__logo{
-  height: 80px;
-}
-
 .footer__rights {
   display: flex;
   flex-direction: column;
@@ -799,20 +752,11 @@ div.gallery .item:hover img{
   justify-content: center;
 }
 
-.footer__copy, .footer__terms-link {
+.footer__copy{
   font-size: var(--small-font-size);
   color: var(--text-color-light);
 }
 
-.footer__terms {
-  display: flex;
-  column-gap: 1.5rem;
-  justify-content: center;
-}
-
-.footer__terms-link:hover {
-  color: var(--text-color);
-}
 
 /*========== SCROLL UP ==========*/
 .scrollup {
@@ -837,10 +781,6 @@ div.gallery .item:hover img{
   font-size: 1.2rem;
 }
 
-.line-height{
-  line-height: 1.5rem;
-}
-
 /* Show scroll */
 .show-scroll {
   bottom: 5rem;
@@ -863,13 +803,12 @@ div.gallery .item:hover img{
 /*=============== MEDIA QUERIES ===============*/
 /* For small devices */
 @media screen and (max-width: 340px) {
-  .place__container {
-    grid-template-columns: max-content;
-    justify-content: center;
-  }
   .home__info {
     width: 190px;
     padding: 1rem;
+  }
+  .video__container {
+    padding: 0;
   }
 }
 
@@ -880,14 +819,29 @@ div.gallery .item:hover img{
     grid-template-columns: .6fr;
     justify-content: center;
   }
-  .place__container {
-    grid-template-columns: repeat(3, max-content);
-  }
-  .subscribe__form {
-    width: 470px;
-    margin: 0 auto;
-  }
+
 }
+
+@media screen and (max-width: 768px) {
+  .devotion__article{
+    margin: 20px;
+    flex-direction: column;
+    width: 100%;
+    border-bottom-left-radius: 12px;
+  }
+  .devotion__content{
+    width: 100%;
+    height: auto;
+  }
+  .devotion__img{
+    width: 100%;
+    height: 300px;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 12px;
+  }
+
+}
+
 
 @media screen and (min-width: 768px) {
   body {
@@ -900,9 +854,6 @@ div.gallery .item:hover img{
     color: var(--white-color);
     text-transform: initial;
   }
-  .home__container{
-    padding-top: 7rem;
-  }
   .nav__link:hover {
     color: var(--white-color);
   }
@@ -912,6 +863,9 @@ div.gallery .item:hover img{
   .nav__menu {
     display: flex;
     column-gap: 1rem;
+  }
+  .nav__icon {
+    display: none;
   }
   .nav__list {
     flex-direction: row;
@@ -942,7 +896,7 @@ div.gallery .item:hover img{
     color: var(--text-color);
   }
   .section {
-    padding: 2rem 0 2rem;
+    padding: 7rem 0 2rem;
   }
   .home__container {
     height: 100vh;
@@ -951,48 +905,29 @@ div.gallery .item:hover img{
   .home__data {
     align-self: flex-end;
   }
-
   .home__social {
     flex-direction: row;
     align-self: flex-end;
     margin-bottom: 3rem;
     column-gap: 2.5rem;
-    padding-top: 2rem;
   }
   .home__info {
     bottom: 3rem;
-    width: 228px;
   }
-
-  .about__container {
+  .about__container, .devotion__maincard {
     grid-template-columns: repeat(2, 1fr);
     align-items: center;
   }
   .about__data, .about__title {
     text-align: initial;
   }
-  .about__title {
+  .about__title, .dev__title {
     margin-bottom: var(--mb-1-5);
   }
-  .about__description {
+  .about__description{
     margin-bottom: var(--mb-2);
   }
- 
-  .subscribe__bg {
-    background: none;
-    padding: 0;
-  }
-  .subscribe__container {
-    background-color: var(--first-color-second);
-    padding: 3.5rem 0;
-  }
-  .subscribe__input {
-    padding: 0 .5rem;
-  }
-  .footer__rights {
-    flex-direction: row;
-    justify-content: center;
-  }
+
 }
 
 /* For large devices */
@@ -1015,21 +950,18 @@ div.gallery .item:hover img{
   .home__info-img {
     width: 240px;
   }
-  .about__img-two {
-    width: 320px;
+  .about__img-one {
+    width: 230px;
   }
+  .about__img-two {
+    width: 290px;
+  }
+
   .video__container {
     grid-template-columns: .7fr;
   }
-  .video__description {
-    padding: 0 6rem;
-  }
-
-  .card__container {
-    gap: 3rem 2rem;
-  }
-  .renungan__card {
-    height: 263px;
+  .video__description, .devotion__description {
+    padding: 0 8rem;
   }
   .footer__content {
     justify-items: center;
@@ -1051,4 +983,3 @@ div.gallery .item:hover img{
     height: 640px;
   }
 }
-
