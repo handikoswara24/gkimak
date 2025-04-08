@@ -8,7 +8,15 @@ export type RenunganHarianType = {
     title: string,
     verse: string,
     image: ImageRenungan[],
-    slug: string
+    slug: string,
+    refleksi: string,
+    ayatColor: string,
+    ayatBgColor: string,
+    renunganColor: string,
+    renunganBgColor: string,
+    refleksiColor: string,
+    refleksiBgColor: string,
+    isiAyat: string
 }
 
 export type ListRenungan = {
@@ -23,6 +31,14 @@ export type RenunganHarianInput = {
     title: string,
     verse: string,
     image: string[],
+    refleksi: string,
+    ayatColor: string,
+    ayatBgColor: string,
+    renunganColor: string,
+    renunganBgColor: string,
+    refleksiColor: string,
+    refleksiBgColor: string,
+    isiAyat: string
 }
 
 export type ImageRenungan = {
@@ -37,7 +53,15 @@ export interface IRenunganHarianDocument extends Document {
     title: string,
     verse: string,
     image: ImageRenungan[],
-    slug: string
+    slug: string,
+    refleksi: string,
+    ayatColor: string,
+    ayatBgColor: string,
+    renunganColor: string,
+    renunganBgColor: string,
+    refleksiColor: string,
+    refleksiBgColor: string,
+    isiAyat: string
 }
 
 export interface IRenunganHarian extends Document {

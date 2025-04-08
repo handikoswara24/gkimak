@@ -27,7 +27,31 @@ const renunganHarianModel = new mongoose.Schema({
         sort: {
             type: Number
         }
-    }]
+    }],
+    refleksi: {
+        type: String
+    },
+    ayatColor: {
+        type: String,
+    },
+    ayatBgColor: {
+        type: String,
+    },
+    renunganColor: {
+        type: String,
+    },
+    renunganBgColor: {
+        type: String,
+    },
+    refleksiColor: {
+        type: String,
+    },
+    refleksiBgColor: {
+        type: String,
+    },
+    isiAyat: {
+        type: String
+    }
 }, {
     timestamps: true
 });

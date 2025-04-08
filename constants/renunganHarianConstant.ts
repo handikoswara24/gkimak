@@ -6,5 +6,13 @@ export const DEFAULTRENUNGANHARIAN : RenunganHarianInput = {
     date: new Date(new Date().setHours(0,0,0,0)),
     image: [],
     title: "",
-    verse: ""
+    verse: "",
+    refleksi: "",
+    ayatBgColor: "#000000",
+    ayatColor: "#ffffff",
+    refleksiBgColor: "#000000",
+    refleksiColor: "#ffffff",
+    renunganBgColor: "#000000",
+    renunganColor: "#ffffff",
+    isiAyat: ""
 }

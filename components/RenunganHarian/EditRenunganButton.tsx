@@ -14,7 +14,15 @@ const EditRenunganButton = ({ data }: EditRenunganProps) => {
         date: data.date,
         image: data.image.map(e => e.url),
         title: data.title,
-        verse: data.verse
+        verse: data.verse,
+        ayatBgColor: data.ayatBgColor,
+        ayatColor: data.ayatColor,
+        isiAyat: data.isiAyat,
+        refleksi: data.refleksi,
+        refleksiBgColor: data.refleksiBgColor,
+        refleksiColor: data.refleksiColor,
+        renunganBgColor: data.refleksiBgColor,
+        renunganColor: data.renunganColor
     }
     return (
         <div className="mr-3">

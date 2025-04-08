@@ -15,6 +15,7 @@ import { useModalAction } from '../utils/ModalProvider';
 import { useAddRenunganMutation, useUpdateRenunganMutation } from '@/service/renungan-query';
 import { toast } from 'react-toastify';
 import dynamic from 'next/dynamic';
+import { ColorPicker } from 'primereact/colorpicker';
 
 type RenunganHarianFormType = {
   data: RenunganHarianInput,
@@ -169,6 +170,19 @@ const RenunganHarianForm = ({ data, id }: RenunganHarianFormType) => {
             </FloatLabel>
           </div>
           <div className=''>
+            <label className='pl-2 text-xs text-slate-500'>Isi Ayat</label>
+            <QuillEditor
+              //@ts-ignore
+              ref={(el) => (quill.current = el)}
+              theme="snow"
+              className='h-32 rounded-xl'
+              value={value.isiAyat}
+              formats={formats}
+              modules={modules}
+              onChange={(content) => setValue({ ...value, isiAyat: content })}
+            />
+          </div>
+          <div className='!mt-20'>
             <FloatLabel>
               <Calendar className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="date" value={new Date(value.date)}
                 onChange={(e) => setValue({ ...value, date: e.value ?? new Date() })}></Calendar>
@@ -183,7 +197,7 @@ const RenunganHarianForm = ({ data, id }: RenunganHarianFormType) => {
             </FloatLabel>
           </div>
         </div>
-        <div className='mt-2'>
+        <div className='mt-4'>
           <label className='pl-2 text-xs text-slate-500'>Konten</label>
           <QuillEditor
             //@ts-ignore
@@ -195,6 +209,49 @@ const RenunganHarianForm = ({ data, id }: RenunganHarianFormType) => {
             modules={modules}
             onChange={(content) => setValue({ ...value, content: content })}
           />
+        </div>
+        <div className='mt-12'>
+          <label className='pl-2 text-xs text-slate-500'>Refleksi</label>
+          <QuillEditor
+            //@ts-ignore
+            ref={(el) => (quill.current = el)}
+            theme="snow"
+            className='h-32 rounded-xl'
+            value={value.refleksi}
+            formats={formats}
+            modules={modules}
+            onChange={(content) => setValue({ ...value, refleksi: content })}
+          />
+        </div>
+        <div className='grid grid-cols-2 gap-4 mt-20'>
+          <div>
+            <ColorPicker className='border border-slate-400 rounded-sm' value={(value.ayatColor ?? "#000000").replace("#", "")} onChange={(e) => setValue({ ...value, ayatColor: "#" + (e.value?.toString() ?? "000000") })} />
+            <span className='ml-4 text-xs'>Warna Ayat</span>
+          </div>
+          <div>
+            <ColorPicker className='border border-slate-400 rounded-sm' value={(value.ayatBgColor ?? "#ffffff").replace("#", "")} onChange={(e) => setValue({ ...value, ayatBgColor: "#" + (e.value?.toString() ?? "ffffff") })} />
+            <span className='ml-4 text-xs'>Warna Background Ayat</span>
+          </div>
+        </div>
+        <div className='grid grid-cols-2 gap-4 mt-4'>
+          <div>
+            <ColorPicker className='border border-slate-400 rounded-sm' value={(value.renunganColor ?? "#000000").replace("#", "")} onChange={(e) => setValue({ ...value, renunganColor: "#" + (e.value?.toString() ?? "000000") })} />
+            <span className='ml-4 text-xs'>Warna Renungan</span>
+          </div>
+          <div>
+            <ColorPicker className='border border-slate-400 rounded-sm' value={(value.renunganBgColor ?? "#ffffff").replace("#", "")} onChange={(e) => setValue({ ...value, renunganBgColor: "#" + (e.value?.toString() ?? "ffffff") })} />
+            <span className='ml-4 text-xs'>Warna Background Renungan</span>
+          </div>
+        </div>
+        <div className='grid grid-cols-2 gap-4 mt-4'>
+          <div>
+            <ColorPicker className='border border-slate-400 rounded-sm' value={(value.refleksiColor ?? "#000000").replace("#", "")} onChange={(e) => setValue({ ...value, refleksiColor: "#" + (e.value?.toString() ?? "000000") })} />
+            <span className='ml-4 text-xs'>Warna Refleksi</span>
+          </div>
+          <div>
+            <ColorPicker className='border border-slate-400 rounded-sm' value={(value.refleksiBgColor ?? "#ffffff").replace("#", "")} onChange={(e) => setValue({ ...value, refleksiBgColor: "#" + (e.value?.toString() ?? "ffffff") })} />
+            <span className='ml-4 text-xs'>Warna Background Refleksi</span>
+          </div>
         </div>
         <div className='mt-28'>
           <Button type='submit' disabled={!value.author || !value.content || !value.title || !value.date || loadingAdd || loadingUpdate}
