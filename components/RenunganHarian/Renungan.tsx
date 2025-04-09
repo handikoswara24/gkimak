@@ -1,8 +1,16 @@
+'use client'
+
 import React from 'react'
 import Header from '../Homepage/Header'
 import Footer from '../Homepage/Footer'
+import { ListRenungan } from '@/types/renunganharian'
 
-const Renungan = () => {
+type RenunganProps = {
+    renungan: ListRenungan
+}
+
+const Renungan = ({ renungan }: RenunganProps) => {
+    console.log(renungan);
     return (
         <>
             <Header />
@@ -27,44 +35,49 @@ const Renungan = () => {
                             <p>Artikel Terkini Tentang Inspirasi Iman Terkini</p>
                         </div>
 
-                        <div className="design-content">
-                            <div className="design-item">
-                                <div className="design-img">
-                                    <img src="/images/art-design-1.jpg" alt="" />
-                                    <span><i className="ri-heart-3-line"></i> 22</span>
-                                    <span>GKIm Amanat Kristus</span>
-                                </div>
+                        <div className='flex justify-center !mb-10'>
+                            <img src={renungan.renungan[0].image.at(0)?.url} className='max-w-100' />
+                        </div>
 
-                                <div className="design-title">
-                                    <a href="#">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</a>
-                                </div>
+                        <div className='grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
+                            <div className='w-[26rem] h-[26rem] !p-4 text-center flex justify-center items-center' style={{
+                                color: renungan.renungan[0].ayatColor ?? "#000000",
+                                backgroundColor: renungan.renungan[0].ayatBgColor ?? "#ffffff"
+                            }}>
+                                <div >
+                                    <div className='text-xl font-semibold pb-2'>
+                                        {renungan.renungan[0].verse}
+                                    </div>
+                                    <div dangerouslySetInnerHTML={{ __html: renungan.renungan[0].isiAyat }} className='text-ellipsis max-h-80 overflow-auto'>
 
+                                    </div>
+                                </div>
                             </div>
+                            <div className='w-[26rem] h-[26rem] !p-4 text-center flex justify-center items-center' style={{
+                                color: renungan.renungan[0].renunganColor ?? "#000000",
+                                backgroundColor: renungan.renungan[0].renunganBgColor ?? "#ffffff"
+                            }}>
+                                <div >
+                                    <div className='text-xl font-semibold pb-2'>
+                                        {renungan.renungan[0].title}
+                                    </div>
+                                    <div dangerouslySetInnerHTML={{ __html: renungan.renungan[0].content }} className='text-ellipsis max-h-80 overflow-auto'>
 
-                            <div className="design-item">
-                                <div className="design-img">
-                                    <img src="/images/art-design-2.jpg" alt="" />
-                                    <span><i className="ri-heart-3-line"></i> 22</span>
-                                    <span>GKIm Amanat Kristus</span>
+                                    </div>
                                 </div>
-
-                                <div className="design-title">
-                                    <a href="#">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</a>
-                                </div>
-
                             </div>
+                            <div className='w-[26rem] h-[26rem] !p-4 text-center flex justify-center items-center' style={{
+                                color: renungan.renungan[0].refleksiColor ?? "#000000",
+                                backgroundColor: renungan.renungan[0].renunganBgColor ?? "#ffffff"
+                            }}>
+                                <div >
+                                    <div className='text-xl font-semibold pb-2'>
+                                        {"Refleksi"}
+                                    </div>
+                                    <div dangerouslySetInnerHTML={{ __html: renungan.renungan[0].refleksi }} className='text-ellipsis max-h-80 overflow-auto'>
 
-                            <div className="design-item">
-                                <div className="design-img">
-                                    <img src="/images/art-design-3.jpg" alt="" />
-                                    <span><i className="ri-heart-3-line"></i> 22</span>
-                                    <span>GKIm Amanat Kristus</span>
+                                    </div>
                                 </div>
-
-                                <div className="design-title">
-                                    <a href="#">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</a>
-                                </div>
-
                             </div>
                         </div>
                     </div>

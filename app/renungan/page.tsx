@@ -8,9 +8,15 @@ export const metadata: Metadata = {
   title: 'GKim Amanat Kristus - Renungan Harian',
 }
 
-const RenunganPage = () => {
+const RenunganPage = async () => {
+
+  const renunganFetch = await fetch(`${process.env.BASE_URL}/api/renungan?page=1&numberPerPage=7`, {
+    cache: 'no-cache'
+  });
+
+  const renunganData = await renunganFetch.json();
   return (
-    <Renungan />
+    <Renungan renungan={renunganData} />
   )
 }
 
