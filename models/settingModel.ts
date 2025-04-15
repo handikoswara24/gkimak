@@ -16,6 +16,30 @@ const settingSchema = new mongoose.Schema({
     },
     isiAyat: {
         type: String
+    },
+    tentangGereja: {
+        type: String
+    },
+    tentangGerejaDesc : {
+        type: String
+    },
+    tentangGerejaButton: {
+        type: String
+    },
+    renunganHarianHome : {
+        type: String
+    },
+    renunganHarianHomeDesc :{
+        type: String
+    },
+    live: {
+        type: String,
+    },
+    liveDesc: {
+        type: String
+    },
+    kenangan: {
+        type: String
     }
 },{
     timestamps: true

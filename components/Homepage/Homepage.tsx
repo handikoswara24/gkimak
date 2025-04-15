@@ -23,11 +23,9 @@ const Homepage = ({ setting, renungan }: HomepageProps) => {
                 <section className="about section" id="about">
                     <div className="about__container container-custom grid">
                         <div className="about__data">
-                            <h2 className="section__title about__title">Tentang Gereja Kami</h2>
-                            <p className="about__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                            <a href="about.html" className="button">Baca lebih lanjut</a>
+                            <h2 className="section__title about__title">{setting.tentangGereja}</h2>
+                            <div className="about__description" dangerouslySetInnerHTML={{__html: setting.tentangGerejaDesc}}></div>
+                            <a href="about.html" className="button">{setting.tentangGerejaButton}</a>
                         </div>
 
                         <div className="about__img">
@@ -45,11 +43,11 @@ const Homepage = ({ setting, renungan }: HomepageProps) => {
                 <RenunganWrapper renungan={renungan} setting={setting} />
 
                 <section className="video section">
-                    <h2 className="section__title">Live Tour</h2>
+                    <h2 className="section__title">{setting.live}</h2>
 
                     <div className="video__container container-custom">
-                        <p className="video__description">Ikuti ibadah gereja kami secara live dan rasakan kehangatan komunitas kami secara langsung.
-                        </p>
+                        <div className="video__description" dangerouslySetInnerHTML={{__html: setting.liveDesc}}>
+                        </div>
                         <div className="video__content">
                             <iframe className='w-full h-100' src={`https://www.youtube.com/embed/${setting.watchIdLive}`} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
                         </div>
@@ -58,7 +56,7 @@ const Homepage = ({ setting, renungan }: HomepageProps) => {
                 </section>
 
                 <section className="gallery section" id="gallery">
-                    <h2 className="section__title">Kenangan Berharga di Gereja </h2>
+                    <h2 className="section__title">{setting.kenangan}</h2>
 
                     <div className="gallery__container">
                         <div className="button-group">

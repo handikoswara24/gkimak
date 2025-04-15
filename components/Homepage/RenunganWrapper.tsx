@@ -14,11 +14,10 @@ const RenunganWrapper = ({ setting, renungan }: RenunganWrapperProps) => {
         <section className="devotion section" id="devotion">
             <div className="devotion__container container-custom grid">
                 <div className="devotion__data">
-                    <h2 className="section__title dev__title">Renungan Harian</h2>
-                    <p className="devotion__description">
-                        Mulailah harimu dengan inspirasi dan penguatan dari Firman Tuhan.
-                        Luangkan waktu sejenak untuk berhenti, merenung, dan bersekutu dengan-Nya.
-                    </p>
+                    <h2 className="section__title dev__title">{setting.renunganHarianHome}</h2>
+                    <div className="devotion__description" dangerouslySetInnerHTML={{__html: setting.renunganHarianHomeDesc}}>
+                        
+                    </div>
                 </div>
 
                 {renungan.renungan.length > 0 && <div className="devotion__maincard">

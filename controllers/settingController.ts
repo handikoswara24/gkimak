@@ -15,6 +15,14 @@ const addUpdateSetting = catchAsyncErrors(async (req: NextRequest) => {
         setting.title = body.title || setting.title;
         setting.ayat = body.ayat || setting.ayat;
         setting.isiAyat = body.isiAyat || setting.isiAyat;
+        setting.tentangGereja = body.tentangGereja || setting.tentangGereja;
+        setting.tentangGerejaDesc = body.tentangGerejaDesc || setting.tentangGerejaDesc;
+        setting.tentangGerejaButton = body.tentangGerejaButton || setting.tentangGerejaButton;
+        setting.renunganHarianHome = body.renunganHarianHome || setting.renunganHarianHome;
+        setting.renunganHarianHomeDesc = body.renunganHarianHomeDesc || setting.renunganHarianHomeDesc;
+        setting.live = body.live || setting.live;
+        setting.liveDesc = body.liveDesc || body.liveDesc;
+        setting.kenangan = body.kenangan || body.kenangan;
 
         await setting.save();
     }
@@ -42,7 +50,15 @@ const getSetting = catchAsyncErrors(async (req: NextRequest) => {
         isiAyat: setting.isiAyat ?? DEFAULTSETTING.isiAyat,
         title: setting.title ?? DEFAULTSETTING.title,
         watchIdLive: setting.watchIdLive ?? DEFAULTSETTING.watchIdLive,
-        welcomeText: setting.welcomeText ?? DEFAULTSETTING.welcomeText
+        welcomeText: setting.welcomeText ?? DEFAULTSETTING.welcomeText,
+        kenangan: setting.kenangan ?? DEFAULTSETTING.kenangan,
+        live: setting.live ?? DEFAULTSETTING.live,
+        liveDesc: setting.liveDesc ?? DEFAULTSETTING.liveDesc,
+        renunganHarianHome: setting.renunganHarianHome ?? DEFAULTSETTING.renunganHarianHome,
+        renunganHarianHomeDesc: setting.renunganHarianHomeDesc ?? DEFAULTSETTING.renunganHarianHomeDesc,
+        tentangGereja: setting.tentangGereja ?? DEFAULTSETTING.tentangGereja,
+        tentangGerejaButton: setting.tentangGerejaButton ?? DEFAULTSETTING.tentangGerejaButton,
+        tentangGerejaDesc: setting.tentangGerejaDesc ?? DEFAULTSETTING.tentangGerejaDesc
     });
 });
 

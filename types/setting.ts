@@ -5,7 +5,15 @@ export interface ISettingDocument extends Document {
     welcomeText: string,
     title: string,
     ayat: string,
-    isiAyat: string
+    isiAyat: string,
+    tentangGereja: string,
+    tentangGerejaDesc : string,
+    tentangGerejaButton: string,
+    renunganHarianHome : string,
+    renunganHarianHomeDesc :string,
+    live: string,
+    liveDesc: string,
+    kenangan: string
 }
 
 export interface ISettingModel extends Document {
@@ -17,5 +25,13 @@ export type SettingType = {
     welcomeText: string,
     title: string,
     ayat: string,
-    isiAyat: string
+    isiAyat: string,
+    tentangGereja: string,
+    tentangGerejaDesc : string,
+    tentangGerejaButton: string,
+    renunganHarianHome : string,
+    renunganHarianHomeDesc :string,
+    live: string,
+    liveDesc: string,
+    kenangan: string
 }
