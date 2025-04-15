@@ -25,13 +25,13 @@ const Footer = () => {
                         <h3 className="footer__subtitle">Tentang</h3>
                         <ul>
                             <li className="footer__item">
-                                <a href="about.html" className="footer__link">Tentang Kami</a>
+                                <a href="/about" className="footer__link">Tentang Kami</a>
                             </li>
                             <li className="footer__item">
-                                <a href="about.html" className="footer__link">Visi Misi</a>
+                                <a href="/about" className="footer__link">Visi Misi</a>
                             </li>
                             <li className="footer__item">
-                                <a href="about.html" className="footer__link">Hubungi Kami</a>
+                                <a href="/about" className="footer__link">Hubungi Kami</a>
                             </li>
                         </ul>
                     </div>
@@ -40,13 +40,13 @@ const Footer = () => {
                         <h3 className="footer__subtitle">Renungan</h3>
                         <ul>
                             <li className="footer__item">
-                                <a href="devotion.html" className="footer__link">Ayat Harian</a>
+                                <a href="/renungan" className="footer__link">Ayat Harian</a>
                             </li>
                             <li className="footer__item">
-                                <a href="devotion.html" className="footer__link">Renungan Terkini</a>
+                                <a href="/renungan" className="footer__link">Renungan Terkini</a>
                             </li>
                             <li className="footer__item">
-                                <a href="devotion.html" className="footer__link">Refleksi Diri</a>
+                                <a href="/renungan" className="footer__link">Refleksi Diri</a>
                             </li>
                         </ul>
                     </div>

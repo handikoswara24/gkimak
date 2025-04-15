@@ -10,7 +10,11 @@ type RenunganProps = {
 }
 
 const Renungan = ({ renungan }: RenunganProps) => {
-    console.log(renungan);
+    if (renungan.renungan.length == 0) {
+        return (
+            <></>
+        )
+    }
     return (
         <>
             <Header />
@@ -89,96 +93,27 @@ const Renungan = ({ renungan }: RenunganProps) => {
                             <p>Artikel Terbaru tentang Kedekatan dengan Tuhan</p>
                         </div>
 
+
+
                         <div className="blog-content">
-                            <div className="blog-item">
-                                <div className="blog-img">
-                                    <img src="/images/blog-p-1.jpg" alt="" />
-                                    <span><i className="ri-heart-3-line"></i></span>
-                                </div>
 
-                                <div className="blog-text">
-                                    <span>20 Februari 2025</span>
-                                    <h2>Lorem ipsum, dolor sit amet consectetur adipisicing</h2>
-                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis libero quas ipsum
-                                        laudantium nihil! Quaerat.</p>
-                                    <a href="#">Read More</a>
-                                </div>
-                            </div>
+                            {renungan.renungan.slice(1, 7).map((r) => {
+                                return (
+                                    <div className="blog-item" key={r._id}>
+                                        <div className="blog-img">
+                                            <img src={r.image.at(0)?.url} alt="" />
+                                            {/* <span><i className="ri-heart-3-line"></i></span> */}
+                                        </div>
 
-                            <div className="blog-item">
-                                <div className="blog-img">
-                                    <img src="/images/blog-p-2.jpg" alt="" />
-                                    <span><i className="ri-heart-3-line"></i></span>
-                                </div>
-
-                                <div className="blog-text">
-                                    <span>20 Februari 2025</span>
-                                    <h2>Lorem ipsum, dolor sit amet consectetur adipisicing</h2>
-                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis libero quas ipsum
-                                        laudantium nihil! Quaerat.</p>
-                                    <a href="#">Read More</a>
-                                </div>
-                            </div>
-
-                            <div className="blog-item">
-                                <div className="blog-img">
-                                    <img src="/images/blog-p-3.jpg" alt="" />
-                                    <span><i className="ri-heart-3-line"></i></span>
-                                </div>
-
-                                <div className="blog-text">
-                                    <span>20 Februari 2025</span>
-                                    <h2>Lorem ipsum, dolor sit amet consectetur adipisicing</h2>
-                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis libero quas ipsum
-                                        laudantium nihil! Quaerat.</p>
-                                    <a href="#">Read More</a>
-                                </div>
-                            </div>
-
-                            <div className="blog-item">
-                                <div className="blog-img">
-                                    <img src="/images/blog-p-4.jpg" alt="" />
-                                    <span><i className="ri-heart-3-line"></i></span>
-                                </div>
-
-                                <div className="blog-text">
-                                    <span>20 Februari 2025</span>
-                                    <h2>Lorem ipsum, dolor sit amet consectetur adipisicing</h2>
-                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis libero quas ipsum
-                                        laudantium nihil! Quaerat.</p>
-                                    <a href="#">Read More</a>
-                                </div>
-                            </div>
-
-                            <div className="blog-item">
-                                <div className="blog-img">
-                                    <img src="/images/blog-p-5.jpg" alt="" />
-                                    <span><i className="ri-heart-3-line"></i></span>
-                                </div>
-
-                                <div className="blog-text">
-                                    <span>20 Februari 2025</span>
-                                    <h2>Lorem ipsum, dolor sit amet consectetur adipisicing</h2>
-                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis libero quas ipsum
-                                        laudantium nihil! Quaerat.</p>
-                                    <a href="#">Read More</a>
-                                </div>
-                            </div>
-
-                            <div className="blog-item">
-                                <div className="blog-img">
-                                    <img src="/images/blog-p-6.jpg" alt="" />
-                                    <span><i className="ri-heart-3-line"></i></span>
-                                </div>
-
-                                <div className="blog-text">
-                                    <span>20 Februari 2025</span>
-                                    <h2>Lorem ipsum, dolor sit amet consectetur adipisicing</h2>
-                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis libero quas ipsum
-                                        laudantium nihil! Quaerat.</p>
-                                    <a href="#">Read More</a>
-                                </div>
-                            </div>
+                                        <div className="blog-text">
+                                            <span>{new Date(r.date).toDateString()}</span>
+                                            <h2>{r.title}</h2>
+                                            <p>{r.content.replaceAll(/<[^>]*>?/gm, '').substring(0, 220) + "..."}</p>
+                                            <a href={`/renungan/${r.slug}`}>Read More</a>
+                                        </div>
+                                    </div>
+                                )
+                            })}
                         </div>
                     </div>
                 </section>
