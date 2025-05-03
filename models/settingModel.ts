@@ -40,6 +40,66 @@ const settingSchema = new mongoose.Schema({
     },
     kenangan: {
         type: String
+    },
+    aboutTitle: {
+        type: String
+    },
+    aboutDesc: {
+        type: String
+    },
+    aboutTitle2: {
+        type: String
+    },
+    aboutDesc2: {
+        type: String
+    },
+    aboutBannerTitle : {
+        type: String
+    },
+    aboutMissionTitle: {
+        type: String
+    },
+    aboutMissionDesc: {
+        type: String
+    },
+    aboutVisionTitle: {
+        type: String
+    },
+    aboutVisionDesc: {
+        type: String
+    },
+    aboutStatementFaith:{
+        type: String
+    },
+    aboutStatementFaithDesc: {
+        type: String
+    },
+    leaderTitle: {
+        type: String
+    },
+    leaderDesc: {
+        type: String
+    },
+    faqTitle: {
+        type: String
+    },
+    hubTitle: {
+        type: String
+    },
+    waTitle: {
+        type: String
+    },
+    waNumber: {
+        type: String
+    },
+    addressTitle: {
+        type: String
+    },
+    address: {
+        type: String
+    },
+    mapsButtonLabel: {
+        type: String
     }
 },{
     timestamps: true

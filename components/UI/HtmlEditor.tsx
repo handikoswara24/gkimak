@@ -4,10 +4,11 @@ import "react-quill/dist/quill.snow.css";
 
 type HtmlEditorProps = {
     content: string,
-    setContent: (newContent: string) => void
+    setContent: (newContent: string) => void,
+    keys: string
 }
 const QuillEditor = dynamic(() => import("react-quill"), { ssr: false });
-const HtmlEditor = ({content, setContent} : HtmlEditorProps) => {
+const HtmlEditor = ({content, setContent, keys} : HtmlEditorProps) => {
     const quill = useRef();
 
     const modules = useMemo(
@@ -49,6 +50,8 @@ const HtmlEditor = ({content, setContent} : HtmlEditorProps) => {
     ];
     return (
         <QuillEditor
+            key={keys}
+            id={keys}
             //@ts-ignore
             ref={(el) => (quill.current = el)}
             theme="snow"
