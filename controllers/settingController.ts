@@ -90,7 +90,7 @@ const getSetting = catchAsyncErrors(async (req: NextRequest) => {
         aboutVisionDesc: setting.aboutVisionDesc ?? DEFAULTSETTING.aboutVisionDesc,
         aboutVisionTitle: setting.aboutVisionTitle ?? DEFAULTSETTING.aboutVisionTitle,
         address: setting.address ?? DEFAULTSETTING.address,
-        addressTitle: setting.address ?? DEFAULTSETTING.addressTitle,
+        addressTitle: setting.addressTitle ?? DEFAULTSETTING.addressTitle,
         faqTitle: setting.faqTitle ?? DEFAULTSETTING.faqTitle,
         hubTitle: setting.hubTitle ?? DEFAULTSETTING.hubTitle,
         leaderDesc: setting.leaderDesc ?? DEFAULTSETTING.leaderDesc,

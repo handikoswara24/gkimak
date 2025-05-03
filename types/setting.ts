@@ -75,3 +75,7 @@ export type SettingType = {
     address: string,
     mapsButtonLabel: string
 }
+
+export type AboutPageProps = {
+    setting : SettingType
+}

@@ -1,5 +1,6 @@
 'use client'
 
+import { AboutPageProps } from '@/types/setting';
 import React, { useState } from 'react'
 import { Fade, Slide } from 'react-awesome-reveal';
 
@@ -28,7 +29,7 @@ const FAQItems = (faq: { question: string, answer: string }) => {
     )
 }
 
-const AboutFAQ = () => {
+const AboutFAQ = ({setting} : AboutPageProps) => {
     const faqs = [
         {
             question: "Apakah GKIm Amanat Kristus memiliki cabang di lokasi lain?",
@@ -58,7 +59,7 @@ const AboutFAQ = () => {
     return (
         <section className="questions section" id="faqs">
             <h2 className="section__title-center questions__title container-custom">
-                Pertanyaan yang Sering Diajukan (FAQ)
+                {setting.faqTitle}
             </h2>
 
             <div className="questions__container container-custom grid">

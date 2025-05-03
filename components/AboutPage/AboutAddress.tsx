@@ -1,7 +1,8 @@
+import { AboutPageProps } from '@/types/setting'
 import React from 'react'
 import { Fade, Slide } from 'react-awesome-reveal'
 
-const AboutAddress = () => {
+const AboutAddress = ({setting} : AboutPageProps) => {
     return (
         <section className="contact section container-custom" id="contact">
 
@@ -10,23 +11,23 @@ const AboutAddress = () => {
                     <Slide duration={1400} direction='left'>
                         <div className="contact__box">
                             <h2 className="section__title">
-                                Hubungi kami dan bertumbuh dalam iman bersama
+                                {setting.hubTitle}
                             </h2>
 
                             <div className="contact__data">
                                 <div className="contact__information">
-                                    <h3 className="contact__subtitle">Hubungi kami untuk dukungan rohani</h3>
+                                    <h3 className="contact__subtitle">{setting.waTitle}</h3>
                                     <span className="contact__description">
                                         <i className="ri-phone-line contact__icon"></i>
-                                        +6282 122 790 090
+                                        {setting.waNumber}
                                     </span>
                                 </div>
 
                                 <div className="contact__information">
-                                    <h3 className="contact__subtitle">Kunjungi gereja kami dan beribadah bersama</h3>
+                                    <h3 className="contact__subtitle">{setting.addressTitle}</h3>
                                     <span className="contact__description">
                                         <i className="ri-map-pin-line contact__icon"></i>
-                                        Jalan Raya Kopo No. 246, Bandung
+                                        {setting.address}
                                     </span>
                                 </div>
                             </div>
@@ -41,7 +42,7 @@ const AboutAddress = () => {
 
                             </iframe>
                             <button className="button button--flex">
-                                See The Map
+                                {setting.mapsButtonLabel}
                                 <i className="ri-arrow-right-up-line button__icon"></i>
                             </button>
                         </div>

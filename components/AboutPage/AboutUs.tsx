@@ -1,7 +1,8 @@
+import { AboutPageProps } from '@/types/setting'
 import React from 'react'
 import { Slide } from 'react-awesome-reveal'
 
-const AboutUs = () => {
+const AboutUs = ({setting} : AboutPageProps) => {
     return (
         <section className="about section container-custom" id="about">
             <div className="about__container grid">
@@ -11,18 +12,14 @@ const AboutUs = () => {
                 <Slide duration={1500} direction='right'>
                     <div className="about__data">
                         <h2 className="section__title about__title">
-                            <div>Who we really are &</div><div>why choose us</div>
+                            {setting.aboutTitle2}
                         </h2>
 
-                        <p className="about__description">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
+                        <div className="about__description" dangerouslySetInnerHTML={{__html : setting.aboutDesc2}}>
+                            
+                        </div>
 
-                        <div className="about__details">
+                        {/* <div className="about__details">
                             <p className="about__details-description">
                                 <i className="ri-checkbox-fill about__details-icon"></i>
                                 We always welcome you with open hearts.
@@ -47,7 +44,7 @@ const AboutUs = () => {
                             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                             Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                             Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
+                        </p> */}
 
                     </div>
                 </Slide>

@@ -8,18 +8,19 @@ import AboutMission from './AboutMission'
 import AboutChurch from './AboutChurch'
 import AboutFAQ from './AboutFAQ'
 import AboutAddress from './AboutAddress'
+import { AboutPageProps } from '@/types/setting'
 
-const About = () => {
+const About = ({ setting }: AboutPageProps) => {
     return (
         <>
             <Header />
             <main className="main">
-                <AboutHeader />
-                <AboutUs />
-                <AboutMission />
-                <AboutChurch />
-                <AboutFAQ />
-                <AboutAddress />
+                <AboutHeader setting={setting}/>
+                <AboutUs setting={setting} />
+                <AboutMission setting={setting} />
+                <AboutChurch setting={setting} />
+                <AboutFAQ setting={setting} />
+                <AboutAddress setting={setting} />
             </main>
             <Footer />
         </>

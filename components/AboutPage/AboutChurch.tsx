@@ -1,17 +1,16 @@
+import { AboutPageProps } from '@/types/setting'
 import React from 'react'
 import { Fade, Slide } from 'react-awesome-reveal'
 
-const AboutChurch = () => {
+const AboutChurch = ({setting}: AboutPageProps) => {
     return (
         <section className="product section container-custom" id="products">
             <h2 className="section__title-center">
-                Get to Know Our Church Leaders
+                {setting.leaderTitle}
             </h2>
 
-            <p className="product__description">
-                Inilah para pemimpin gereja kami yang melayani dengan iman dan dedikasi untuk membimbing serta mendukung jemaat.
-                Kenali mereka dan visi pelayanannya.
-            </p>
+            <div className="product__description" dangerouslySetInnerHTML={{__html: setting.leaderDesc}}>
+            </div>
 
             <div className="product__container grid">
                 <Fade duration={1200}>
