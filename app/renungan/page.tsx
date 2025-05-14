@@ -9,14 +9,16 @@ export const metadata: Metadata = {
 }
 
 const RenunganPage = async () => {
-
+  const fetchData = await fetch(`${process.env.BASE_URL}/api/setting`, {
+    cache: 'no-cache'
+  });
   const renunganFetch = await fetch(`${process.env.BASE_URL}/api/renungan?page=1&numberPerPage=7`, {
     cache: 'no-cache'
   });
-
+  const data = await fetchData.json();
   const renunganData = await renunganFetch.json();
   return (
-    <Renungan renungan={renunganData} />
+    <Renungan renungan={renunganData} setting={data} />
   )
 }
 

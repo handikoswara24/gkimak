@@ -7,10 +7,10 @@ export interface ISettingDocument extends Document {
     ayat: string,
     isiAyat: string,
     tentangGereja: string,
-    tentangGerejaDesc : string,
+    tentangGerejaDesc: string,
     tentangGerejaButton: string,
-    renunganHarianHome : string,
-    renunganHarianHomeDesc :string,
+    renunganHarianHome: string,
+    renunganHarianHomeDesc: string,
     live: string,
     liveDesc: string,
     kenangan: string,
@@ -18,12 +18,12 @@ export interface ISettingDocument extends Document {
     aboutDesc: string,
     aboutTitle2: string,
     aboutDesc2: string,
-    aboutBannerTitle : string,
+    aboutBannerTitle: string,
     aboutMissionTitle: string,
     aboutMissionDesc: string,
     aboutVisionTitle: string,
     aboutVisionDesc: string,
-    aboutStatementFaith:string,
+    aboutStatementFaith: string,
     aboutStatementFaithDesc: string,
     leaderTitle: string,
     leaderDesc: string,
@@ -33,11 +33,15 @@ export interface ISettingDocument extends Document {
     waNumber: string,
     addressTitle: string,
     address: string,
-    mapsButtonLabel: string
+    mapsButtonLabel: string,
+    renunganTitle1: string,
+    renunganDesc1: string,
+    renunganTitle2: string,
+    renunganDesc2: string
 }
 
 export interface ISettingModel extends Document {
-    
+
 }
 
 export type SettingType = {
@@ -47,10 +51,10 @@ export type SettingType = {
     ayat: string,
     isiAyat: string,
     tentangGereja: string,
-    tentangGerejaDesc : string,
+    tentangGerejaDesc: string,
     tentangGerejaButton: string,
-    renunganHarianHome : string,
-    renunganHarianHomeDesc :string,
+    renunganHarianHome: string,
+    renunganHarianHomeDesc: string,
     live: string,
     liveDesc: string,
     kenangan: string,
@@ -58,12 +62,12 @@ export type SettingType = {
     aboutDesc: string,
     aboutTitle2: string,
     aboutDesc2: string,
-    aboutBannerTitle : string,
+    aboutBannerTitle: string,
     aboutMissionTitle: string,
     aboutMissionDesc: string,
     aboutVisionTitle: string,
     aboutVisionDesc: string,
-    aboutStatementFaith:string,
+    aboutStatementFaith: string,
     aboutStatementFaithDesc: string,
     leaderTitle: string,
     leaderDesc: string,
@@ -73,9 +77,13 @@ export type SettingType = {
     waNumber: string,
     addressTitle: string,
     address: string,
-    mapsButtonLabel: string
+    mapsButtonLabel: string,
+    renunganTitle1: string,
+    renunganDesc1: string,
+    renunganTitle2: string,
+    renunganDesc2: string
 }
 
 export type AboutPageProps = {
-    setting : SettingType
+    setting: SettingType
 }

@@ -151,7 +151,7 @@ const SettingForm = ({ data }: SettingFormProps) => {
                         <div className='!mt-2'>
                             <div className=''>
                                 <label className='pl-2 text-xs text-slate-500'>About Title Description</label>
-                                <HtmlEditor keys={"aboutDesc"} content={input.aboutDesc} setContent={(content) => setInput({...input, aboutDesc: content})} />
+                                <HtmlEditor keys={"aboutDesc"} content={input.aboutDesc} setContent={(content) => setInput({ ...input, aboutDesc: content })} />
                             </div>
                         </div>
                         <div className='!mt-18'>
@@ -291,7 +291,34 @@ const SettingForm = ({ data }: SettingFormProps) => {
                     </div>
                 </TabPanel>
                 <TabPanel header="Renungan">
-
+                    <div className=''>
+                        <FloatLabel>
+                            <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="renunganTitle1"
+                                value={input.renunganTitle1}
+                                onChange={(e) => setInput({ ...input, renunganTitle1: e.target.value })} autoComplete='off' />
+                            <label htmlFor="renunganTitle1" className='-mt-[0.35rem] text-xs'>Renungan Title 1</label>
+                        </FloatLabel>
+                    </div>
+                    <div className='!mt-2'>
+                        <div className=''>
+                            <label className='pl-2 text-xs text-slate-500'>Renungan Description 1</label>
+                            <HtmlEditor keys={"renunganDesc1"} content={input.renunganDesc1} setContent={(content) => setInput({ ...input, renunganDesc1: content })} />
+                        </div>
+                    </div>
+                    <div className='!mt-18'>
+                        <FloatLabel>
+                            <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="renunganTitle2"
+                                value={input.renunganTitle2}
+                                onChange={(e) => setInput({ ...input, renunganTitle2: e.target.value })} autoComplete='off' />
+                            <label htmlFor="renunganTitle2" className='-mt-[0.35rem] text-xs'>Renungan Title 2</label>
+                        </FloatLabel>
+                    </div>
+                    <div className='!mt-2 mb-8'>
+                        <div className=''>
+                            <label className='pl-2 text-xs text-slate-500'>Renungan Description 2</label>
+                            <HtmlEditor keys={"renunganDesc2"} content={input.renunganDesc2} setContent={(content) => setInput({ ...input, renunganDesc2: content })} />
+                        </div>
+                    </div>
                 </TabPanel>
             </TabView>
 

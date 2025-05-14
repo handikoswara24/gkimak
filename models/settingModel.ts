@@ -100,6 +100,18 @@ const settingSchema = new mongoose.Schema({
     },
     mapsButtonLabel: {
         type: String
+    },
+    renunganTitle1:  {
+        type: String
+    },
+    renunganDesc1:  {
+        type: String
+    },
+    renunganTitle2:  {
+        type: String
+    },
+    renunganDesc2:  {
+        type: String
     }
 },{
     timestamps: true

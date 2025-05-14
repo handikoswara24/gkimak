@@ -33,5 +33,9 @@ export const DEFAULTSETTING : SettingType = {
     leaderTitle: "Get to Know Our Church Leaders",
     waNumber: "+6282 122 790 090",
     waTitle: "Hubungi kami untuk dukungan rohani",
-    mapsButtonLabel: "See The Map"
+    mapsButtonLabel: "See The Map",
+    renunganDesc1: "<p>Semua tentang Iman, Doa, dan Kedekatan dengan Tuhan</p>",
+    renunganDesc2: "<p>Artikel Terkini Tentang Inspirasi Iman Terkini</p>",
+    renunganTitle1: "Firman. Kehidupan. Kebenaran.",
+    renunganTitle2: "Renungan Terkini"
 }

@@ -41,8 +41,12 @@ const addUpdateSetting = catchAsyncErrors(async (req: NextRequest) => {
         setting.leaderDesc = body.leaderDesc || setting.leaderDesc;
         setting.leaderTitle = body.leaderTitle || setting.leaderTitle;
         setting.waNumber = body.waNumber || setting.waNumber;
-        setting.waTitle = body.waTitle || body.waTitle;
-        setting.mapsButtonLabel = body.mapsButtonLabel || body.mapsButtonLabel;
+        setting.waTitle = body.waTitle || setting.waTitle;
+        setting.mapsButtonLabel = body.mapsButtonLabel || setting.mapsButtonLabel;
+        setting.renunganTitle1 = body.renunganTitle1 || setting.renunganTitle1;
+        setting.renunganTitle2 = body.renunganTitle2 || setting.renunganTitle2;
+        setting.renunganDesc1 = body.renunganDesc1 || setting.renunganDesc2;
+        setting.renunganDesc2 = body.renunganDesc2 || setting.renunganDesc2;
         await setting.save();
     }
     else {
@@ -97,7 +101,11 @@ const getSetting = catchAsyncErrors(async (req: NextRequest) => {
         leaderTitle : setting.leaderTitle ?? DEFAULTSETTING.leaderTitle,
         mapsButtonLabel: setting.mapsButtonLabel ?? DEFAULTSETTING.mapsButtonLabel,
         waNumber: setting.waNumber ?? DEFAULTSETTING.waNumber,
-        waTitle: setting.waTitle ?? DEFAULTSETTING.waTitle
+        waTitle: setting.waTitle ?? DEFAULTSETTING.waTitle,
+        renunganDesc1: setting.renunganDesc1 ?? DEFAULTSETTING.renunganDesc1,
+        renunganDesc2: setting.renunganDesc2 ?? DEFAULTSETTING.renunganDesc2,
+        renunganTitle1: setting.renunganTitle1 ?? DEFAULTSETTING.renunganTitle1,
+        renunganTitle2: setting.renunganTitle2 ?? DEFAULTSETTING.renunganTitle2
     });
 });
 

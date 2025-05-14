@@ -4,12 +4,14 @@ import React from 'react'
 import Header from '../Homepage/Header'
 import Footer from '../Homepage/Footer'
 import { ListRenungan } from '@/types/renunganharian'
+import { SettingType } from '@/types/setting'
 
 type RenunganProps = {
-    renungan: ListRenungan
+    renungan: ListRenungan,
+    setting: SettingType,
 }
 
-const Renungan = ({ renungan }: RenunganProps) => {
+const Renungan = ({ renungan, setting }: RenunganProps) => {
     if (renungan.renungan.length == 0) {
         return (
             <></>
@@ -25,9 +27,11 @@ const Renungan = ({ renungan }: RenunganProps) => {
                         <div className="banner">
                             <div className="container-custom">
                                 <h1 className="banner-title">
-                                    <span>Firman.</span> Kehidupan. Kebenaran.
+                                    {setting.renunganTitle1}
                                 </h1>
-                                <p className="banner-subtitle">Semua tentang Iman, Doa, dan Kedekatan dengan Tuhan</p>
+                                <div className="banner-subtitle" dangerouslySetInnerHTML={{__html: setting.renunganDesc1}}>
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -35,8 +39,8 @@ const Renungan = ({ renungan }: RenunganProps) => {
                 <section className="design" id="design">
                     <div className="container-custom">
                         <div className="title">
-                            <h2>Renungan Terkini</h2>
-                            <p>Artikel Terkini Tentang Inspirasi Iman Terkini</p>
+                            <h2>{setting.renunganTitle2}</h2>
+                            <div dangerouslySetInnerHTML={{__html: setting.renunganDesc2}}></div>
                         </div>
 
                         <div className='flex justify-center !mb-10'>

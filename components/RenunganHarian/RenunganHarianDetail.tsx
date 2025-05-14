@@ -21,6 +21,17 @@ const RenunganHarianDetail = ({ data }: RenunganHarianDetailProps) => {
                 <div dangerouslySetInnerHTML={{ __html: data.content }} className='text-justify'>
 
                 </div>
+
+                {data.refleksi && (
+                    <>
+                        <div className='mt-3 font-bold'>
+                            Refleksi
+                        </div>
+                        <div dangerouslySetInnerHTML={{ __html: data.refleksi }}>
+
+                        </div>
+                    </>
+                )}
                 <div className='text-xs'>
                     Oleh : {data.author}
                 </div>
