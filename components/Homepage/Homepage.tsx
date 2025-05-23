@@ -30,10 +30,6 @@ const Homepage = ({ setting, renungan }: HomepageProps) => {
 
                         <div className="about__img">
                             <div className="about__img-overlay">
-                                <img src="/images/about1.jpg" alt="" className="about__img-one" />
-                            </div>
-
-                            <div className="about__img-overlay">
                                 <img src="/images/about2.jpg" alt="" className="about__img-two" />
                             </div>
                         </div>

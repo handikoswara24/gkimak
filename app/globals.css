@@ -45,3 +45,12 @@
     text-underline-offset: 6px;
     color: rgb(6, 182, 212)
 }
+
+.hide-scroll {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+.hide-scroll::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+    width: 0;
+}

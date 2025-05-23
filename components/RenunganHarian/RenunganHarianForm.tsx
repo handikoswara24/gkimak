@@ -223,7 +223,7 @@ const RenunganHarianForm = ({ data, id }: RenunganHarianFormType) => {
             onChange={(content) => setValue({ ...value, refleksi: content })}
           />
         </div>
-        <div className='grid grid-cols-2 gap-4 mt-20'>
+        {/* <div className='grid grid-cols-2 gap-4 mt-20'>
           <div>
             <ColorPicker className='border border-slate-400 rounded-sm' value={(value.ayatColor ?? "#000000").replace("#", "")} onChange={(e) => setValue({ ...value, ayatColor: "#" + (e.value?.toString() ?? "000000") })} />
             <span className='ml-4 text-xs'>Warna Ayat</span>
@@ -252,7 +252,7 @@ const RenunganHarianForm = ({ data, id }: RenunganHarianFormType) => {
             <ColorPicker className='border border-slate-400 rounded-sm' value={(value.refleksiBgColor ?? "#ffffff").replace("#", "")} onChange={(e) => setValue({ ...value, refleksiBgColor: "#" + (e.value?.toString() ?? "ffffff") })} />
             <span className='ml-4 text-xs'>Warna Background Refleksi</span>
           </div>
-        </div>
+        </div> */}
         <div className='mt-28'>
           <Button type='submit' disabled={!value.author || !value.content || !value.title || !value.date || loadingAdd || loadingUpdate}
             loading={loadingAdd || loadingUpdate}

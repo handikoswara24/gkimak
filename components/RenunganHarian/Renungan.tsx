@@ -5,6 +5,7 @@ import Header from '../Homepage/Header'
 import Footer from '../Homepage/Footer'
 import { ListRenungan } from '@/types/renunganharian'
 import { SettingType } from '@/types/setting'
+import { RENUNGAN1, RENUNGAN2, RENUNGAN3 } from '@/constants/imageConstant'
 
 type RenunganProps = {
     renungan: ListRenungan,
@@ -29,7 +30,7 @@ const Renungan = ({ renungan, setting }: RenunganProps) => {
                                 <h1 className="banner-title">
                                     {setting.renunganTitle1}
                                 </h1>
-                                <div className="banner-subtitle" dangerouslySetInnerHTML={{__html: setting.renunganDesc1}}>
+                                <div className="banner-subtitle" dangerouslySetInnerHTML={{ __html: setting.renunganDesc1 }}>
 
                                 </div>
                             </div>
@@ -40,49 +41,49 @@ const Renungan = ({ renungan, setting }: RenunganProps) => {
                     <div className="container-custom">
                         <div className="title">
                             <h2>{setting.renunganTitle2}</h2>
-                            <div dangerouslySetInnerHTML={{__html: setting.renunganDesc2}}></div>
+                            <div dangerouslySetInnerHTML={{ __html: setting.renunganDesc2 }}></div>
                         </div>
 
-                        <div className='flex justify-center !mb-10'>
+                        {/* <div className='flex justify-center !mb-10'>
                             <img src={renungan.renungan[0].image.at(0)?.url} className='max-w-100' />
-                        </div>
+                        </div> */}
 
                         <div className='grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
                             <div className='w-[26rem] h-[26rem] !p-4 text-center flex justify-center items-center' style={{
-                                color: renungan.renungan[0].ayatColor ?? "#000000",
-                                backgroundColor: renungan.renungan[0].ayatBgColor ?? "#ffffff"
+                                backgroundImage: `url("${RENUNGAN1}")`,
+                                backgroundSize: "cover"
                             }}>
                                 <div >
-                                    <div className='text-xl font-semibold pb-2'>
+                                    <div className='text-xl font-semibold pb-2 text-white'>
                                         {renungan.renungan[0].verse}
                                     </div>
-                                    <div dangerouslySetInnerHTML={{ __html: renungan.renungan[0].isiAyat }} className='text-ellipsis max-h-80 overflow-auto'>
+                                    <div dangerouslySetInnerHTML={{ __html: renungan.renungan[0].isiAyat }} className='hide-scroll text-white text-ellipsis max-h-80 overflow-auto'>
 
                                     </div>
                                 </div>
                             </div>
                             <div className='w-[26rem] h-[26rem] !p-4 text-center flex justify-center items-center' style={{
-                                color: renungan.renungan[0].renunganColor ?? "#000000",
-                                backgroundColor: renungan.renungan[0].renunganBgColor ?? "#ffffff"
+                                backgroundImage: `url("${RENUNGAN2}")`,
+                                backgroundSize: "cover",
                             }}>
-                                <div >
-                                    <div className='text-xl font-semibold pb-2'>
+                                <div className='bg-slate-100 opacity-90'>
+                                    <div className='text-slate-600 text-xl font-semibold pb-2'>
                                         {renungan.renungan[0].title}
                                     </div>
-                                    <div dangerouslySetInnerHTML={{ __html: renungan.renungan[0].content }} className='text-ellipsis max-h-80 overflow-auto'>
+                                    <div dangerouslySetInnerHTML={{ __html: renungan.renungan[0].content }} className='text-slate-600 hide-scroll text-ellipsis max-h-80 overflow-auto'>
 
                                     </div>
                                 </div>
                             </div>
                             <div className='w-[26rem] h-[26rem] !p-4 text-center flex justify-center items-center' style={{
-                                color: renungan.renungan[0].refleksiColor ?? "#000000",
-                                backgroundColor: renungan.renungan[0].renunganBgColor ?? "#ffffff"
+                                backgroundImage: `url("${RENUNGAN3}")`,
+                                backgroundSize: "cover"
                             }}>
-                                <div >
-                                    <div className='text-xl font-semibold pb-2'>
+                                <div className='bg-slate-100 opacity-90'>
+                                    <div className='text-xl font-semibold pb-2 text-slate-600'>
                                         {"Refleksi"}
                                     </div>
-                                    <div dangerouslySetInnerHTML={{ __html: renungan.renungan[0].refleksi }} className='text-ellipsis max-h-80 overflow-auto'>
+                                    <div dangerouslySetInnerHTML={{ __html: renungan.renungan[0].refleksi }} className='text-slate-600 hide-scroll text-ellipsis max-h-80 overflow-auto'>
 
                                     </div>
                                 </div>
