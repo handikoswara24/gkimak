@@ -4,7 +4,7 @@ import { useMutation, useQuery } from "react-query";
 import { MessageType } from "@/types/common";
 import { InventoryCategoryInput, ListInventoryCategory } from "@/types/inventoryCategory";
 
-const getAllInventoryCategory = async (page : number, numberPerPage : number, search: string) => {
+export const getAllInventoryCategory = async (page : number, numberPerPage : number, search: string) => {
     const token = localStorage.getItem(TOKEN)?.replaceAll('"', "") ?? "";
     const result = await http.get<ListInventoryCategory>(`/api/inventorycategory?page=${page}&numberPerPage=${numberPerPage}&search=${search}`, {
         headers: {

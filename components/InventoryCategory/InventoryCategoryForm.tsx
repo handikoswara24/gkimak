@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 import { InventoryCategoryInput } from '@/types/inventoryCategory';
 import { useAddInventoryCategoryMutation, useUpdateInventoryCategoryMutation } from '@/service/inventorycategory-query';
 import { DEFAULTINVENTORYCATEGORY } from '@/constants/inventoryCategoryConstant';
+import AutocompleteInventoryCategory from './AutocompleteInventoryCategory';
 
 type InventoryCategoryFormProps = {
     id?: string,
@@ -74,7 +75,9 @@ const InventoryCategoryForm = ({ input, id }: InventoryCategoryFormProps) => {
                         <label htmlFor="name" className='-mt-[0.35rem]'>Code</label>
                     </FloatLabel>
                 </div>
-                
+                <div className=''>
+                    <AutocompleteInventoryCategory input={inventoryCategoryData} setInventoryCategoryData={setInventoryCategoryData} />
+                </div>
                 <div>
                     <Button type='submit' disabled={!inventoryCategoryData.name || !inventoryCategoryData.code || loadingUpdate || loadingAdd}
                         loading={loadingAdd || loadingUpdate}

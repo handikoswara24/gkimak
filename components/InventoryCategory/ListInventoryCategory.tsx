@@ -22,6 +22,12 @@ const ListInventoryCategory = () => {
         )
     }
 
+    const ParentCategory = (data: InventoryCategoryType) => {
+        return (
+            <span>{data.parentId ? data.parentLookup.name : "-"}</span>
+        )
+    }
+
     const onSearch = (input: string) => {
         setSearch(input)
     }
@@ -42,6 +48,7 @@ const ListInventoryCategory = () => {
                     <DataTable value={data?.inventoryCategory} className='text-xs'>
                         <Column field="name" header="Category"></Column>
                         <Column field="code" header="Code"></Column>
+                        <Column body={ParentCategory} header="Parent"></Column>
                         <Column header="Action" body={ButtonInventoryCategory} className='w-24'></Column>
                     </DataTable>
                     <Paginator first={page - 1} style={{ scale: 0.8 }} rows={numberPerPage}
