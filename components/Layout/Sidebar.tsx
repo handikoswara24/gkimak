@@ -7,6 +7,7 @@ import SidebarItem from "./SidebarItem";
 import useLocalStorage from "../utils/useLocalStorage";
 import BookIcon from "../Icons/BookIcon";
 import SettingIcon from "../Icons/SettingIcon";
+import TagIcon from "../Icons/TagIcon";
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -83,6 +84,18 @@ const menuGroups = [
         children: [
           { label: "List Jemaat", route: "/admin/jemaat" },
           { label: "Add Jemaat", route: "/admin/addjemaat" },
+        ]
+      },
+      {
+        icon: (
+          <TagIcon className="size-6" />
+        ),
+        label: "Inventory Category",
+        route: "#",
+        roles: ["admin"],
+        children: [
+          { label: "List Inventory Category", route: "/admin/inventorycategory" },
+          { label: "Add Inventory Category", route: "/admin/addinventorycategory" },
         ]
       },
       {

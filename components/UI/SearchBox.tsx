@@ -20,6 +20,8 @@ const SearchBox = ({ onClickSearch }: SearchBoxProps) => {
 
     const onClear = () => {
         setSearch("");
+
+        onClickSearch("");
     }
     return (
         <form onSubmit={onSubmit} className='mb-4'>

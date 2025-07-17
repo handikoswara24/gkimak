@@ -27,7 +27,7 @@ const DeleteJemaatButton = ({ data }: DeleteJemaatButtonProps) => {
                             queryClient.invalidateQueries(['allJemaat']);
                         },
                         onError: (err) => {
-                            toast.error("Error when delete user");
+                            toast.error("Error when delete jemaat");
                         }
                     })
                 }

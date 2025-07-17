@@ -4,9 +4,27 @@ export type ResultType = {
 }
 
 export type IconType = {
-    className : string
+    className: string
 }
 
 export type MessageType = {
-    message : string
+    message: string
+}
+
+export type Lookup = {
+    id: string,
+    name: string,
+    collection: string
+}
+
+export const LookupDefault = {
+    name: {
+        type: String
+    },
+    id: {
+        type: String,
+    },
+    collection: {
+        type: String
+    }
 }
