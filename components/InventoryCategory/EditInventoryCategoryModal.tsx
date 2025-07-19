@@ -2,7 +2,6 @@ import { InventoryCategoryInput } from '@/types/inventoryCategory'
 import React from 'react'
 import InventoryCategoryForm from './InventoryCategoryForm'
 
-
 type EditInventoryCategoryModalProps = {
     id: string,
     inventoryCategory: InventoryCategoryInput

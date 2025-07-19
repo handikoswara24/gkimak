@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 import { InventoryCategoryInput } from '@/types/inventoryCategory';
 import { useAddInventoryCategoryMutation, useUpdateInventoryCategoryMutation } from '@/service/inventorycategory-query';
 import { DEFAULTINVENTORYCATEGORY } from '@/constants/inventoryCategoryConstant';
-import AutocompleteInventoryCategory from './AutocompleteInventoryCategory';
+import AutocompleteParentInventoryCategory from './AutocompleteParentInventoryCategory';
 
 type InventoryCategoryFormProps = {
     id?: string,
@@ -46,7 +46,7 @@ const InventoryCategoryForm = ({ input, id }: InventoryCategoryFormProps) => {
         else {
             addinventorycategory(inventoryCategoryData, {
                 onSuccess: (data) => {
-                    toast.success("Success create jemaat!");
+                    toast.success("Success create inventory category!");
                     setInventoryCategoryData(DEFAULTINVENTORYCATEGORY);
                 },
                 onError: (err: any) => {
@@ -72,11 +72,11 @@ const InventoryCategoryForm = ({ input, id }: InventoryCategoryFormProps) => {
                     <FloatLabel>
                         <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="code" autoComplete='off'
                             value={inventoryCategoryData?.code} onChange={(e) => setInventoryCategoryData({ ...inventoryCategoryData, code: e.target.value })} />
-                        <label htmlFor="name" className='-mt-[0.35rem]'>Code</label>
+                        <label htmlFor="code" className='-mt-[0.35rem]'>Code</label>
                     </FloatLabel>
                 </div>
                 <div className=''>
-                    <AutocompleteInventoryCategory input={inventoryCategoryData} setInventoryCategoryData={setInventoryCategoryData} />
+                    <AutocompleteParentInventoryCategory input={inventoryCategoryData} setInventoryCategoryData={setInventoryCategoryData} />
                 </div>
                 <div>
                     <Button type='submit' disabled={!inventoryCategoryData.name || !inventoryCategoryData.code || loadingUpdate || loadingAdd}

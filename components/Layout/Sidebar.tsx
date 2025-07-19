@@ -8,6 +8,7 @@ import useLocalStorage from "../utils/useLocalStorage";
 import BookIcon from "../Icons/BookIcon";
 import SettingIcon from "../Icons/SettingIcon";
 import TagIcon from "../Icons/TagIcon";
+import WrenchIcon from "../Icons/WrenchIcon";
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -100,6 +101,18 @@ const menuGroups = [
       },
       {
         icon: (
+          <WrenchIcon className="size-6" />
+        ),
+        label: "Inventory",
+        route: "#",
+        roles: ["admin"],
+        children: [
+          { label: "List Inventory", route: "/admin/inventory" },
+          { label: "Add Inventory", route: "/admin/addinventory" },
+        ]
+      },
+      {
+        icon: (
           <SettingIcon className="size-6" />
         ),
         label: "Setting",
@@ -118,9 +131,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   return (
     <ClickOutside onClick={() => setSidebarOpen(false)}>
       <aside
-        className={`fixed left-0 top-0 z-[1000] flex h-screen w-72.5 flex-col overflow-y-hidden bg-black duration-300 ease-linear dark:bg-boxdark lg:translate-x-0 ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+        className={`fixed left-0 top-0 z-[1000] flex h-screen w-72.5 flex-col overflow-y-hidden bg-black duration-300 ease-linear dark:bg-boxdark lg:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
       >
         {/* <!-- SIDEBAR HEADER --> */}
         <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">

@@ -3,12 +3,12 @@ import { NextRequest, NextResponse } from "next/server";
 import ErrorHandler from "@/utils/errorHandler";
 import { Pagination } from "@/types/pagination";
 import InventoryCategory from "@/models/inventoryCategoryModel";
-import { InventoryCategoryInput, InventoryCategoryType } from "@/types/inventoryCategory";
+import { InventoryCategoryInput } from "@/types/inventoryCategory";
 
 const addInventoryCategory = catchAsyncErrors(async (req: NextRequest) => {
     const body = await req.json() as InventoryCategoryInput;
 
-    const jemaat = await InventoryCategory.create({...body})
+    const inventoryCategory = await InventoryCategory.create({...body})
     return NextResponse.json({
         message: "Success"
     });

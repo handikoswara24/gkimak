@@ -1,4 +1,3 @@
-import { JemaatInput, JemaatType } from '@/types/jemaat'
 import React from 'react'
 import { useModalAction } from '../utils/ModalProvider'
 import { InventoryCategoryInput, InventoryCategoryType } from '@/types/inventoryCategory'

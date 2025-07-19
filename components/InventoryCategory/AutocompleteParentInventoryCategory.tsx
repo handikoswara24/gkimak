@@ -11,7 +11,7 @@ type AutocompleteInventoryCategoryProps = {
     setInventoryCategoryData: React.Dispatch<React.SetStateAction<InventoryCategoryInput>>
 }
 
-const AutocompleteInventoryCategory = ({ input, setInventoryCategoryData }: AutocompleteInventoryCategoryProps) => {
+const AutocompleteParentInventoryCategory = ({ input, setInventoryCategoryData }: AutocompleteInventoryCategoryProps) => {
     const [selectedValue, setSelectedCValue] = useState<Lookup | null>(input.parentLookup);
     const [filteredCategory, setFilteredCategory] = useState<Lookup[]>([]);
 
@@ -59,4 +59,4 @@ const AutocompleteInventoryCategory = ({ input, setInventoryCategoryData }: Auto
     )
 }
 
-export default AutocompleteInventoryCategory
+export default AutocompleteParentInventoryCategory

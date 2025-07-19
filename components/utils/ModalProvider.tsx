@@ -7,6 +7,7 @@ type MODAL_VIEWS = "QRUSER"
                   | "USERFORM"
                   | "JEMAATFORM"
                   | "INVENTORYCATEGORYFORM"
+                  | "INVENTORYFORM"
 
 type State = {
     view?: MODAL_VIEWS,

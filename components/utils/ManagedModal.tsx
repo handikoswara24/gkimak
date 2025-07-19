@@ -14,12 +14,14 @@ const ManagedModal = () => {
     const EditRenunganForm = dynamic(() => import("@components/RenunganHarian/EditRenunganModal"));
     const EditJemaatForm = dynamic(() => import("@components/Jemaat/EditJemaatModal"));
     const EditInventoryCategoryForm = dynamic(() => import("@components/InventoryCategory/EditInventoryCategoryModal"))
+    const EditInventoryForm = dynamic(() => import("@components/Inventory/EditInventoryModal"))
     return (
         <Sidebar visible={isOpen} fullScreen onHide={closeModal} blockScroll className={view?.toLocaleLowerCase() + "modalcustom"}>
             {view == "USERFORM" && <EditUserForm id={data.id} user={data.userInput} />}
             {view == "RENUNGANFORM" && <EditRenunganForm id={data.id} renungan={data.renungan} />}
             {view == "JEMAATFORM" && <EditJemaatForm id={data.id} jemaat={data.jemaat} />}
             {view == "INVENTORYCATEGORYFORM" && <EditInventoryCategoryForm id={data.id} inventoryCategory={data.inventoryCategory} />}
+            {view == "INVENTORYFORM" && <EditInventoryForm id={data.id} inventory={data.inventory} />}
         </Sidebar>
     )
 }
