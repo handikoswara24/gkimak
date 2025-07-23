@@ -8,6 +8,7 @@ type MODAL_VIEWS = "QRUSER"
                   | "JEMAATFORM"
                   | "INVENTORYCATEGORYFORM"
                   | "INVENTORYFORM"
+                  | "INVENTORYQR"
 
 type State = {
     view?: MODAL_VIEWS,

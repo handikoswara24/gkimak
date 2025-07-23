@@ -91,7 +91,12 @@ const updateInventory = catchAsyncErrors(async (req: NextRequest, { params }: { 
 
     inventory.categoryId = body.categoryId;
     inventory.categoryLookup = body.categoryLookup;
-    inventory.description = body.description
+    inventory.description = body.description;
+    inventory.qty = body.qty;
+    inventory.condition = body.condition;
+    inventory.status = body.status;
+    inventory.borrowed = body.borrowed;
+    inventory.broken = body.broken;
 
     await inventory.save();
     return NextResponse.json({

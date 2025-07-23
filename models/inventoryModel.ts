@@ -15,7 +15,26 @@ const inventory = new mongoose.Schema({
     description: {
         type: String,
     },
-    categoryLookup : {...LookupDefault}
+    categoryLookup : {...LookupDefault},
+    qty: {
+        type: Number
+    },
+    condition: {
+        type: Number,
+        default: 1
+    },
+    status: {
+        type: Number,
+        default: 1
+    },
+    broken: {
+        type: Number,
+        default: 0
+    },
+    borrowed: {
+        type: Number,
+        default: 0
+    }
 }, {
     timestamps: true
 });

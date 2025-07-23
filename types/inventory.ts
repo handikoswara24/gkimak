@@ -6,7 +6,12 @@ export interface IInventoryDocument extends Document {
     description: string,
     categoryId: string,
     categoryLookup : Lookup
-    code: string
+    code: string,
+    qty: number,
+    condition: number,
+    status: number,
+    borrowed: number,
+    broken: number
 }
 
 export interface IInventoryModel extends Document {
@@ -19,14 +24,24 @@ export type InventoryType = {
     description: string,
     categoryId: string,
     categoryLookup : Lookup
-    code: string
+    code: string,
+    qty: number,
+    condition: number,
+    status: number,
+    borrowed: number,
+    broken: number
 }
 
 export type InventoryInput = {
     name: string,
     description: string,
     categoryId: string | null,
-    categoryLookup : Lookup | null
+    categoryLookup : Lookup | null,
+    qty: number,
+    condition?: number,
+    status?: number,
+    borrowed?: number,
+    broken?: number
 }
 
 export type ListInventory = {

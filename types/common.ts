@@ -28,3 +28,8 @@ export const LookupDefault = {
         type: String
     }
 }
+
+export type ChoiceType = {
+    label: string,
+    value: number
+}

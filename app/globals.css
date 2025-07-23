@@ -54,3 +54,7 @@
     display: none;  /* Safari and Chrome */
     width: 0;
 }
+
+.p-dropdown-label{
+    font-size: 0.75rem;
+}

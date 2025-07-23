@@ -13,10 +13,15 @@ const EditInventoryButton = ({ data }: EditInventoryButtonProps) => {
         name: data.name,
         categoryId: data.categoryId,
         categoryLookup: data.categoryLookup,
-        description: data.description
+        description: data.description,
+        qty: data.qty,
+        borrowed: data.borrowed,
+        broken: data.broken,
+        condition: data.condition,
+        status: data.status
     }
     return (
-        <div className="mr-3">
+        <div>
             <i className="pi pi-user-edit text-lg text-blue-300 cursor-pointer" onClick={() => openModal("INVENTORYFORM", { id: data._id, inventory })}></i>
         </div>
     )

@@ -8,10 +8,11 @@ import { InputText } from 'primereact/inputtext';
 import Button from '../UI/Button';
 import { toast } from 'react-toastify';
 import { InventoryInput } from '@/types/inventory';
-import { INVENTORYDEFAULT } from '@/constants/inventoryConstant';
+import { Condition, INVENTORYDEFAULT, Status } from '@/constants/inventoryConstant';
 import { useAddInventoryMutation, useUpdateInventoryMutation } from '@/service/inventory-query';
 import { InputTextarea } from 'primereact/inputtextarea';
 import AutocompleteInventoryCategory from './AutocompleteInventoryCategory';
+import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
 
 type InventoryFormProps = {
     id?: string,
@@ -79,6 +80,47 @@ const InventoryForm = ({ id, input }: InventoryFormProps) => {
                 </div>
                 <div>
                     <AutocompleteInventoryCategory input={inventoryData} setInventoryData={setInventoryData} />
+                </div>
+                <div className=''>
+                    <FloatLabel>
+                        <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' type='number' id="qty" autoComplete='off'
+                            value={inventoryData?.qty?.toString()} onChange={(e) => setInventoryData({ ...inventoryData, qty: e.target.valueAsNumber })} />
+                        <label htmlFor="qty" className='-mt-[0.35rem]'>Quantity</label>
+                    </FloatLabel>
+                </div>
+                <div>
+                    <FloatLabel>
+                        <Dropdown inputId="status" value={inventoryData.status ?? 1} 
+                            onChange={(e: DropdownChangeEvent) => setInventoryData({ ...inventoryData, status: e.value })} 
+                            options={Status} optionLabel="label" panelClassName='text-xs'
+                             className="rounded-xl w-full text-xs border border-slate-300 px-2 py-1" />
+                        <label htmlFor="status">Status</label>
+                    </FloatLabel>
+                </div>
+                <div>
+                    <FloatLabel>
+                        <Dropdown inputId="condition" value={inventoryData.condition ?? 1} 
+                            onChange={(e: DropdownChangeEvent) => setInventoryData({ ...inventoryData, condition: e.value })} 
+                            options={Condition} optionLabel="label" panelClassName='text-xs'
+                             className="rounded-xl w-full !text-xs border border-slate-300 px-2 py-1" />
+                        <label htmlFor="status">Condition</label>
+                    </FloatLabel>
+                </div>
+                <div className=''>
+                    <FloatLabel>
+                        <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' type='number' 
+                            id="borrowed" autoComplete='off'
+                            value={inventoryData?.borrowed?.toString()} onChange={(e) => setInventoryData({ ...inventoryData, borrowed: e.target.valueAsNumber })} />
+                        <label htmlFor="borrowed" className='-mt-[0.35rem]'>Borrowed</label>
+                    </FloatLabel>
+                </div>
+                <div className=''>
+                    <FloatLabel>
+                        <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' type='number' 
+                            id="broken" autoComplete='off'
+                            value={inventoryData?.broken?.toString()} onChange={(e) => setInventoryData({ ...inventoryData, broken: e.target.valueAsNumber })} />
+                        <label htmlFor="broken" className='-mt-[0.35rem]'>Broken</label>
+                    </FloatLabel>
                 </div>
                 <div>
                     <Button type='submit' disabled={!inventoryData.name || !inventoryData.categoryId || !inventoryData.categoryLookup || loadingUpdate || loadingAdd}

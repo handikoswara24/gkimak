@@ -15,6 +15,7 @@ const ManagedModal = () => {
     const EditJemaatForm = dynamic(() => import("@components/Jemaat/EditJemaatModal"));
     const EditInventoryCategoryForm = dynamic(() => import("@components/InventoryCategory/EditInventoryCategoryModal"))
     const EditInventoryForm = dynamic(() => import("@components/Inventory/EditInventoryModal"))
+    const QRInventory = dynamic(() => import("@components/Inventory/QRInventoryModal"))
     return (
         <Sidebar visible={isOpen} fullScreen onHide={closeModal} blockScroll className={view?.toLocaleLowerCase() + "modalcustom"}>
             {view == "USERFORM" && <EditUserForm id={data.id} user={data.userInput} />}
@@ -22,6 +23,7 @@ const ManagedModal = () => {
             {view == "JEMAATFORM" && <EditJemaatForm id={data.id} jemaat={data.jemaat} />}
             {view == "INVENTORYCATEGORYFORM" && <EditInventoryCategoryForm id={data.id} inventoryCategory={data.inventoryCategory} />}
             {view == "INVENTORYFORM" && <EditInventoryForm id={data.id} inventory={data.inventory} />}
+            {view == "INVENTORYQR" && <QRInventory data={data.data} />}
         </Sidebar>
     )
 }
