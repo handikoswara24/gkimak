@@ -51,3 +51,7 @@ export type ListInventory = {
     inventory: InventoryType[],
     pagination: Pagination
 }
+
+export type InventoryByCode = {
+    result: InventoryType
+}

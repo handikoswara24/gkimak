@@ -2,10 +2,10 @@ import { TOKEN } from "@/constants/loginConstant";
 import http from "./base-query";
 import { useMutation, useQuery } from "react-query";
 import { MessageType } from "@/types/common";
-import { InventoryInput, ListInventory } from "@/types/inventory";
+import { InventoryByCode, InventoryInput, ListInventory } from "@/types/inventory";
 
 
-export const getAllInventory = async (page : number, numberPerPage : number, search: string, location: number) => {
+export const getAllInventory = async (page: number, numberPerPage: number, search: string, location: number) => {
     const token = localStorage.getItem(TOKEN)?.replaceAll('"', "") ?? "";
     const result = await http.get<ListInventory>(`/api/inventory?page=${page}&numberPerPage=${numberPerPage}&search=${search}&location=${location}`, {
         headers: {
@@ -16,7 +16,7 @@ export const getAllInventory = async (page : number, numberPerPage : number, sea
     return result.data;
 }
 
-const addInventory = async (inventory : InventoryInput) => {
+const addInventory = async (inventory: InventoryInput) => {
     const token = localStorage.getItem(TOKEN)?.replaceAll('"', "") ?? "";
     const result = await http.post<MessageType>(`/api/inventory`, inventory, {
         headers: {
@@ -51,8 +51,23 @@ const deleteInventory = async (id: string) => {
     return result.data;
 }
 
+const getInventoryByCode = async (code: string) => {
+    const token = localStorage.getItem(TOKEN)?.replaceAll('"', "") ?? "";
 
-export const useGetAllInventory = (page : number, numberPerPage : number, search: string, location: number) => {
+    const result = await http.get<InventoryByCode>(`/api/inventory/code?code=${code}`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        }
+    })
+
+    return result.data;
+}
+
+export const useGetInventoryByCode = (code: string) => {
+    return useQuery(["inventoryByCode", code], () => getInventoryByCode(code), { enabled: !!code })
+}
+
+export const useGetAllInventory = (page: number, numberPerPage: number, search: string, location: number) => {
     return useQuery(["allInventory", page, numberPerPage, search, location], () => getAllInventory(page, numberPerPage, search, location))
 }
 
@@ -66,5 +81,5 @@ export const useUpdateInventoryMutation = (id: string) => {
 }
 
 export const useDeleteInventoryMutation = () => {
-    return useMutation((id : string) => deleteInventory(id));
+    return useMutation((id: string) => deleteInventory(id));
 }

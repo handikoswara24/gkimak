@@ -109,6 +109,7 @@ const menuGroups = [
         children: [
           { label: "List Inventory", route: "/admin/inventory" },
           { label: "Add Inventory", route: "/admin/addinventory" },
+          { label: "Scan Inventory", route: "/admin/scaninventory" },
         ]
       },
       {
