@@ -18,7 +18,8 @@ const EditInventoryButton = ({ data }: EditInventoryButtonProps) => {
         borrowed: data.borrowed,
         broken: data.broken,
         condition: data.condition,
-        status: data.status
+        status: data.status,
+        locations: data.locations
     }
     return (
         <div>

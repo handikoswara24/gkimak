@@ -5,9 +5,9 @@ import { MessageType } from "@/types/common";
 import { InventoryInput, ListInventory } from "@/types/inventory";
 
 
-export const getAllInventory = async (page : number, numberPerPage : number, search: string) => {
+export const getAllInventory = async (page : number, numberPerPage : number, search: string, location: number) => {
     const token = localStorage.getItem(TOKEN)?.replaceAll('"', "") ?? "";
-    const result = await http.get<ListInventory>(`/api/inventory?page=${page}&numberPerPage=${numberPerPage}&search=${search}`, {
+    const result = await http.get<ListInventory>(`/api/inventory?page=${page}&numberPerPage=${numberPerPage}&search=${search}&location=${location}`, {
         headers: {
             Authorization: `Bearer ${token}`,
         }
@@ -52,8 +52,8 @@ const deleteInventory = async (id: string) => {
 }
 
 
-export const useGetAllInventory = (page : number, numberPerPage : number, search: string) => {
-    return useQuery(["allInventory", page, numberPerPage, search], () => getAllInventory(page, numberPerPage, search))
+export const useGetAllInventory = (page : number, numberPerPage : number, search: string, location: number) => {
+    return useQuery(["allInventory", page, numberPerPage, search, location], () => getAllInventory(page, numberPerPage, search, location))
 }
 
 

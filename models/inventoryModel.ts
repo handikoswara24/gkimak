@@ -34,6 +34,10 @@ const inventory = new mongoose.Schema({
     borrowed: {
         type: Number,
         default: 0
+    },
+    locations: {
+        type: Number,
+        default: 1
     }
 }, {
     timestamps: true

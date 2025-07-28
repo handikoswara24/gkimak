@@ -8,7 +8,7 @@ import { InputText } from 'primereact/inputtext';
 import Button from '../UI/Button';
 import { toast } from 'react-toastify';
 import { InventoryInput } from '@/types/inventory';
-import { Condition, INVENTORYDEFAULT, Status } from '@/constants/inventoryConstant';
+import { Condition, INVENTORYDEFAULT, Locations, Status } from '@/constants/inventoryConstant';
 import { useAddInventoryMutation, useUpdateInventoryMutation } from '@/service/inventory-query';
 import { InputTextarea } from 'primereact/inputtextarea';
 import AutocompleteInventoryCategory from './AutocompleteInventoryCategory';
@@ -80,6 +80,15 @@ const InventoryForm = ({ id, input }: InventoryFormProps) => {
                 </div>
                 <div>
                     <AutocompleteInventoryCategory input={inventoryData} setInventoryData={setInventoryData} />
+                </div>
+                <div>
+                    <FloatLabel>
+                        <Dropdown inputId="locations" value={inventoryData.locations ?? 1} 
+                            onChange={(e: DropdownChangeEvent) => setInventoryData({ ...inventoryData, locations : e.value })} 
+                            options={Locations} optionLabel="label" panelClassName='text-xs'
+                             className="rounded-xl w-full text-xs border border-slate-300 px-2 py-1" />
+                        <label htmlFor="locations">Location</label>
+                    </FloatLabel>
                 </div>
                 <div className=''>
                     <FloatLabel>

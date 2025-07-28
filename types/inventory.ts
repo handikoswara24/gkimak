@@ -11,7 +11,8 @@ export interface IInventoryDocument extends Document {
     condition: number,
     status: number,
     borrowed: number,
-    broken: number
+    broken: number,
+    locations: number
 }
 
 export interface IInventoryModel extends Document {
@@ -29,7 +30,8 @@ export type InventoryType = {
     condition: number,
     status: number,
     borrowed: number,
-    broken: number
+    broken: number,
+    locations: number
 }
 
 export type InventoryInput = {
@@ -41,7 +43,8 @@ export type InventoryInput = {
     condition?: number,
     status?: number,
     borrowed?: number,
-    broken?: number
+    broken?: number,
+    locations: number
 }
 
 export type ListInventory = {

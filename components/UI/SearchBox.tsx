@@ -11,9 +11,6 @@ const SearchBox = ({ onClickSearch }: SearchBoxProps) => {
     const [search, setSearch] = useState("");
     const onSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        if (search.length < 3) {
-            return;
-        }
 
         onClickSearch(search);
     }
@@ -24,7 +21,7 @@ const SearchBox = ({ onClickSearch }: SearchBoxProps) => {
         onClickSearch("");
     }
     return (
-        <form onSubmit={onSubmit} className='mb-4'>
+        <form onSubmit={onSubmit}>
             <div className='flex space-x-3'>
                 <div className='relative w-60'>
                     <InputText className='rounded-xl text-xs border border-slate-300 pl-4 pr-8 py-3 w-60' id="search"

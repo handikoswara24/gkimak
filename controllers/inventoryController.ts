@@ -49,7 +49,9 @@ const getAllInventory = catchAsyncErrors(async (req: NextRequest) => {
     const page = Number(req.nextUrl.searchParams.get("page") ?? 1);
     const numberPerPage = Number(req.nextUrl.searchParams.get("numberPerPage") ?? 20);
     const search = req.nextUrl.searchParams.get("search") ?? "";
-    let query = {};
+    const location = Number(req.nextUrl.searchParams.get("location"));
+    console.log(location)
+    let query = {} as any;
     if (search) {
         query = {
             "$or": [
@@ -61,6 +63,10 @@ const getAllInventory = catchAsyncErrors(async (req: NextRequest) => {
                 }
             ]
         }
+    }
+
+    if(location != 0){
+        query.locations = location;
     }
     const inventory = await Inventory.find(query).skip((page - 1) * numberPerPage).limit(numberPerPage);
     const total = await Inventory.countDocuments();
@@ -97,6 +103,7 @@ const updateInventory = catchAsyncErrors(async (req: NextRequest, { params }: { 
     inventory.status = body.status;
     inventory.borrowed = body.borrowed;
     inventory.broken = body.broken;
+    inventory.locations = body.locations;
 
     await inventory.save();
     return NextResponse.json({
