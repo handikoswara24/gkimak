@@ -42,7 +42,7 @@ const ListInventory = () => {
     return (
         <div>
             <h1 className='mb-4 font-semibold text-xl'>Inventory</h1>
-            <div className='flex gap-x-4 mb-4'>
+            <div className='flex gap-4 mb-4 flex-col md:flex-row'>
                 <SearchBox onClickSearch={onSearch} />
                 <div className='flex items-center space-x-2'>
                     <div className='text-xs'>
