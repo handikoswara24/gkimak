@@ -10,6 +10,7 @@ import 'swiper/css';
 import { ConfirmDialog } from 'primereact/confirmdialog';
 import { ModalProvider } from './ModalProvider';
 import ManagedModal from './ManagedModal';
+import ErudaConsole from './ErudaConsole';
 const queryClient = new QueryClient({ defaultOptions: { queries: { refetchOnWindowFocus: false } } })
 
 const Provider: FC<PropsWithChildren> = ({ children }) => {
@@ -20,6 +21,7 @@ const Provider: FC<PropsWithChildren> = ({ children }) => {
                 <ManagedModal />
                 <ToastContainer />
                 <ConfirmDialog />
+                <ErudaConsole />
             </ModalProvider>
         </QueryClientProvider>
     )
