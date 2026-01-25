@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
+import { Metadata } from "next";
+import ListOption from "@/components/Option/ListOption";
 
-const LocationPage = () => {
-  return (
-    <div>LocationPage</div>
-  )
-}
+export const metadata: Metadata = {
+  title: "GKim Amanat Kristus - Option",
+};
 
-export default LocationPage
+const OptionPage = () => {
+  return <ListOption />;
+};
+
+export default OptionPage;
