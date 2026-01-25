@@ -1,19 +1,23 @@
 import { IOptionsModel } from "@/types/options";
 import mongoose from "mongoose";
 
-const option = new mongoose.Schema({
+const option = new mongoose.Schema(
+  {
     name: {
-        type: String,
+      type: String,
     },
     description: {
-        type: String,
+      type: String,
     },
     type: {
-        type: Number
-    }
-}, {
-    timestamps: true
-});
+      type: String,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-const Option = mongoose.models.Option ?? mongoose.model<IOptionsModel>("Option", option);
+const Option =
+  mongoose.models.Option ?? mongoose.model<IOptionsModel>("Option", option);
 export default Option;

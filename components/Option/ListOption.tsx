@@ -38,7 +38,7 @@ const ListOption = () => {
       )}
       {!(isFetching || isLoading) && (
         <div>
-          <DataTable value={data?.location} className="text-xs">
+          <DataTable value={data?.option} className="text-xs">
             <Column field="name" header="Option"></Column>
             <Column field="description" header="Description"></Column>
             <Column field="type" header="Value"></Column>
