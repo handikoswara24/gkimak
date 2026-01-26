@@ -71,7 +71,7 @@ const updateOption = catchAsyncErrors(async (req: NextRequest, { params }: { par
 const deleteOption = catchAsyncErrors(async (req: NextRequest, { params }: { params: { id: string } }) => {
     const option = await Option.findById(params.id);
 
-    if (!location) {
+    if (!option) {
         throw new ErrorHandler("Option not found", 404);
     }
 

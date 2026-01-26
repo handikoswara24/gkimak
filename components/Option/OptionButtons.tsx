@@ -1,14 +1,19 @@
-import { OptionsType } from '@/types/options'
-import React from 'react'
+import { OptionsType } from "@/types/options";
+import React from "react";
+import EditOptionButton from "./EditOptionButton";
+import RemoveOptionButton from "./RemoveOptionButton";
 
 type OptionButtonsProps = {
-    option : OptionsType
-}
+  option: OptionsType;
+};
 
-const OptionButtons = ({option} : OptionButtonsProps) => {
+const OptionButtons = ({ option }: OptionButtonsProps) => {
   return (
-    <div>OptionButtons</div>
-  )
-}
+    <div className="flex flex-row">
+      <EditOptionButton data={option} />
+      <RemoveOptionButton data={option} />
+    </div>
+  );
+};
 
-export default OptionButtons
+export default OptionButtons;
