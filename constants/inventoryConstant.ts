@@ -11,7 +11,8 @@ export const INVENTORYDEFAULT : InventoryInput = {
     broken: 0,
     condition: 1,
     status: 1,
-    locations: 1
+    locationId: null,
+    locationLookup: null
 }
 
 export const Status : ChoiceType[] = [

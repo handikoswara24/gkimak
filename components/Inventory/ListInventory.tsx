@@ -32,7 +32,7 @@ const ListInventory = () => {
 
     const Location = (data: InventoryType) => {
         return (
-            <span>{Locations.find(e => e.value == (data.locations ?? 1))?.label ?? "-"}</span>
+            <span>{data.locationLookup?.name ?? "-"}</span>
         )
     }
 

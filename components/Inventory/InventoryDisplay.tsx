@@ -1,4 +1,4 @@
-import { Condition, Locations, Status } from '@/constants/inventoryConstant'
+import { Condition, Status } from '@/constants/inventoryConstant'
 import { InventoryType } from '@/types/inventory'
 import React from 'react'
 
@@ -43,7 +43,7 @@ const InventoryDisplay = ({ inventory }: InventoryDisplayProps) => {
                         Location
                     </div>
                     <div>
-                        {Locations.find(e => e.value == inventory.locations)?.label ?? "-"}
+                        {inventory.locationLookup?.name ?? "-"}
                     </div>
                 </div>
                 <div>

@@ -19,7 +19,8 @@ const EditInventoryButton = ({ data }: EditInventoryButtonProps) => {
         broken: data.broken,
         condition: data.condition,
         status: data.status,
-        locations: data.locations
+        locationId: data.locationId,
+        locationLookup: data.locationLookup
     }
     return (
         <div>

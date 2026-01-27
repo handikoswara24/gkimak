@@ -4,7 +4,7 @@ import { ListOptions, OptionsInput } from "@/types/options";
 import { MessageType } from "@/types/common";
 import { useQuery, useMutation } from "react-query";
 
-const getAllOptions = async (
+export const getAllOptions = async (
   page: number,
   numberPerPage: number,
   search: string,

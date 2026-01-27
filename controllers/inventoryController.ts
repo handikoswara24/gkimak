@@ -65,7 +65,7 @@ const getAllInventory = catchAsyncErrors(async (req: NextRequest) => {
     }
 
     if(location != 0){
-        query.locations = location;
+        // query.locations = location;
     }
     const inventory = await Inventory.find(query).skip((page - 1) * numberPerPage).limit(numberPerPage);
     const total = await Inventory.countDocuments();
@@ -115,7 +115,8 @@ const updateInventory = catchAsyncErrors(async (req: NextRequest, { params }: { 
     inventory.status = body.status;
     inventory.borrowed = body.borrowed;
     inventory.broken = body.broken;
-    inventory.locations = body.locations;
+    inventory.locationId = body.locationId;
+    inventory.locationLookup = body.locationLookup;
 
     await inventory.save();
     return NextResponse.json({

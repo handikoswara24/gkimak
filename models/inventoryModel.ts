@@ -35,10 +35,10 @@ const inventory = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    locations: {
-        type: Number,
-        default: 1
-    }
+    locationId : {
+        type : Schema.Types.ObjectId
+    },
+    locationLookup : {...LookupDefault}
 }, {
     timestamps: true
 });
