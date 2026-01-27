@@ -9,6 +9,7 @@ import { Paginator } from "primereact/paginator";
 import SearchBox from "../UI/SearchBox";
 import { OptionsType } from "@/types/options";
 import OptionButtons from "./OptionButtons";
+import { OptionTypeList } from "@/constants/optionConstant";
 
 const ListOption = () => {
   const [page, setPage] = useState(1);
@@ -23,6 +24,15 @@ const ListOption = () => {
 
   const ButtonOption = (data: OptionsType) => {
     return <OptionButtons option={data} />;
+  };
+
+  const TypeComponent = (data: OptionsType) => {
+    return (
+      <span>
+        {OptionTypeList.find((e) => e.value == Number(data.type ?? 1))?.label ??
+          "-"}
+      </span>
+    );
   };
 
   const onSearch = (input: string) => {
@@ -45,7 +55,7 @@ const ListOption = () => {
           <DataTable value={data?.option} className="text-xs">
             <Column field="name" header="Option"></Column>
             <Column field="description" header="Description"></Column>
-            <Column field="type" header="Value"></Column>
+            <Column body={TypeComponent} header="Type"></Column>
             <Column
               header="Action"
               body={ButtonOption}

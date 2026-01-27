@@ -3,13 +3,13 @@ import { OptionsInput } from "@/types/options";
 
 export const OptionTypeList: ChoiceType[] = [
   {
-    label: "location",
+    label: "Location",
     value: 1,
   },
 ];
 
 export const DefaultOptionInput: OptionsInput = {
   name: "",
-  type: "",
+  type: "1",
   description: "",
 };
