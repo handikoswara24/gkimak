@@ -5,7 +5,7 @@ import { MessageType } from "@/types/common";
 import { InventoryByCode, InventoryInput, ListInventory } from "@/types/inventory";
 
 
-export const getAllInventory = async (page: number, numberPerPage: number, search: string, location: number) => {
+export const getAllInventory = async (page: number, numberPerPage: number, search: string, location: string) => {
     const token = localStorage.getItem(TOKEN)?.replaceAll('"', "") ?? "";
     const result = await http.get<ListInventory>(`/api/inventory?page=${page}&numberPerPage=${numberPerPage}&search=${search}&location=${location}`, {
         headers: {
@@ -67,7 +67,7 @@ export const useGetInventoryByCode = (code: string) => {
     return useQuery(["inventoryByCode", code], () => getInventoryByCode(code), { enabled: !!code })
 }
 
-export const useGetAllInventory = (page: number, numberPerPage: number, search: string, location: number) => {
+export const useGetAllInventory = (page: number, numberPerPage: number, search: string, location: string) => {
     return useQuery(["allInventory", page, numberPerPage, search, location], () => getAllInventory(page, numberPerPage, search, location))
 }
 

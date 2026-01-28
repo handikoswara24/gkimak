@@ -1,4 +1,3 @@
-import { InventoryInput } from "@/types/inventory";
 import React, { useEffect, useState } from "react";
 import {
   AutoComplete,
@@ -9,24 +8,22 @@ import { Lookup } from "@/types/common";
 import { getAllOptions } from "@/service/option-query";
 
 type AutocompleteLocationProps = {
-  input: InventoryInput;
-  setInventoryData: React.Dispatch<React.SetStateAction<InventoryInput>>;
+  input: string;
+  setFilter: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const AutocompleteLocation = ({
+const AutocompleteLocationList = ({
   input,
-  setInventoryData,
+  setFilter,
 }: AutocompleteLocationProps) => {
-  const [selectedValue, setSelectedValue] = useState<Lookup | null>(
-    input.locationLookup
-  );
+  const [selectedValue, setSelectedValue] = useState<Lookup | null>(null);
   const [filteredLocation, setFilteredLocation] = useState<Lookup[]>([]);
 
   useEffect(() => {
-    if (!input.locationId) {
+    if (!input) {
       setSelectedValue(null);
     }
-  }, [input.locationId, input.locationLookup]);
+  }, [input]);
 
   const search = async (event: AutoCompleteCompleteEvent) => {
     // Timeout to emulate a network connection
@@ -46,32 +43,25 @@ const AutocompleteLocation = ({
   const OnChangeAutocomplete = (e: AutoCompleteChangeEvent) => {
     if (typeof e.value === "string") {
       if (!e.value) {
-        setInventoryData({ ...input, locationLookup: null, locationId: null });
+        setFilter("");
       }
     } else {
-      setInventoryData({
-        ...input,
-        locationLookup: e.value,
-        locationId: e.value.id,
-      });
+      setFilter(e.value.id);
     }
     setSelectedValue(e.value);
   };
   return (
-    <span className="p-float-label w-full">
-      <AutoComplete
-        inputId="ac-loc"
-        field="name"
-        className="w-full"
-        inputClassName="rounded-xl w-full text-xs border border-slate-300 px-4 py-3"
-        value={selectedValue}
-        suggestions={filteredLocation}
-        completeMethod={search}
-        onChange={(e) => OnChangeAutocomplete(e)}
-      />
-      <label htmlFor="ac-loc">Location</label>
-    </span>
+    <AutoComplete
+      inputId="ac-loc"
+      field="name"
+      className="w-full"
+      inputClassName="rounded-xl w-full text-xs border border-slate-300 px-4 py-3"
+      value={selectedValue}
+      suggestions={filteredLocation}
+      completeMethod={search}
+      onChange={(e) => OnChangeAutocomplete(e)}
+    />
   );
 };
 
-export default AutocompleteLocation;
+export default AutocompleteLocationList;
