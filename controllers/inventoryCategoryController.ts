@@ -32,7 +32,7 @@ const getAllInventoryCategory = catchAsyncErrors(async (req: NextRequest) => {
         }
     }
     const inventoryCategory = await InventoryCategory.find(query).skip((page - 1) * numberPerPage).limit(numberPerPage);
-    const total = await InventoryCategory.countDocuments();
+    const total = await InventoryCategory.find(query).countDocuments();
     const pagination: Pagination = {
         numberPerPage,
         page,

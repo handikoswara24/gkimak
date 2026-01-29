@@ -104,7 +104,7 @@ const getAllRenunganAdmin = catchAsyncErrors(async (req: NextRequest) => {
 
     const renungan = await RenunganHarianModel.find(query).sort({ date: -1 })
         .skip((page - 1) * numberPerPage).limit(numberPerPage);
-    const total = await RenunganHarianModel.countDocuments();
+    const total = await RenunganHarianModel.find(query).countDocuments();
     const pagination: Pagination = {
         numberPerPage,
         page,

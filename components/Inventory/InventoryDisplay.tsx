@@ -7,9 +7,8 @@ type InventoryDisplayProps = {
 }
 
 const InventoryDisplay = ({ inventory }: InventoryDisplayProps) => {
-    console.log(inventory);
     return (
-        <div>
+        <div className='overflow-y-auto'>
             <div className='text-center text-xl font-semibold mb-3'>
                 Inventory
             </div>
