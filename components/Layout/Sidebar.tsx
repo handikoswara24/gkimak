@@ -8,7 +8,7 @@ import useLocalStorage from "../utils/useLocalStorage";
 import BookIcon from "../Icons/BookIcon";
 import SettingIcon from "../Icons/SettingIcon";
 import TagIcon from "../Icons/TagIcon";
-import { ContactRound, Package, SquareMenu } from "lucide-react";
+import { ContactRound, FolderOutput, Package, SquareMenu } from "lucide-react";
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -45,48 +45,46 @@ const menuGroups = [
         children: [
           { label: "List Users", route: "/admin/listuser" },
           { label: "Add User", route: "/admin/adduser" },
-        ]
+        ],
       },
       {
-        icon: (
-          <BookIcon className="size-6" />
-        ),
+        icon: <BookIcon className="size-6" />,
         label: "Renungan Harian",
         route: "#",
         roles: ["admin"],
         children: [
           { label: "List Renungan Harian", route: "/admin/renunganharian" },
           { label: "Add Renungan Harian", route: "/admin/addrenunganharian" },
-        ]
+        ],
       },
       {
-        icon: (
-          <ContactRound />
-        ),
+        icon: <ContactRound />,
         label: "Jemaat",
         route: "#",
         roles: ["admin"],
         children: [
           { label: "List Jemaat", route: "/admin/jemaat" },
           { label: "Add Jemaat", route: "/admin/addjemaat" },
-        ]
+        ],
       },
       {
-        icon: (
-          <TagIcon className="size-6" />
-        ),
+        icon: <TagIcon className="size-6" />,
         label: "Inventory Category",
         route: "#",
         roles: ["admin"],
         children: [
-          { label: "List Inventory Category", route: "/admin/inventorycategory" },
-          { label: "Add Inventory Category", route: "/admin/addinventorycategory" },
-        ]
+          {
+            label: "List Inventory Category",
+            route: "/admin/inventorycategory",
+          },
+          {
+            label: "Add Inventory Category",
+            route: "/admin/addinventorycategory",
+          },
+        ],
       },
       {
-        icon: (
-          <Package />
-        ),
+        icon: <Package />,
         label: "Inventory",
         route: "#",
         roles: ["admin"],
@@ -94,28 +92,34 @@ const menuGroups = [
           { label: "List Inventory", route: "/admin/inventory" },
           { label: "Add Inventory", route: "/admin/addinventory" },
           { label: "Scan Inventory", route: "/admin/scaninventory" },
-        ]
+        ],
       },
-       {
-        icon: (
-          <SquareMenu />
-        ),
+      {
+        icon: <FolderOutput />,
+        label: "Borrowed Item",
+        route: "#",
+        roles: ["admin"],
+        children: [
+          { label: "List Borrowed Item", route: "/admin/borrowitem" },
+          { label: "Add Borrowed Item", route: "/admin/addborrowitem" },
+        ],
+      },
+      {
+        icon: <SquareMenu />,
         label: "Options",
         route: "#",
         roles: ["admin"],
         children: [
           { label: "List Options", route: "/admin/option" },
           { label: "Add Option", route: "/admin/addoption" },
-        ]
+        ],
       },
       {
-        icon: (
-          <SettingIcon className="size-6" />
-        ),
+        icon: <SettingIcon className="size-6" />,
         label: "Setting",
         route: "/admin/setting",
         roles: ["admin"],
-        children: null
+        children: null,
       },
     ],
   },
@@ -128,14 +132,13 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   return (
     <ClickOutside onClick={() => setSidebarOpen(false)}>
       <aside
-        className={`fixed left-0 top-0 z-[1000] flex h-screen w-72.5 flex-col overflow-y-hidden bg-black duration-300 ease-linear dark:bg-boxdark lg:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
-          }`}
+        className={`fixed left-0 top-0 z-[1000] flex h-screen w-72.5 flex-col overflow-y-hidden bg-black duration-300 ease-linear dark:bg-boxdark lg:translate-x-0 ${
+          sidebarOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
       >
         {/* <!-- SIDEBAR HEADER --> */}
         <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
-          <div className="text-white text-lg">
-            Admin Page
-          </div>
+          <div className="text-white text-lg">Admin Page</div>
 
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
