@@ -33,10 +33,10 @@ export type BorrowItemType = {
 };
 
 export type BorrowItemInput = {
-  memberId: string;
-  memberLookup: Lookup;
+  memberId: string | null;
+  memberLookup: Lookup | null;
   borrowDate: Date;
-  returnDate: Date;
+  returnDate: Date | null;
   items: ItemForBorrow[];
   purpose: string;
   status?: number;

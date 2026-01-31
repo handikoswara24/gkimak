@@ -4,7 +4,7 @@ import { useMutation, useQuery } from "react-query";
 import { MessageType } from "@/types/common";
 import { GetJemaatInput, JemaatInput, JemaatType, ListJemmat } from "@/types/jemaat";
 
-const getAllJemaat = async (page : number, numberPerPage : number, search: string) => {
+export const getAllJemaat = async (page : number, numberPerPage : number, search: string) => {
     const token = localStorage.getItem(TOKEN)?.replaceAll('"', "") ?? "";
     const result = await http.get<ListJemmat>(`/api/jemaat?page=${page}&numberPerPage=${numberPerPage}&search=${search}`, {
         headers: {
