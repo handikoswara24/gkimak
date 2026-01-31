@@ -43,6 +43,6 @@ export type BorrowItemInput = {
 };
 
 export type ListBorrowItem = {
-  inventory: BorrowItemType[];
+  borrowItem: BorrowItemType[];
   pagination: Pagination;
 };
