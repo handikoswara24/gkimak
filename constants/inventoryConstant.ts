@@ -27,7 +27,11 @@ export const Status : ChoiceType[] = [
     {
         label: "Broken",
         value: 3
-    }
+    },
+    {
+        label: "Available - Cannot Be Borrowed",
+        value: 4
+    },
 ]
 
 export const Condition : ChoiceType[] = [

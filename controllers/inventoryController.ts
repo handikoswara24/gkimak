@@ -87,6 +87,47 @@ const getAllInventory = catchAsyncErrors(async (req: NextRequest) => {
   });
 });
 
+const getAllInventoryLookup = catchAsyncErrors(async (req: NextRequest) => {
+  const page = Number(req.nextUrl.searchParams.get("page") ?? 1);
+  const numberPerPage = Number(
+    req.nextUrl.searchParams.get("numberPerPage") ?? 20
+  );
+  const search = req.nextUrl.searchParams.get("search") ?? "";
+
+  let query = {} as any;
+  if (search) {
+    query = {
+      $or: [
+        {
+          name: {
+            $regex: search,
+            $options: "i",
+          },
+        },
+      ],
+    };
+  }
+
+  query.status = 1;
+  query.borrowed = false;
+  query.qty = {
+    $gte: 0,
+  };
+  const inventory = await Inventory.find(query)
+    .skip((page - 1) * numberPerPage)
+    .limit(numberPerPage);
+  const total = await Inventory.find(query).countDocuments();
+  const pagination: Pagination = {
+    numberPerPage,
+    page,
+    total,
+  };
+  return NextResponse.json({
+    inventory,
+    pagination,
+  });
+});
+
 const getInventoryByCode = catchAsyncErrors(async (req: NextRequest) => {
   const code = req.nextUrl.searchParams.get("code") ?? "";
   let query = {
@@ -154,4 +195,5 @@ export {
   updateInventory,
   deleteInventory,
   getInventoryByCode,
+  getAllInventoryLookup,
 };

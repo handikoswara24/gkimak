@@ -11,6 +11,7 @@ import {
 import { toast } from "react-toastify";
 import { BorrowItemDefault } from "@/constants/borrowItemConstant";
 import AutocompleteMember from "./AutocompleteMember";
+import AutocompleteItem from "./AutocompleteItem";
 
 type BorrowItemFormProps = {
   id?: string;
@@ -69,6 +70,12 @@ const BorrowItemForm = ({ id, input }: BorrowItemFormProps) => {
       <form className="mt-12 space-y-8 text-xs" onSubmit={onSubmit}>
         <div>
           <AutocompleteMember
+            input={borrowItemData}
+            setBorrowItemData={setBorrowItemData}
+          />
+        </div>
+        <div>
+          <AutocompleteItem
             input={borrowItemData}
             setBorrowItemData={setBorrowItemData}
           />

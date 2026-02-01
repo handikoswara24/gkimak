@@ -29,6 +29,9 @@ const borrowItem = new mongoose.Schema(
         quantity: {
           type: Number,
         },
+        maxQty : {
+          type: Number
+        }
       },
     ],
   },

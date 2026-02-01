@@ -64,6 +64,7 @@ const ListInventory = () => {
           <DataTable value={data?.inventory} className="text-xs">
             <Column field="name" header="Name"></Column>
             <Column field="code" header="Code"></Column>
+            <Column field="qty" header="Quantity"></Column>
             <Column body={Category} header="Category"></Column>
             <Column body={Location} header="Location"></Column>
             <Column

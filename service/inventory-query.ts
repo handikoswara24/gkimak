@@ -16,6 +16,17 @@ export const getAllInventory = async (page: number, numberPerPage: number, searc
     return result.data;
 }
 
+export const getAllInventoryLookup = async (page: number, numberPerPage: number, search: string) => {
+    const token = localStorage.getItem(TOKEN)?.replaceAll('"', "") ?? "";
+    const result = await http.get<ListInventory>(`/api/inventory/lookup?page=${page}&numberPerPage=${numberPerPage}&search=${search}`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        }
+    })
+
+    return result.data;
+}
+
 const addInventory = async (inventory: InventoryInput) => {
     const token = localStorage.getItem(TOKEN)?.replaceAll('"', "") ?? "";
     const result = await http.post<MessageType>(`/api/inventory`, inventory, {

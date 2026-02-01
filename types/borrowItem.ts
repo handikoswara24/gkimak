@@ -18,6 +18,7 @@ export type ItemForBorrow = {
   itemId: string;
   itemLookup: Lookup;
   quantity: number;
+  maxQty: number
 };
 
 export type BorrowItemType = {
