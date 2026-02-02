@@ -20,6 +20,9 @@ const borrowItem = new mongoose.Schema(
     status: {
       type: Number,
     },
+    borrowNumber: {
+      type: String,
+    },
     items: [
       {
         itemId: {
@@ -29,9 +32,9 @@ const borrowItem = new mongoose.Schema(
         quantity: {
           type: Number,
         },
-        maxQty : {
-          type: Number
-        }
+        maxQty: {
+          type: Number,
+        },
       },
     ],
   },

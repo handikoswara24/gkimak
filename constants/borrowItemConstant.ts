@@ -1,5 +1,6 @@
 import { BorrowItemInput } from "@/types/borrowItem";
 import { ChoiceType } from "@/types/common";
+import dayjs from "dayjs";
 
 export const BorrowStatus: ChoiceType[] = [
   {
@@ -20,7 +21,7 @@ export const BorrowItemDefault: BorrowItemInput = {
   memberId: null,
   memberLookup: null,
   borrowDate: new Date(),
-  returnDate: null,
+  returnDate: dayjs(new Date()).add(1, "day").toDate(),
   items: [],
   purpose: "",
 };

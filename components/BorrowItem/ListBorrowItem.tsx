@@ -86,7 +86,7 @@ const ListBorrowItem = () => {
             <Column body={itemsComponent} header="Items"></Column>
             <Column body={borrowDateComponent} header="Borrow Date"></Column>
             <Column body={dueDateComponent} header="Due Date"></Column>
-            <Column body={memberComponent} header="Status"></Column>
+            <Column body={statusComponent} header="Status"></Column>
             <Column field="purpose" header="Purpose"></Column>
           </DataTable>
           <Paginator

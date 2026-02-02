@@ -13,7 +13,7 @@ const addBorrowItem = catchAsyncErrors(async (req: NextRequest) => {
     "GKIM-AK-" +
     new Date().getFullYear() +
     "-" +
-    new Date().getMonth() +
+    (new Date().getMonth() + 1) +
     "-" +
     new Date().getDate() +
     "-" +
@@ -23,7 +23,7 @@ const addBorrowItem = catchAsyncErrors(async (req: NextRequest) => {
     memberId: body.memberId,
     memberLookup: body.memberLookup,
     borrowDate: body.borrowDate,
-    returnDate: null,
+    returnDate: body.returnDate,
     items: body.items,
     purpose: body.purpose,
     status: 1,

@@ -7,7 +7,7 @@ const AddBorrowItem = () => {
   return (
     <div>
       <h1 className="mb-4 text-xl font-semibold">Add Borrow Item</h1>
-      <BorrowItemForm input={BorrowItemDefault} />
+      <BorrowItemForm input={structuredClone(BorrowItemDefault)} />
     </div>
   );
 };
