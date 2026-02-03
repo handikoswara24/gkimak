@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import ErrorHandler from "@/utils/errorHandler";
 import { Pagination } from "@/types/pagination";
 import BorrowItem from "@/models/borrowItem";
-import { BorrowItemInput } from "@/types/borrowItem";
+import { BorrowItemInput, ReleasedBorrowItemInput } from "@/types/borrowItem";
 import generateRandomString from "@/utils/generateRandomString";
 
 const addBorrowItem = catchAsyncErrors(async (req: NextRequest) => {
@@ -97,6 +97,22 @@ const updateBorrowItem = catchAsyncErrors(
   }
 );
 
+const releasedBorrowItem = catchAsyncErrors(
+  async (req: NextRequest) => {
+    const body = (await req.json()) as ReleasedBorrowItemInput;
+    const borrowItem = await BorrowItem.findById(body.id);
+
+    if (!borrowItem) {
+      throw new ErrorHandler("Borrow Item not found", 404);
+    }
+    borrowItem.status = 2; //Released
+    await borrowItem.save();
+    return NextResponse.json({
+      message: "Success",
+    });
+  }
+)
+
 const deleteBorrowItem = catchAsyncErrors(
   async (req: NextRequest, { params }: { params: { id: string } }) => {
     const borrowItem = await BorrowItem.findById(params.id);
@@ -112,4 +128,4 @@ const deleteBorrowItem = catchAsyncErrors(
   }
 );
 
-export { addBorrowItem, getAllBorrowItem, updateBorrowItem, deleteBorrowItem };
+export { addBorrowItem, getAllBorrowItem, updateBorrowItem, deleteBorrowItem, releasedBorrowItem };

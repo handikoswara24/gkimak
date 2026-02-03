@@ -43,6 +43,11 @@ export type BorrowItemInput = {
   status?: number;
 };
 
+export type ReleasedBorrowItemInput = {
+  id: string;
+};
+
+
 export type ListBorrowItem = {
   borrowItem: BorrowItemType[];
   pagination: Pagination;

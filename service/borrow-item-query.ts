@@ -2,7 +2,7 @@ import { TOKEN } from "@/constants/loginConstant";
 import http from "./base-query";
 import { MessageType } from "@/types/common";
 import { useQuery, useMutation } from "react-query";
-import { BorrowItemInput, ListBorrowItem } from "@/types/borrowItem";
+import { BorrowItemInput, ListBorrowItem, ReleasedBorrowItemInput } from "@/types/borrowItem";
 
 export const getAllBorrowItem = async (
   page: number,
@@ -60,6 +60,20 @@ const deleteBorrowItem = async (id: string) => {
   return result.data;
 };
 
+const releaseBorrowItem = async (id: string) => {
+  const token = localStorage.getItem(TOKEN)?.replaceAll('"', "") ?? "";
+  const input : ReleasedBorrowItemInput = {
+    id
+  }
+  const result = await http.post<MessageType>(`/api/borrowitem/released`, input, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return result.data;
+};
+
 export const useGetAllBorrowItems = (
   page: number,
   numberPerPage: number,
@@ -81,4 +95,8 @@ export const useUpdateBorrowItem = (id: string) => {
 
 export const useDeleteBorrowItem = () => {
   return useMutation((id: string) => deleteBorrowItem(id));
+};
+
+export const useReleasedBorrowItem = () => {
+  return useMutation((id: string) => releaseBorrowItem(id));
 };
