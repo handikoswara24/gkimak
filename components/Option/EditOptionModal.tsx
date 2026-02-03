@@ -10,7 +10,7 @@ type EditOptionModalProps = {
 const EditOptionModal = ({ id, option }: EditOptionModalProps) => {
   return (
     <div className="max-w-xl mx-auto">
-      <h1 className="text-xl font-semibold">Edit User</h1>
+      <h1 className="text-xl font-semibold">Edit Option</h1>
       <div>
         <OptionForm id={id} option={option} />
       </div>

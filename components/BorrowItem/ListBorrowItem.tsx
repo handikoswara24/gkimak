@@ -10,6 +10,7 @@ import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import { Paginator } from "primereact/paginator";
 import dayjs from "dayjs";
+import BorrowItemButtons from "./BorrowItemButtons";
 
 const ListBorrowItem = () => {
   const [page, setPage] = useState(1);
@@ -36,6 +37,10 @@ const ListBorrowItem = () => {
     );
   };
 
+  const buttonComponent = (data: BorrowItemType) => {
+    return <BorrowItemButtons data={data} />;
+  };
+
   const memberComponent = (data: BorrowItemType) => {
     return <span>{data.memberLookup.name}</span>;
   };
@@ -55,7 +60,7 @@ const ListBorrowItem = () => {
           return (
             <div>
               {item.itemLookup.name}{" "}
-              <span className="text-gray">({item.quantity})</span>
+              <span className="text-slate-400">({item.quantity})</span>
             </div>
           );
         })}
@@ -88,6 +93,7 @@ const ListBorrowItem = () => {
             <Column body={dueDateComponent} header="Due Date"></Column>
             <Column body={statusComponent} header="Status"></Column>
             <Column field="purpose" header="Purpose"></Column>
+            <Column body={buttonComponent} header="Action"></Column>
           </DataTable>
           <Paginator
             first={page - 1}

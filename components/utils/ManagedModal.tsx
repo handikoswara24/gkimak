@@ -1,33 +1,71 @@
 "use client";
 
-import React from 'react'
+import React from "react";
 
-import { Sidebar } from 'primereact/sidebar';
-import dynamic from 'next/dynamic';
-import { useModalAction, useModalState } from './ModalProvider';
-
+import { Sidebar } from "primereact/sidebar";
+import dynamic from "next/dynamic";
+import { useModalAction, useModalState } from "./ModalProvider";
 
 const ManagedModal = () => {
-    const { isOpen, data, view } = useModalState();
-    const { closeModal } = useModalAction();
-    const EditUserForm = dynamic(() => import("@components/User/EditUserModal"));
-    const EditRenunganForm = dynamic(() => import("@components/RenunganHarian/EditRenunganModal"));
-    const EditJemaatForm = dynamic(() => import("@components/Jemaat/EditJemaatModal"));
-    const EditInventoryCategoryForm = dynamic(() => import("@components/InventoryCategory/EditInventoryCategoryModal"))
-    const EditInventoryForm = dynamic(() => import("@components/Inventory/EditInventoryModal"))
-    const QRInventory = dynamic(() => import("@components/Inventory/QRInventoryModal"))
-    const EditOptionForm = dynamic(() => import("@components/Option/EditOptionModal"))
-    return (
-        <Sidebar visible={isOpen} fullScreen onHide={closeModal} blockScroll className={view?.toLocaleLowerCase() + "modalcustom"}>
-            {view == "USERFORM" && <EditUserForm id={data.id} user={data.userInput} />}
-            {view == "RENUNGANFORM" && <EditRenunganForm id={data.id} renungan={data.renungan} />}
-            {view == "JEMAATFORM" && <EditJemaatForm id={data.id} jemaat={data.jemaat} />}
-            {view == "INVENTORYCATEGORYFORM" && <EditInventoryCategoryForm id={data.id} inventoryCategory={data.inventoryCategory} />}
-            {view == "INVENTORYFORM" && <EditInventoryForm id={data.id} inventory={data.inventory} />}
-            {view == "INVENTORYQR" && <QRInventory data={data.data} />}
-            {view == "OPTIONFORM" && <EditOptionForm id={data.id} option={data.option} />}
-        </Sidebar>
-    )
-}
+  const { isOpen, data, view } = useModalState();
+  const { closeModal } = useModalAction();
+  const EditUserForm = dynamic(() => import("@components/User/EditUserModal"));
+  const EditRenunganForm = dynamic(
+    () => import("@components/RenunganHarian/EditRenunganModal")
+  );
+  const EditJemaatForm = dynamic(
+    () => import("@components/Jemaat/EditJemaatModal")
+  );
+  const EditInventoryCategoryForm = dynamic(
+    () => import("@components/InventoryCategory/EditInventoryCategoryModal")
+  );
+  const EditInventoryForm = dynamic(
+    () => import("@components/Inventory/EditInventoryModal")
+  );
+  const QRInventory = dynamic(
+    () => import("@components/Inventory/QRInventoryModal")
+  );
+  const EditOptionForm = dynamic(
+    () => import("@components/Option/EditOptionModal")
+  );
+  const EditBorrowItem = dynamic(
+    () => import("@components/BorrowItem/EditBorrowItemModal")
+  );
+  return (
+    <Sidebar
+      visible={isOpen}
+      fullScreen
+      onHide={closeModal}
+      blockScroll
+      className={view?.toLocaleLowerCase() + "modalcustom"}
+    >
+      {view == "USERFORM" && (
+        <EditUserForm id={data.id} user={data.userInput} />
+      )}
+      {view == "RENUNGANFORM" && (
+        <EditRenunganForm id={data.id} renungan={data.renungan} />
+      )}
+      {view == "JEMAATFORM" && (
+        <EditJemaatForm id={data.id} jemaat={data.jemaat} />
+      )}
+      {view == "INVENTORYCATEGORYFORM" && (
+        <EditInventoryCategoryForm
+          id={data.id}
+          inventoryCategory={data.inventoryCategory}
+        />
+      )}
+      {view == "INVENTORYFORM" && (
+        <EditInventoryForm id={data.id} inventory={data.inventory} />
+      )}
+      {view == "INVENTORYQR" && <QRInventory data={data.data} />}
+      {view == "OPTIONFORM" && (
+        <EditOptionForm id={data.id} option={data.option} />
+      )}
+      {view == "BORROWITEMFORM" && (
+        <EditBorrowItem id={data.id} borrowItem={data.borrowItem} />
+      )}
+    </Sidebar>
+  );
+};
 
-export default ManagedModal
+export default ManagedModal;
