@@ -2,6 +2,7 @@ import { BorrowItemType } from "@/types/borrowItem";
 import React from "react";
 import EditBorrowItemButton from "./EditBorrowItemButton";
 import RemoveBorrowItemButton from "./RemoveBorrowItemButton";
+import ReleasedBorrowItemButton from "./ReleasedBorrowItemButton";
 
 type BorrowItemButtonsProps = {
   data: BorrowItemType;
@@ -10,8 +11,13 @@ type BorrowItemButtonsProps = {
 const BorrowItemButtons = ({ data }: BorrowItemButtonsProps) => {
   return (
     <div className="flex flex-row">
-      <EditBorrowItemButton data={data} />
-      <RemoveBorrowItemButton data={data} />
+      {data.status == 1 && (
+        <>
+          <ReleasedBorrowItemButton data={data} />
+          <EditBorrowItemButton data={data} />
+          <RemoveBorrowItemButton data={data} />
+        </>
+      )}
     </div>
   );
 };

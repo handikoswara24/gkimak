@@ -3,8 +3,14 @@ import { NextRequest, NextResponse } from "next/server";
 import ErrorHandler from "@/utils/errorHandler";
 import { Pagination } from "@/types/pagination";
 import BorrowItem from "@/models/borrowItem";
-import { BorrowItemInput, ReleasedBorrowItemInput } from "@/types/borrowItem";
+import {
+  BorrowItemInput,
+  ItemForBorrow,
+  ReleasedBorrowItemInput,
+} from "@/types/borrowItem";
 import generateRandomString from "@/utils/generateRandomString";
+import Inventory from "@/models/inventoryModel";
+import { InventoryType } from "@/types/inventory";
 
 const addBorrowItem = catchAsyncErrors(async (req: NextRequest) => {
   const body = (await req.json()) as BorrowItemInput;
@@ -97,21 +103,42 @@ const updateBorrowItem = catchAsyncErrors(
   }
 );
 
-const releasedBorrowItem = catchAsyncErrors(
-  async (req: NextRequest) => {
-    const body = (await req.json()) as ReleasedBorrowItemInput;
-    const borrowItem = await BorrowItem.findById(body.id);
+const releasedBorrowItem = catchAsyncErrors(async (req: NextRequest) => {
+  const body = (await req.json()) as ReleasedBorrowItemInput;
+  const borrowItem = await BorrowItem.findById(body.id);
 
-    if (!borrowItem) {
-      throw new ErrorHandler("Borrow Item not found", 404);
-    }
-    borrowItem.status = 2; //Released
-    await borrowItem.save();
-    return NextResponse.json({
-      message: "Success",
-    });
+  if (!borrowItem) {
+    throw new ErrorHandler("Borrow Item not found", 404);
   }
-)
+  borrowItem.status = 2; //Released
+  await borrowItem.save();
+
+  const listItemId = borrowItem.items.map((item: ItemForBorrow) => item.itemId);
+
+  const filter = {
+    _id: { $in: listItemId },
+  };
+
+  const listItem = await Inventory.find(filter);
+
+  const listStatus = listItem.map((e: InventoryType) => e.status);
+
+  if (listStatus.find((e) => e != 1)) {
+    throw new ErrorHandler(
+      "Cannot Released because one or more items has been borrowed",
+      500
+    );
+  }
+
+  const update = { $set: { status: 2 } };
+
+  await Inventory.updateMany(filter, update);
+
+  await borrowItem.save();
+  return NextResponse.json({
+    message: "Success",
+  });
+});
 
 const deleteBorrowItem = catchAsyncErrors(
   async (req: NextRequest, { params }: { params: { id: string } }) => {
@@ -128,4 +155,10 @@ const deleteBorrowItem = catchAsyncErrors(
   }
 );
 
-export { addBorrowItem, getAllBorrowItem, updateBorrowItem, deleteBorrowItem, releasedBorrowItem };
+export {
+  addBorrowItem,
+  getAllBorrowItem,
+  updateBorrowItem,
+  deleteBorrowItem,
+  releasedBorrowItem,
+};
