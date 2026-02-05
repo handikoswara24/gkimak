@@ -65,6 +65,7 @@ const getAllBorrowItem = catchAsyncErrors(async (req: NextRequest) => {
     query.status = status;
   }
   const borrowItem = await BorrowItem.find(query)
+    .sort({ _id: -1 })
     .skip((page - 1) * numberPerPage)
     .limit(numberPerPage);
   const total = await BorrowItem.find(query).countDocuments();

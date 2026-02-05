@@ -50,7 +50,22 @@ const ListBorrowItem = () => {
   };
 
   const dueDateComponent = (data: BorrowItemType) => {
-    return <span>{dayjs(data.returnDate).format("YYYY-MM-DD")}</span>;
+    return (
+      <span
+        className={`${
+          new Date().setHours(0, 0, 0, 0) >
+          new Date(data.returnDate).setHours(0, 0, 0, 0)
+            ? "text-red"
+            : ""
+        }`}
+      >
+        {dayjs(data.returnDate).format("YYYY-MM-DD")}
+        {new Date().setHours(0, 0, 0, 0) >
+          new Date(data.returnDate).setHours(0, 0, 0, 0) && (
+          <span className={"ml-2 rounded-xl text-xs p-2 bg-red text-white"}>Overdue</span>
+        )}
+      </span>
+    );
   };
 
   const itemsComponent = (data: BorrowItemType) => {
