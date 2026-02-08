@@ -49,6 +49,14 @@ const ListBorrowItem = () => {
     return <span>{dayjs(data.borrowDate).format("YYYY-MM-DD")}</span>;
   };
 
+  const actualBorrowDateComponent = (data: BorrowItemType) => {
+    return data.actualReturnDate ? (
+      <span>{dayjs(data.actualReturnDate).format("YYYY-MM-DD")}</span>
+    ) : (
+      "-"
+    );
+  };
+
   const dueDateComponent = (data: BorrowItemType) => {
     return (
       <span
@@ -62,7 +70,9 @@ const ListBorrowItem = () => {
         {dayjs(data.returnDate).format("YYYY-MM-DD")}
         {new Date().setHours(0, 0, 0, 0) >
           new Date(data.returnDate).setHours(0, 0, 0, 0) && (
-          <span className={"ml-2 rounded-xl text-xs p-2 bg-red text-white"}>Overdue</span>
+          <span className={"ml-2 rounded-xl text-xs p-2 bg-red text-white"}>
+            Overdue
+          </span>
         )}
       </span>
     );
@@ -106,6 +116,10 @@ const ListBorrowItem = () => {
             <Column body={itemsComponent} header="Items"></Column>
             <Column body={borrowDateComponent} header="Borrow Date"></Column>
             <Column body={dueDateComponent} header="Due Date"></Column>
+            <Column
+              body={actualBorrowDateComponent}
+              header="Actual Return Date"
+            ></Column>
             <Column body={statusComponent} header="Status"></Column>
             <Column field="purpose" header="Purpose"></Column>
             <Column body={buttonComponent} header="Action"></Column>

@@ -7,6 +7,7 @@ import {
   BorrowItemInput,
   ItemForBorrow,
   ReleasedBorrowItemInput,
+  ReturnBorrowItemInput,
 } from "@/types/borrowItem";
 import generateRandomString from "@/utils/generateRandomString";
 import Inventory from "@/models/inventoryModel";
@@ -141,6 +142,33 @@ const releasedBorrowItem = catchAsyncErrors(async (req: NextRequest) => {
   });
 });
 
+const returnBorrowItem = catchAsyncErrors(async (req: NextRequest) => {
+  const body = (await req.json()) as ReturnBorrowItemInput;
+  const borrowItem = await BorrowItem.findById(body.id);
+
+  if (!borrowItem) {
+    throw new ErrorHandler("Borrow Item not found", 404);
+  }
+  borrowItem.status = 3;
+  borrowItem.actualReturnDate = body.actualReturnDate;
+  await borrowItem.save();
+
+  const listItemId = borrowItem.items.map((item: ItemForBorrow) => item.itemId);
+
+  const filter = {
+    _id: { $in: listItemId },
+  };
+
+  const update = { $set: { status: 1 } };
+
+  await Inventory.updateMany(filter, update);
+
+  await borrowItem.save();
+  return NextResponse.json({
+    message: "Success",
+  });
+});
+
 const deleteBorrowItem = catchAsyncErrors(
   async (req: NextRequest, { params }: { params: { id: string } }) => {
     const borrowItem = await BorrowItem.findById(params.id);
@@ -162,4 +190,5 @@ export {
   updateBorrowItem,
   deleteBorrowItem,
   releasedBorrowItem,
+  returnBorrowItem,
 };

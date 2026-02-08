@@ -14,6 +14,9 @@ const borrowItem = new mongoose.Schema(
     returnDate: {
       type: Date,
     },
+    actualReturnDate: {
+      type: Date
+    },
     purpose: {
       type: String,
     },

@@ -34,7 +34,7 @@ const ReleasedBorrowItemButton = ({ data }: ReleasedBorrowItemButtonProps) => {
             console.log(error);
             toast.error(
               error?.response?.data?.errMessage ??
-                "Error when delete borrow item"
+                "Error when released borrow item"
             );
           },
         });

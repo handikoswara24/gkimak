@@ -8,7 +8,7 @@ import SearchBox from "../UI/SearchBox";
 import { useGetAllInventory } from "@/service/inventory-query";
 import InventoryButtons from "./InventoryButtons";
 import { InventoryType } from "@/types/inventory";
-import { Locations } from "@/constants/inventoryConstant";
+import { Locations, Status } from "@/constants/inventoryConstant";
 import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
 import AutocompleteLocationList from "./AutocompleteLocationList";
 
@@ -30,6 +30,12 @@ const ListInventory = () => {
 
   const Category = (data: InventoryType) => {
     return <span>{data.categoryLookup ? data.categoryLookup.name : "-"}</span>;
+  };
+
+  const statusComponent = (data: InventoryType) => {
+    return (
+      <span>{Status.find((e) => e.value == data.status)?.label ?? "-"}</span>
+    );
   };
 
   const Location = (data: InventoryType) => {
@@ -66,6 +72,7 @@ const ListInventory = () => {
             <Column field="code" header="Code"></Column>
             <Column field="qty" header="Quantity"></Column>
             <Column body={Category} header="Category"></Column>
+            <Column body={statusComponent} header="Status"></Column>
             <Column body={Location} header="Location"></Column>
             <Column
               header="Action"

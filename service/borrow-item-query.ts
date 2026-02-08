@@ -2,7 +2,12 @@ import { TOKEN } from "@/constants/loginConstant";
 import http from "./base-query";
 import { MessageType } from "@/types/common";
 import { useQuery, useMutation } from "react-query";
-import { BorrowItemInput, ListBorrowItem, ReleasedBorrowItemInput } from "@/types/borrowItem";
+import {
+  BorrowItemInput,
+  ListBorrowItem,
+  ReleasedBorrowItemInput,
+  ReturnBorrowItemInput,
+} from "@/types/borrowItem";
 
 export const getAllBorrowItem = async (
   page: number,
@@ -62,14 +67,37 @@ const deleteBorrowItem = async (id: string) => {
 
 const releaseBorrowItem = async (id: string) => {
   const token = localStorage.getItem(TOKEN)?.replaceAll('"', "") ?? "";
-  const input : ReleasedBorrowItemInput = {
-    id
-  }
-  const result = await http.post<MessageType>(`/api/borrowitem/released`, input, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  const input: ReleasedBorrowItemInput = {
+    id,
+  };
+  const result = await http.post<MessageType>(
+    `/api/borrowitem/released`,
+    input,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  return result.data;
+};
+
+const returnBorrowItem = async (id: string, actualReturnDate: Date) => {
+  const token = localStorage.getItem(TOKEN)?.replaceAll('"', "") ?? "";
+  const input: ReturnBorrowItemInput = {
+    id,
+    actualReturnDate,
+  };
+  const result = await http.post<MessageType>(
+    `/api/borrowitem/returned`,
+    input,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
 
   return result.data;
 };
@@ -99,4 +127,10 @@ export const useDeleteBorrowItem = () => {
 
 export const useReleasedBorrowItem = () => {
   return useMutation((id: string) => releaseBorrowItem(id));
+};
+
+export const useReturnedBorrowItem = () => {
+  return useMutation((input: ReturnBorrowItemInput) =>
+    returnBorrowItem(input.id, input.actualReturnDate)
+  );
 };
