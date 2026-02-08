@@ -161,6 +161,14 @@ const getUserBySearch = catchAsyncErrors(async (req: NextRequest) => {
   });
 });
 
+const getUserById = catchAsyncErrors(async (req: NextRequest) => {
+  const id = req.nextUrl.searchParams.get("id") ?? "";
+  const user = await User.findById(id).select("-password");
+  return NextResponse.json({
+    user,
+  });
+});
+
 const template = catchAsyncErrors(async (req: NextRequest) => {
   return NextResponse.json({});
 });
@@ -173,4 +181,5 @@ export {
   updateUserProfile,
   resetUserPassword,
   getUserBySearch,
+  getUserById,
 };

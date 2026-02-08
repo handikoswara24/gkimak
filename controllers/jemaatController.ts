@@ -64,6 +64,14 @@ const getAllJemaat = catchAsyncErrors(async (req: NextRequest) => {
   });
 });
 
+const getJemaatById =  catchAsyncErrors(async (req: NextRequest) => {
+  const id = req.nextUrl.searchParams.get("id") ?? "";
+  const jemaat = await Jemaat.findById(id);
+  return NextResponse.json({
+    jemaat,
+  });
+});
+
 const updateJemaat = catchAsyncErrors(
   async (req: NextRequest, { params }: { params: { id: string } }) => {
     const jemaat = await Jemaat.findById(params.id);
@@ -123,4 +131,5 @@ export {
   getAllJemaat,
   getJemaatByPhone,
   deleteJemaat,
+  getJemaatById
 };

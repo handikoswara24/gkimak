@@ -15,6 +15,17 @@ const getAllUser = async (page : number, numberPerPage : number, search: string)
     return result.data;
 }
 
+const getAllUserById = async (id : string) => {
+    const token = localStorage.getItem(TOKEN)?.replaceAll('"', "") ?? "";
+    const result = await http.get<ListUser>(`/api/user/byid?id=${id}`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        }
+    })
+
+    return result.data;
+}
+
 const addUser = async (user : UserInput) => {
     const token = localStorage.getItem(TOKEN)?.replaceAll('"', "") ?? "";
     const result = await http.post<UserCreateResponse>(`/api/user`, user, {

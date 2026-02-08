@@ -1,54 +1,58 @@
-import { NextRequest } from "next/server"
-import { Pagination } from "./pagination"
-import { Document } from 'mongoose';
+import { NextRequest } from "next/server";
+import { Pagination } from "./pagination";
+import { Document } from "mongoose";
 
 export type User = {
-    username: string,
-    name: string,
-    role: string,
-    _id: string,
-}
+  username: string;
+  name: string;
+  role: string;
+  _id: string;
+};
 export type ListUser = {
-    users: User[],
-    pagination: Pagination
-}
+  users: User[];
+  pagination: Pagination;
+};
 
 export type UserInput = {
-    username: string,
-    password: string,
-    name: string,
-    role?: string
-}
+  username: string;
+  password: string;
+  name: string;
+  role?: string;
+};
 
 export type LoginInput = {
-    username: string,
-    password: string,
-}
+  username: string;
+  password: string;
+};
 
 export type LoginOutput = {
-    _id: string,
-    username: string,
-    role: string,
-    name: string,
-    token: string
-}
+  _id: string;
+  username: string;
+  role: string;
+  name: string;
+  token: string;
+};
 
 export type UserCreateResponse = {
-    _id : string,
-    username : string
-}
+  _id: string;
+  username: string;
+};
 
 export interface IUserDocument extends Document {
-    username: string,
-    password: string,
-    name: string,
-    role: string,
+  username: string;
+  password: string;
+  name: string;
+  role: string;
 }
 
 export interface IUser extends IUserDocument {
-    matchPassword(password: string): Promise<boolean>;
+  matchPassword(password: string): Promise<boolean>;
 }
 
 export interface NextRequestWithUser extends NextRequest {
-    user: any
+  user: any;
+}
+
+export type UserById = {
+    user : User
 }
