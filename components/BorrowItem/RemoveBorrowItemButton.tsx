@@ -7,13 +7,16 @@ import { acceptClassName, rejectClassName } from "@/constants/cssConstant";
 import { toast } from "react-toastify";
 
 type RemoveBorrowItemButtonProps = {
-  data : BorrowItemType
-}
+  data: BorrowItemType;
+};
 
-const RemoveBorrowItemButton = ({data} : RemoveBorrowItemButtonProps) => {
-  const { mutate: deleteBorrowItem } = useDeleteBorrowItem();
+const RemoveBorrowItemButton = ({ data }: RemoveBorrowItemButtonProps) => {
+  const { mutate: deleteBorrowItem, isLoading } = useDeleteBorrowItem();
   const queryClient = useQueryClient();
   const confirm = (id: string) => {
+    if (isLoading) {
+      return;
+    }
     confirmDialog({
       message: "Are you sure you want to delete this borrow item?",
       header: "Confirmation",

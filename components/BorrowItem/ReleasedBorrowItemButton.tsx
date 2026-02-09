@@ -17,6 +17,9 @@ const ReleasedBorrowItemButton = ({ data }: ReleasedBorrowItemButtonProps) => {
   const { mutate: releaseBorrowItem, isLoading } = useReleasedBorrowItem();
   const queryClient = useQueryClient();
   const confirm = (id: string) => {
+    if (isLoading) {
+      return;
+    }
     confirmDialog({
       message: "Are you sure you want to released this borrow item?",
       header: "Confirmation",

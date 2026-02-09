@@ -2,6 +2,7 @@ import { BorrowItemType } from "@/types/borrowItem";
 import React from "react";
 import WAIcon from "../Icons/WAIcon";
 import { getJemaatById } from "@/service/jemaat-query";
+// import { toast } from "react-toastify";
 
 type WABorrowItemButtonProps = {
   data: BorrowItemType;
@@ -12,6 +13,7 @@ const WABorrowItemButton = ({ data }: WABorrowItemButtonProps) => {
     const jemaatData = await getJemaatById(data.memberId);
 
     if (!jemaatData.jemaat.telepon) {
+      toast.error("No Phone Number");
       return;
     }
 

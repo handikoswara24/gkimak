@@ -17,6 +17,9 @@ const ReturnBorrowItemButton = ({ data }: ReturnBorrowItemButtonProps) => {
   const { mutate: returnBorrowItem, isLoading } = useReturnedBorrowItem();
   const queryClient = useQueryClient();
   const confirm = (id: string) => {
+    if (isLoading) {
+      return;
+    }
     confirmDialog({
       message: "Are you sure you want to returned this borrow item?",
       header: "Confirmation",
