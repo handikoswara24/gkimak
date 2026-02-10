@@ -160,7 +160,7 @@ const InventoryForm = ({ id, input }: InventoryFormProps) => {
             <label htmlFor="status">Status</label>
           </FloatLabel>
         </div>
-        <div>
+        {/* <div>
           <FloatLabel>
             <Dropdown
               inputId="condition"
@@ -215,7 +215,7 @@ const InventoryForm = ({ id, input }: InventoryFormProps) => {
               Broken
             </label>
           </FloatLabel>
-        </div>
+        </div> */}
         <div>
           <Button
             type="submit"
