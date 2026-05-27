@@ -8,22 +8,23 @@ const SidebarDropdown = ({ item }: any) => {
   const pathname = usePathname();
 
   return (
-    <>
-      <ul className="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
-        {item.map((item: any, index: number) => (
-          <li key={index}>
-            <Link
-              href={item.route}
-              className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
-                pathname === item.route ? "text-white" : ""
+    <ul className="mt-1 mb-2 flex flex-col gap-0.5 pl-4 pr-2 border-l border-white/10 ml-6">
+      {item.map((child: any, index: number) => (
+        <li key={index}>
+          <Link
+            href={child.route}
+            className={`flex items-center gap-2 rounded-md px-3 py-2 text-xs font-medium duration-200 ease-in-out
+              ${pathname === child.route
+                ? "text-white bg-white/10"
+                : "text-bodydark2 hover:text-white hover:bg-white/5"
               }`}
-            >
-              {item.label}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </>
+          >
+            <span className={`w-1 h-1 rounded-full flex-shrink-0 ${pathname === child.route ? "bg-primary" : "bg-bodydark2/50"}`} />
+            {child.label}
+          </Link>
+        </li>
+      ))}
+    </ul>
   );
 };
 

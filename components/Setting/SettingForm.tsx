@@ -1,20 +1,60 @@
 'use client'
 
-import { useAddUpdateSetting, useGetSetting } from '@/service/setting-query'
+import { useAddUpdateSetting } from '@/service/setting-query'
 import { SettingType } from '@/types/setting';
-import { FloatLabel } from 'primereact/floatlabel';
-import { InputText } from 'primereact/inputtext';
-import React, { useMemo, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 import Button from '../UI/Button';
 import HtmlEditor from '../UI/HtmlEditor';
-import { InputTextarea } from 'primereact/inputtextarea';
 import { TabPanel, TabView } from 'primereact/tabview';
+import FormField from '../UI/FormField';
 
 type SettingFormProps = {
     data: SettingType
 }
+
+// Helper: field input text yang konsisten
+const TextField = ({ label, id, value, onChange, placeholder }: {
+    label: string, id: string, value: string, onChange: (v: string) => void, placeholder?: string
+}) => (
+    <FormField label={label} htmlFor={id}>
+        <input
+            id={id}
+            className="admin-input"
+            value={value ?? ""}
+            onChange={(e) => onChange(e.target.value)}
+            autoComplete="off"
+            placeholder={placeholder ?? `Masukkan ${label.toLowerCase()}`}
+        />
+    </FormField>
+)
+
+// Helper: field textarea yang konsisten
+const TextAreaField = ({ label, id, value, onChange }: {
+    label: string, id: string, value: string, onChange: (v: string) => void
+}) => (
+    <FormField label={label} htmlFor={id}>
+        <textarea
+            id={id}
+            className="admin-input resize-none"
+            rows={3}
+            value={value ?? ""}
+            onChange={(e) => onChange(e.target.value)}
+        />
+    </FormField>
+)
+
+// Helper: Rich text editor field
+const EditorField = ({ label, keys, content, setContent }: {
+    label: string, keys: string, content: string, setContent: (v: string) => void
+}) => (
+    <FormField label={label}>
+        <div className="rounded-lg border border-stroke overflow-hidden">
+            <HtmlEditor keys={keys} content={content} setContent={setContent} />
+        </div>
+    </FormField>
+)
 
 const SettingForm = ({ data }: SettingFormProps) => {
     const queryClient = useQueryClient();
@@ -23,310 +63,137 @@ const SettingForm = ({ data }: SettingFormProps) => {
 
     const onSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-
         addUpdateSetting(input, {
             onSuccess: () => {
-                toast.success("Success update settings!");
+                toast.success("Pengaturan berhasil disimpan!");
                 queryClient.invalidateQueries({ queryKey: ["setting"] })
             },
-            onError: (err: any) => {
-                toast.error(err?.message ?? "An Error occured")
-            }
+            onError: (err: any) => { toast.error(err?.message ?? "Terjadi kesalahan"); }
         })
     }
 
+    const set = (key: keyof SettingType) => (v: string) => setInput({ ...input, [key]: v })
+
     return (
-        <form onSubmit={onSubmit} className='mt-8'>
+        <form onSubmit={onSubmit} className="admin-form">
             <TabView>
                 <TabPanel header="Home">
-                    <div className='space-y-8'>
-                        <div className=''>
-                            <FloatLabel>
-                                <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="watchIdLive"
-                                    value={input.watchIdLive}
-                                    onChange={(e) => setInput({ ...input, watchIdLive: e.target.value })} autoComplete='off' />
-                                <label htmlFor="watchIdLive" className='-mt-[0.35rem] text-xs'>Watch Id Live</label>
-                            </FloatLabel>
-                        </div>
-                        <div className=''>
-                            <FloatLabel>
-                                <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="welcomeText"
-                                    value={input.welcomeText}
-                                    onChange={(e) => setInput({ ...input, welcomeText: e.target.value })} autoComplete='off' />
-                                <label htmlFor="welcomeText" className='-mt-[0.35rem] text-xs'>Welcome Text</label>
-                            </FloatLabel>
-                        </div>
-                        <div className='!mt-2'>
-                            <div className=''>
-                                <label className='pl-2 text-xs text-slate-500'>Title</label>
-                                <HtmlEditor keys={"title"} content={input.title} setContent={(content) => setInput({ ...input, title: content })} />
+                    <div className="space-y-5">
+                        <TextField label="Watch ID Live (YouTube)" id="watchIdLive" value={input.watchIdLive} onChange={set("watchIdLive")} placeholder="Contoh: dQw4w9WgXcQ" />
+                        <TextField label="Welcome Text" id="welcomeText" value={input.welcomeText} onChange={set("welcomeText")} />
+                        <EditorField label="Title" keys="title" content={input.title} setContent={set("title")} />
+                        <TextField label="Ayat" id="ayat" value={input.ayat} onChange={set("ayat")} placeholder="Contoh: Yohanes 3:16" />
+                        <TextAreaField label="Isi Ayat" id="isiAyat" value={input.isiAyat} onChange={set("isiAyat")} />
+
+                        <div className="border-t border-stroke pt-5 mt-5">
+                            <p className="text-xs font-semibold text-body uppercase tracking-wide mb-4">Tentang Gereja</p>
+                            <div className="space-y-5">
+                                <TextField label="Judul Tentang Gereja" id="tentangGereja" value={input.tentangGereja} onChange={set("tentangGereja")} />
+                                <EditorField label="Deskripsi Tentang Gereja" keys="tentangGerejaDesc" content={input.tentangGerejaDesc} setContent={set("tentangGerejaDesc")} />
+                                <TextField label="Teks Tombol" id="tentangGerejaButton" value={input.tentangGerejaButton} onChange={set("tentangGerejaButton")} />
                             </div>
                         </div>
-                        <div className='!mt-18'>
-                            <FloatLabel>
-                                <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="ayat"
-                                    value={input.ayat}
-                                    onChange={(e) => setInput({ ...input, ayat: e.target.value })} autoComplete='off' />
-                                <label htmlFor="ayat" className='-mt-[0.35rem] text-xs'>Ayat</label>
-                            </FloatLabel>
-                        </div>
-                        <div className=''>
-                            <FloatLabel>
-                                <InputTextarea className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="isiAyat"
-                                    value={input.isiAyat}
-                                    onChange={(e) => setInput({ ...input, isiAyat: e.target.value })} autoComplete='off' />
-                                <label htmlFor="watchIdLive" className='-mt-[0.35rem] text-xs'>Isi Ayat</label>
-                            </FloatLabel>
-                        </div>
-                        <div className=''>
-                            <FloatLabel>
-                                <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="welcomeText"
-                                    value={input.tentangGereja}
-                                    onChange={(e) => setInput({ ...input, tentangGereja: e.target.value })} autoComplete='off' />
-                                <label htmlFor="welcomeText" className='-mt-[0.35rem] text-xs'>Tentang Gereja</label>
-                            </FloatLabel>
-                        </div>
-                        <div className='!mt-2'>
-                            <div className=''>
-                                <label className='pl-2 text-xs text-slate-500'>Tentang Gereja Description</label>
-                                <HtmlEditor keys={"tentangGerejaDesc"} content={input.tentangGerejaDesc} setContent={(content) => setInput({ ...input, tentangGerejaDesc: content })} />
+
+                        <div className="border-t border-stroke pt-5 mt-5">
+                            <p className="text-xs font-semibold text-body uppercase tracking-wide mb-4">Renungan Harian (Beranda)</p>
+                            <div className="space-y-5">
+                                <TextField label="Judul Renungan Harian" id="renunganHarianHome" value={input.renunganHarianHome} onChange={set("renunganHarianHome")} />
+                                <EditorField label="Deskripsi Renungan Harian" keys="renunganHarianHomeDesc" content={input.renunganHarianHomeDesc} setContent={set("renunganHarianHomeDesc")} />
                             </div>
                         </div>
-                        <div className='!mt-18'>
-                            <FloatLabel>
-                                <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="ayat"
-                                    value={input.tentangGerejaButton}
-                                    onChange={(e) => setInput({ ...input, tentangGerejaButton: e.target.value })} autoComplete='off' />
-                                <label htmlFor="ayat" className='-mt-[0.35rem] text-xs'>Tentang Gereja Button</label>
-                            </FloatLabel>
-                        </div>
-                        <div className=''>
-                            <FloatLabel>
-                                <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="welcomeText"
-                                    value={input.renunganHarianHome}
-                                    onChange={(e) => setInput({ ...input, renunganHarianHome: e.target.value })} autoComplete='off' />
-                                <label htmlFor="welcomeText" className='-mt-[0.35rem] text-xs'>Renungan Harian (HOME)</label>
-                            </FloatLabel>
-                        </div>
-                        <div className='!mt-2'>
-                            <div className=''>
-                                <label className='pl-2 text-xs text-slate-500'>Renungan Harian Desc (HOME)</label>
-                                <HtmlEditor keys={"renunganHarianHomeDesc"} content={input.renunganHarianHomeDesc} setContent={(content) => setInput({ ...input, renunganHarianHomeDesc: content })} />
+
+                        <div className="border-t border-stroke pt-5 mt-5">
+                            <p className="text-xs font-semibold text-body uppercase tracking-wide mb-4">Live Streaming</p>
+                            <div className="space-y-5">
+                                <TextField label="Label Live" id="live" value={input.live} onChange={set("live")} />
+                                <EditorField label="Deskripsi Live" keys="liveDesc" content={input.liveDesc} setContent={set("liveDesc")} />
+                                <TextField label="Kenangan" id="kenangan" value={input.kenangan} onChange={set("kenangan")} />
                             </div>
-                        </div>
-                        <div className='!mt-18'>
-                            <FloatLabel>
-                                <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="ayat"
-                                    value={input.live}
-                                    onChange={(e) => setInput({ ...input, live: e.target.value })} autoComplete='off' />
-                                <label htmlFor="ayat" className='-mt-[0.35rem] text-xs'>Live Label</label>
-                            </FloatLabel>
-                        </div>
-                        <div className='!mt-2'>
-                            <div className=''>
-                                <label className='pl-2 text-xs text-slate-500'>Live Desc</label>
-                                <HtmlEditor keys={"liveDesc"} content={input.liveDesc} setContent={(content) => setInput({ ...input, liveDesc: content })} />
-                            </div>
-                        </div>
-                        <div className='!mt-18'>
-                            <FloatLabel>
-                                <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="ayat"
-                                    value={input.kenangan}
-                                    onChange={(e) => setInput({ ...input, kenangan: e.target.value })} autoComplete='off' />
-                                <label htmlFor="ayat" className='-mt-[0.35rem] text-xs'>Kenangan</label>
-                            </FloatLabel>
                         </div>
                     </div>
                 </TabPanel>
+
                 <TabPanel header="About">
-                    <div className='space-y-8'>
-                        <div className=''>
-                            <FloatLabel>
-                                <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="aboutTitle"
-                                    value={input.aboutTitle}
-                                    onChange={(e) => setInput({ ...input, aboutTitle: e.target.value })} autoComplete='off' />
-                                <label htmlFor="aboutTitle" className='-mt-[0.35rem] text-xs'>About Title</label>
-                            </FloatLabel>
-                        </div>
-                        <div className='!mt-2'>
-                            <div className=''>
-                                <label className='pl-2 text-xs text-slate-500'>About Title Description</label>
-                                <HtmlEditor keys={"aboutDesc"} content={input.aboutDesc} setContent={(content) => setInput({ ...input, aboutDesc: content })} />
+                    <div className="space-y-5">
+                        <TextField label="About Title" id="aboutTitle" value={input.aboutTitle} onChange={set("aboutTitle")} />
+                        <EditorField label="About Description" keys="aboutDesc" content={input.aboutDesc} setContent={set("aboutDesc")} />
+
+                        <div className="border-t border-stroke pt-5">
+                            <TextField label="About Title 2" id="aboutTitle2" value={input.aboutTitle2} onChange={set("aboutTitle2")} />
+                            <div className="mt-5">
+                                <EditorField label="About Description 2" keys="aboutDesc2" content={input.aboutDesc2} setContent={set("aboutDesc2")} />
                             </div>
                         </div>
-                        <div className='!mt-18'>
-                            <FloatLabel>
-                                <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="aboutTitle2"
-                                    value={input.aboutTitle2}
-                                    onChange={(e) => setInput({ ...input, aboutTitle2: e.target.value })} autoComplete='off' />
-                                <label htmlFor="aboutTitle2" className='-mt-[0.35rem] text-xs'>About Title 2</label>
-                            </FloatLabel>
-                        </div>
-                        <div className='!mt-2'>
-                            <div className=''>
-                                <label className='pl-2 text-xs text-slate-500'>About Title Description 2</label>
-                                <HtmlEditor keys={"aboutDesc2"} content={input.aboutDesc2} setContent={(content) => setInput({ ...input, aboutDesc2: content })} />
+
+                        <div className="border-t border-stroke pt-5">
+                            <p className="text-xs font-semibold text-body uppercase tracking-wide mb-4">Banner & Misi</p>
+                            <div className="space-y-5">
+                                <TextField label="About Banner Title" id="aboutBannerTitle" value={input.aboutBannerTitle} onChange={set("aboutBannerTitle")} />
+                                <TextField label="Mission Title" id="aboutMissionTitle" value={input.aboutMissionTitle} onChange={set("aboutMissionTitle")} />
+                                <EditorField label="Mission Description" keys="aboutMissionDesc" content={input.aboutMissionDesc} setContent={set("aboutMissionDesc")} />
                             </div>
                         </div>
-                        <div className='!mt-18'>
-                            <FloatLabel>
-                                <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="aboutBannerTitle"
-                                    value={input.aboutBannerTitle}
-                                    onChange={(e) => setInput({ ...input, aboutBannerTitle: e.target.value })} autoComplete='off' />
-                                <label htmlFor="aboutBannerTitle" className='-mt-[0.35rem] text-xs'>About Banner Title</label>
-                            </FloatLabel>
-                        </div>
-                        <div className=''>
-                            <FloatLabel>
-                                <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="aboutMissionTitle"
-                                    value={input.aboutMissionTitle}
-                                    onChange={(e) => setInput({ ...input, aboutMissionTitle: e.target.value })} autoComplete='off' />
-                                <label htmlFor="aboutTitle2" className='-mt-[0.35rem] text-xs'>About Mission Title</label>
-                            </FloatLabel>
-                        </div>
-                        <div className='!mt-2'>
-                            <div className=''>
-                                <label className='pl-2 text-xs text-slate-500'>About Mission Description</label>
-                                <HtmlEditor keys={"aboutMissionDesc"} content={input.aboutMissionDesc} setContent={(content) => setInput({ ...input, aboutMissionDesc: content })} />
+
+                        <div className="border-t border-stroke pt-5">
+                            <p className="text-xs font-semibold text-body uppercase tracking-wide mb-4">Visi & Statement Iman</p>
+                            <div className="space-y-5">
+                                <TextField label="Vision Title" id="aboutVisionTitle" value={input.aboutVisionTitle} onChange={set("aboutVisionTitle")} />
+                                <EditorField label="Vision Description" keys="aboutVisionDesc" content={input.aboutVisionDesc} setContent={set("aboutVisionDesc")} />
+                                <TextField label="Statement Faith Title" id="aboutStatementFaith" value={input.aboutStatementFaith} onChange={set("aboutStatementFaith")} />
+                                <EditorField label="Statement Faith Description" keys="aboutStatementFaithDesc" content={input.aboutStatementFaithDesc} setContent={set("aboutStatementFaithDesc")} />
                             </div>
                         </div>
-                        <div className='!mt-18'>
-                            <FloatLabel>
-                                <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="aboutVisionTitle"
-                                    value={input.aboutVisionTitle}
-                                    onChange={(e) => setInput({ ...input, aboutVisionTitle: e.target.value })} autoComplete='off' />
-                                <label htmlFor="aboutVisionTitle" className='-mt-[0.35rem] text-xs'>About Vision Title</label>
-                            </FloatLabel>
-                        </div>
-                        <div className='!mt-2'>
-                            <div className=''>
-                                <label className='pl-2 text-xs text-slate-500'>About Vision Description</label>
-                                <HtmlEditor keys={"aboutVisionDesc"} content={input.aboutVisionDesc} setContent={(content) => setInput({ ...input, aboutVisionDesc: content })} />
+
+                        <div className="border-t border-stroke pt-5">
+                            <p className="text-xs font-semibold text-body uppercase tracking-wide mb-4">Leadership & FAQ</p>
+                            <div className="space-y-5">
+                                <TextField label="Leader Title" id="leaderTitle" value={input.leaderTitle} onChange={set("leaderTitle")} />
+                                <EditorField label="Leader Description" keys="leaderDesc" content={input.leaderDesc} setContent={set("leaderDesc")} />
+                                <TextField label="FAQ Title" id="faqTitle" value={input.faqTitle} onChange={set("faqTitle")} />
                             </div>
                         </div>
-                        <div className='!mt-18'>
-                            <FloatLabel>
-                                <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="aboutStatementFaith"
-                                    value={input.aboutStatementFaith}
-                                    onChange={(e) => setInput({ ...input, aboutStatementFaith: e.target.value })} autoComplete='off' />
-                                <label htmlFor="aboutStatementFaith" className='-mt-[0.35rem] text-xs'>About Statement Faith Title</label>
-                            </FloatLabel>
-                        </div>
-                        <div className='!mt-2'>
-                            <div className=''>
-                                <label className='pl-2 text-xs text-slate-500'>About Statement Faith Description</label>
-                                <HtmlEditor keys={"aboutStatementFaithDesc"} content={input.aboutStatementFaithDesc} setContent={(content) => setInput({ ...input, aboutStatementFaithDesc: content })} />
+
+                        <div className="border-t border-stroke pt-5">
+                            <p className="text-xs font-semibold text-body uppercase tracking-wide mb-4">Kontak & Lokasi</p>
+                            <div className="space-y-5">
+                                <TextField label="Hub Title" id="hubTitle" value={input.hubTitle} onChange={set("hubTitle")} />
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                    <TextField label="WhatsApp Title" id="waTitle" value={input.waTitle} onChange={set("waTitle")} />
+                                    <TextField label="WhatsApp Number" id="waNumber" value={input.waNumber} onChange={set("waNumber")} placeholder="Contoh: 628123456789" />
+                                </div>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                    <TextField label="Address Title" id="addressTitle" value={input.addressTitle} onChange={set("addressTitle")} />
+                                    <TextField label="Alamat" id="address" value={input.address} onChange={set("address")} />
+                                </div>
+                                <TextField label="Teks Tombol Maps" id="mapsButtonLabel" value={input.mapsButtonLabel} onChange={set("mapsButtonLabel")} />
                             </div>
-                        </div>
-                        <div className='!mt-18'>
-                            <FloatLabel>
-                                <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="leaderTitle"
-                                    value={input.leaderTitle}
-                                    onChange={(e) => setInput({ ...input, leaderTitle: e.target.value })} autoComplete='off' />
-                                <label htmlFor="leaderTitle" className='-mt-[0.35rem] text-xs'>Leader Title</label>
-                            </FloatLabel>
-                        </div>
-                        <div className='!mt-2'>
-                            <div className=''>
-                                <label className='pl-2 text-xs text-slate-500'>Leader Description</label>
-                                <HtmlEditor keys={"leaderDesc"} content={input.leaderDesc} setContent={(content) => setInput({ ...input, leaderDesc: content })} />
-                            </div>
-                        </div>
-                        <div className='!mt-18'>
-                            <FloatLabel>
-                                <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="faqTitle"
-                                    value={input.faqTitle}
-                                    onChange={(e) => setInput({ ...input, faqTitle: e.target.value })} autoComplete='off' />
-                                <label htmlFor="faqTitle" className='-mt-[0.35rem] text-xs'>FAQ Title</label>
-                            </FloatLabel>
-                        </div>
-                        <div className=''>
-                            <FloatLabel>
-                                <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="hubTitle"
-                                    value={input.hubTitle}
-                                    onChange={(e) => setInput({ ...input, hubTitle: e.target.value })} autoComplete='off' />
-                                <label htmlFor="hubTitle" className='-mt-[0.35rem] text-xs'>Hub Title</label>
-                            </FloatLabel>
-                        </div>
-                        <div className=''>
-                            <FloatLabel>
-                                <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="waTitle"
-                                    value={input.waTitle}
-                                    onChange={(e) => setInput({ ...input, waTitle: e.target.value })} autoComplete='off' />
-                                <label htmlFor="waTitle" className='-mt-[0.35rem] text-xs'>WA Title</label>
-                            </FloatLabel>
-                        </div>
-                        <div className=''>
-                            <FloatLabel>
-                                <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="waNumber"
-                                    value={input.waNumber}
-                                    onChange={(e) => setInput({ ...input, waNumber: e.target.value })} autoComplete='off' />
-                                <label htmlFor="waNumber" className='-mt-[0.35rem] text-xs'>WA Number</label>
-                            </FloatLabel>
-                        </div>
-                        <div className=''>
-                            <FloatLabel>
-                                <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="addressTitle"
-                                    value={input.addressTitle}
-                                    onChange={(e) => setInput({ ...input, addressTitle: e.target.value })} autoComplete='off' />
-                                <label htmlFor="addressTitle" className='-mt-[0.35rem] text-xs'>Address Title</label>
-                            </FloatLabel>
-                        </div>
-                        <div className=''>
-                            <FloatLabel>
-                                <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="address"
-                                    value={input.address}
-                                    onChange={(e) => setInput({ ...input, address: e.target.value })} autoComplete='off' />
-                                <label htmlFor="address" className='-mt-[0.35rem] text-xs'>Address</label>
-                            </FloatLabel>
-                        </div>
-                        <div className=''>
-                            <FloatLabel>
-                                <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="mapsButtonLabel"
-                                    value={input.mapsButtonLabel}
-                                    onChange={(e) => setInput({ ...input, mapsButtonLabel: e.target.value })} autoComplete='off' />
-                                <label htmlFor="mapsButtonLabel" className='-mt-[0.35rem] text-xs'>Maps Button Label</label>
-                            </FloatLabel>
                         </div>
                     </div>
                 </TabPanel>
+
                 <TabPanel header="Renungan">
-                    <div className=''>
-                        <FloatLabel>
-                            <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="renunganTitle1"
-                                value={input.renunganTitle1}
-                                onChange={(e) => setInput({ ...input, renunganTitle1: e.target.value })} autoComplete='off' />
-                            <label htmlFor="renunganTitle1" className='-mt-[0.35rem] text-xs'>Renungan Title 1</label>
-                        </FloatLabel>
-                    </div>
-                    <div className='!mt-2'>
-                        <div className=''>
-                            <label className='pl-2 text-xs text-slate-500'>Renungan Description 1</label>
-                            <HtmlEditor keys={"renunganDesc1"} content={input.renunganDesc1} setContent={(content) => setInput({ ...input, renunganDesc1: content })} />
-                        </div>
-                    </div>
-                    <div className='!mt-18'>
-                        <FloatLabel>
-                            <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="renunganTitle2"
-                                value={input.renunganTitle2}
-                                onChange={(e) => setInput({ ...input, renunganTitle2: e.target.value })} autoComplete='off' />
-                            <label htmlFor="renunganTitle2" className='-mt-[0.35rem] text-xs'>Renungan Title 2</label>
-                        </FloatLabel>
-                    </div>
-                    <div className='!mt-2 mb-8'>
-                        <div className=''>
-                            <label className='pl-2 text-xs text-slate-500'>Renungan Description 2</label>
-                            <HtmlEditor keys={"renunganDesc2"} content={input.renunganDesc2} setContent={(content) => setInput({ ...input, renunganDesc2: content })} />
+                    <div className="space-y-5">
+                        <TextField label="Renungan Title 1" id="renunganTitle1" value={input.renunganTitle1} onChange={set("renunganTitle1")} />
+                        <EditorField label="Renungan Description 1" keys="renunganDesc1" content={input.renunganDesc1} setContent={set("renunganDesc1")} />
+
+                        <div className="border-t border-stroke pt-5">
+                            <TextField label="Renungan Title 2" id="renunganTitle2" value={input.renunganTitle2} onChange={set("renunganTitle2")} />
+                            <div className="mt-5">
+                                <EditorField label="Renungan Description 2" keys="renunganDesc2" content={input.renunganDesc2} setContent={set("renunganDesc2")} />
+                            </div>
                         </div>
                     </div>
                 </TabPanel>
             </TabView>
 
-            <div className='mt-4'>
-                <Button type='submit' disabled={isLoading || !input.watchIdLive}
+            <div className="mt-6 pt-4 border-t border-stroke">
+                <Button
+                    type="submit"
+                    disabled={isLoading || !input.watchIdLive}
                     loading={isLoading}
-                    className='w-full border border-blue-400 text-blue-400 py-2 rounded-xl disabled:border-slate-300 disabled:text-slate-300 disabled:hover:bg-transparent disabled:hover:text-slate-300 hover:text-white hover:bg-blue-400'>
-                    Save
+                    size="lg"
+                >
+                    Simpan Pengaturan
                 </Button>
             </div>
         </form>

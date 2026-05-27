@@ -3,14 +3,13 @@
 import React, { useState } from 'react'
 import { useQueryClient } from 'react-query';
 import { useModalAction } from '../utils/ModalProvider';
-import { FloatLabel } from 'primereact/floatlabel';
-import { InputText } from 'primereact/inputtext';
 import Button from '../UI/Button';
 import { toast } from 'react-toastify';
 import { InventoryCategoryInput } from '@/types/inventoryCategory';
 import { useAddInventoryCategoryMutation, useUpdateInventoryCategoryMutation } from '@/service/inventorycategory-query';
 import { DEFAULTINVENTORYCATEGORY } from '@/constants/inventoryCategoryConstant';
 import AutocompleteParentInventoryCategory from './AutocompleteParentInventoryCategory';
+import FormField from '../UI/FormField';
 
 type InventoryCategoryFormProps = {
     id?: string,
@@ -23,70 +22,78 @@ const InventoryCategoryForm = ({ input, id }: InventoryCategoryFormProps) => {
     const [inventoryCategoryData, setInventoryCategoryData] = useState<InventoryCategoryInput>(input);
     const { mutate: addinventorycategory, isLoading: loadingAdd } = useAddInventoryCategoryMutation();
     const { mutate: updateInventoryCategory, isLoading: loadingUpdate } = useUpdateInventoryCategoryMutation(id ?? "");
+
+    const isDisabled = !inventoryCategoryData.name || !inventoryCategoryData.code;
+
     const onSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-
-        if (!inventoryCategoryData.name || !inventoryCategoryData.code) {
-            toast.error("Please Fill All Fields");
+        if (isDisabled) {
+            toast.error("Mohon isi semua field yang wajib");
             return;
         }
-
         if (id) {
             updateInventoryCategory(inventoryCategoryData, {
-                onSuccess: (data) => {
-                    toast.success("Success update inventory category!");
+                onSuccess: () => {
+                    toast.success("Kategori berhasil diperbarui!");
                     queryClient.invalidateQueries({ queryKey: ["allInventoryCategory"] })
                     closeModal();
                 },
-                onError: (err: any) => {
-                    toast.error(err?.message ?? "An Error occured")
-                }
+                onError: (err: any) => { toast.error(err?.message ?? "Terjadi kesalahan"); }
             })
-        }
-        else {
+        } else {
             addinventorycategory(inventoryCategoryData, {
-                onSuccess: (data) => {
-                    toast.success("Success create inventory category!");
+                onSuccess: () => {
+                    toast.success("Kategori berhasil ditambahkan!");
                     setInventoryCategoryData(DEFAULTINVENTORYCATEGORY);
                 },
-                onError: (err: any) => {
-                    toast.error(err?.message ?? "An Error occured")
-                }
+                onError: (err: any) => { toast.error(err?.message ?? "Terjadi kesalahan"); }
             })
         }
     }
+
     return (
-        <div>
-            {!id && (
-                <div className='h-3 font-semibold mb-10'>Inventory Category</div>
-            )}
-            <form className='mt-12 space-y-8 text-xs' onSubmit={onSubmit}>
-                <div className=''>
-                    <FloatLabel>
-                        <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="name" autoComplete='off'
-                            value={inventoryCategoryData?.name} onChange={(e) => setInventoryCategoryData({ ...inventoryCategoryData, name: e.target.value })} />
-                        <label htmlFor="name" className='-mt-[0.35rem]'>Category</label>
-                    </FloatLabel>
-                </div>
-                <div className=''>
-                    <FloatLabel>
-                        <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="code" autoComplete='off'
-                            value={inventoryCategoryData?.code} onChange={(e) => setInventoryCategoryData({ ...inventoryCategoryData, code: e.target.value })} />
-                        <label htmlFor="code" className='-mt-[0.35rem]'>Code</label>
-                    </FloatLabel>
-                </div>
-                <div className=''>
-                    <AutocompleteParentInventoryCategory input={inventoryCategoryData} setInventoryCategoryData={setInventoryCategoryData} />
-                </div>
-                <div>
-                    <Button type='submit' disabled={!inventoryCategoryData.name || !inventoryCategoryData.code || loadingUpdate || loadingAdd}
-                        loading={loadingAdd || loadingUpdate}
-                        className='w-full border border-blue-400 text-blue-400 py-2 rounded-xl disabled:border-slate-300 disabled:text-slate-300 disabled:hover:bg-transparent disabled:hover:text-slate-300 hover:text-white hover:bg-blue-400'>
-                        Submit
-                    </Button>
-                </div>
-            </form>
-        </div>
+        <form className="admin-form space-y-5" onSubmit={onSubmit}>
+            <FormField label="Nama Kategori" htmlFor="name" required>
+                <input
+                    id="name"
+                    className="admin-input"
+                    value={inventoryCategoryData?.name}
+                    onChange={(e) => setInventoryCategoryData({ ...inventoryCategoryData, name: e.target.value })}
+                    autoComplete="off"
+                    placeholder="Masukkan nama kategori"
+                />
+            </FormField>
+
+            <FormField label="Kode Kategori" htmlFor="code" required>
+                <input
+                    id="code"
+                    className="admin-input"
+                    value={inventoryCategoryData?.code}
+                    onChange={(e) => setInventoryCategoryData({ ...inventoryCategoryData, code: e.target.value })}
+                    autoComplete="off"
+                    placeholder="Contoh: FURN, ELEC"
+                />
+            </FormField>
+
+            <FormField label="Kategori Parent" hint="Opsional — pilih jika ini adalah sub-kategori">
+                <AutocompleteParentInventoryCategory
+                    input={inventoryCategoryData}
+                    setInventoryCategoryData={setInventoryCategoryData}
+                />
+            </FormField>
+
+            <div className="pt-2">
+                <Button
+                    type="submit"
+                    disabled={isDisabled}
+                    loading={loadingAdd || loadingUpdate}
+                    fullWidth
+                    size="lg"
+                >
+                    {id ? "Simpan Perubahan" : "Tambah Kategori"}
+                </Button>
+            </div>
+        </form>
     )
 }
 

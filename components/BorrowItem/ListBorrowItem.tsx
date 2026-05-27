@@ -11,6 +11,9 @@ import { DataTable } from "primereact/datatable";
 import { Paginator } from "primereact/paginator";
 import dayjs from "dayjs";
 import BorrowItemButtons from "./BorrowItemButtons";
+import AdminCard from "../UI/AdminCard";
+import Link from "next/link";
+import { FolderPlus } from "lucide-react";
 
 const ListBorrowItem = () => {
   const [page, setPage] = useState(1);
@@ -26,117 +29,129 @@ const ListBorrowItem = () => {
   );
 
   const onSearch = (input: string) => {
+    setPage(1);
     setSearch(input);
   };
 
-  const statusComponent = (data: BorrowItemType) => {
+  const statusComponent = (rowData: BorrowItemType) => {
+    const label = BorrowStatus.find((e) => e.value == rowData.status)?.label ?? "-";
+    const colorMap: Record<number, string> = {
+      1: "bg-meta-6/10 text-meta-6",   // pending
+      2: "bg-primary/10 text-primary",  // dipinjam
+      3: "bg-meta-3/10 text-meta-3",    // dikembalikan
+    };
     return (
-      <span>
-        {BorrowStatus.find((e) => e.value == data.status)?.label ?? "-"}
+      <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${colorMap[rowData.status] ?? "bg-gray-2 text-body"}`}>
+        {label}
       </span>
     );
   };
 
-  const buttonComponent = (data: BorrowItemType) => {
-    return <BorrowItemButtons data={data} />;
+  const buttonComponent = (rowData: BorrowItemType) => {
+    return <BorrowItemButtons data={rowData} />;
   };
 
-  const memberComponent = (data: BorrowItemType) => {
-    return <span>{data.memberLookup.name}</span>;
+  const memberComponent = (rowData: BorrowItemType) => {
+    return <span>{rowData.memberLookup.name}</span>;
   };
 
-  const borrowDateComponent = (data: BorrowItemType) => {
-    return <span>{dayjs(data.borrowDate).format("YYYY-MM-DD")}</span>;
+  const borrowDateComponent = (rowData: BorrowItemType) => {
+    return <span>{dayjs(rowData.borrowDate).format("DD/MM/YYYY")}</span>;
   };
 
-  const actualBorrowDateComponent = (data: BorrowItemType) => {
-    return data.actualReturnDate ? (
-      <span>{dayjs(data.actualReturnDate).format("YYYY-MM-DD")}</span>
+  const actualBorrowDateComponent = (rowData: BorrowItemType) => {
+    return rowData.actualReturnDate ? (
+      <span>{dayjs(rowData.actualReturnDate).format("DD/MM/YYYY")}</span>
     ) : (
-      "-"
+      <span className="text-body">-</span>
     );
   };
 
-  const dueDateComponent = (data: BorrowItemType) => {
+  const dueDateComponent = (rowData: BorrowItemType) => {
+    const isOverdue =
+      new Date().setHours(0, 0, 0, 0) >
+      new Date(rowData.returnDate).setHours(0, 0, 0, 0) &&
+      rowData.status == 2;
     return (
-      <span
-        className={`${
-          new Date().setHours(0, 0, 0, 0) >
-          new Date(data.returnDate).setHours(0, 0, 0, 0) && data.status == 2 
-            ? "text-red"
-            : ""
-        }`}
-      >
-        {dayjs(data.returnDate).format("YYYY-MM-DD")}
-        {new Date().setHours(0, 0, 0, 0) >
-          new Date(data.returnDate).setHours(0, 0, 0, 0) &&
-          data.status == 2 && (
-            <span className={"ml-2 rounded-xl text-xs p-2 bg-red text-white"}>
-              Overdue
-            </span>
-          )}
+      <span className={isOverdue ? "text-danger font-medium" : ""}>
+        {dayjs(rowData.returnDate).format("DD/MM/YYYY")}
+        {isOverdue && (
+          <span className="ml-2 px-1.5 py-0.5 rounded text-[10px] bg-danger text-white font-semibold">
+            Overdue
+          </span>
+        )}
       </span>
     );
   };
 
-  const itemsComponent = (data: BorrowItemType) => {
+  const itemsComponent = (rowData: BorrowItemType) => {
     return (
-      <>
-        {data.items.map((item) => {
-          return (
-            <div>
-              {item.itemLookup.name}{" "}
-              <span className="text-slate-400">({item.quantity})</span>
-            </div>
-          );
-        })}
-      </>
+      <div className="flex flex-col gap-0.5">
+        {rowData.items.map((item, i) => (
+          <div key={i} className="text-xs">
+            {item.itemLookup.name}{" "}
+            <span className="text-body">({item.quantity})</span>
+          </div>
+        ))}
+      </div>
     );
   };
+
+  const total = data?.pagination?.total ?? 0;
 
   return (
-    <div>
-      <h1 className="mb-4 font-semibold text-xl">Borrow Items</h1>
+    <AdminCard
+      title="Peminjaman Barang"
+      description={total > 0 ? `${total} catatan peminjaman` : undefined}
+      action={
+        <Link
+          href="/admin/addborrowitem"
+          className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary/90 transition-colors"
+        >
+          <FolderPlus size={15} />
+          Tambah Peminjaman
+        </Link>
+      }
+    >
       <div className="mb-4">
-        <SearchBox onClickSearch={onSearch} />
+        <SearchBox onClickSearch={onSearch} placeholder="Cari nomor peminjaman..." />
       </div>
-      {(isFetching || isLoading) && (
-        <div className="w-full flex justify-center">
+
+      {(isFetching || isLoading) ? (
+        <div className="w-full flex justify-center py-12">
           <ProgressSpinner className="w-8 h-8" />
         </div>
-      )}
-      {!(isFetching || isLoading) && (
+      ) : (
         <div>
           <DataTable
             value={data?.borrowItem}
-            className="text-xs"
-            emptyMessage="No Data"
+            className="text-sm"
+            emptyMessage="Tidak ada data peminjaman"
+            stripedRows
           >
-            <Column field="borrowNumber" header="Borrow Number"></Column>
-            <Column body={memberComponent} header="Member"></Column>
-            <Column body={itemsComponent} header="Items"></Column>
-            <Column body={borrowDateComponent} header="Borrow Date"></Column>
-            <Column body={dueDateComponent} header="Due Date"></Column>
-            <Column
-              body={actualBorrowDateComponent}
-              header="Actual Return Date"
-            ></Column>
-            <Column body={statusComponent} header="Status"></Column>
-            <Column field="purpose" header="Purpose"></Column>
-            <Column body={buttonComponent} header="Action"></Column>
+            <Column field="borrowNumber" header="No. Pinjam" style={{ width: '130px' }} />
+            <Column body={memberComponent} header="Peminjam" />
+            <Column body={itemsComponent} header="Barang" />
+            <Column body={borrowDateComponent} header="Tgl Pinjam" style={{ width: '110px' }} />
+            <Column body={dueDateComponent} header="Tgl Kembali" style={{ width: '130px' }} />
+            <Column body={actualBorrowDateComponent} header="Aktual Kembali" style={{ width: '120px' }} />
+            <Column body={statusComponent} header="Status" style={{ width: '110px' }} />
+            <Column field="purpose" header="Keperluan" />
+            <Column body={buttonComponent} header="Aksi" style={{ width: '100px' }} />
           </DataTable>
-          <Paginator
-            first={page - 1}
-            style={{ scale: 0.8 }}
-            rows={numberPerPage}
-            totalRecords={data?.pagination.total}
-            onPageChange={(event) => {
-              setPage(event.page + 1);
-            }}
-          />
+          <div className="mt-4 flex items-center justify-between text-xs text-body">
+            <span>Menampilkan {data?.borrowItem?.length ?? 0} dari {total} data</span>
+            <Paginator
+              first={(page - 1) * numberPerPage}
+              rows={numberPerPage}
+              totalRecords={total}
+              onPageChange={(event) => setPage(event.page + 1)}
+              className="!p-0"
+            />
+          </div>
         </div>
       )}
-    </div>
+    </AdminCard>
   );
 };
 

@@ -108,56 +108,52 @@ const AutocompleteItem = ({
   return (
     <div>
       <div className="w-full">
-        <span className="p-float-label w-full">
-          <AutoComplete
-            inputId="ac"
-            field="name"
-            className="w-full"
-            inputClassName="rounded-xl w-full text-xs border border-slate-300 px-4 py-3"
-            value={selectedValue}
-            suggestions={filteredCategory}
-            completeMethod={search}
-            onChange={(e) => OnChangeAutocomplete(e)}
-          />
-          <label htmlFor="ac">Item</label>
-        </span>
+        <AutoComplete
+          inputId="ac-item"
+          field="name"
+          className="w-full"
+          inputClassName="admin-input"
+          value={selectedValue}
+          suggestions={filteredCategory}
+          completeMethod={search}
+          onChange={(e) => OnChangeAutocomplete(e)}
+          placeholder="Ketik nama barang..."
+        />
       </div>
-      <div className="w-full mt-4 px-4">
-        {input.items.length > 0 && (
-          <div className="flex w-full font-semibold">
-            <div className="grow p-2">Item</div>
-            <div className="w-24 text-right p-2">Quantity</div>
-            <div className="w-8 p-2"></div>
+
+      {input.items.length > 0 && (
+        <div className="mt-3 rounded-lg border border-stroke overflow-hidden">
+          <div className="flex w-full bg-gray-2 text-xs font-semibold text-body px-3 py-2">
+            <div className="grow">Barang</div>
+            <div className="w-28 text-center">Jumlah</div>
+            <div className="w-8"></div>
           </div>
-        )}
-        {input.items.map((item) => {
-          return (
+          {input.items.map((item) => (
             <div
-              className="flex w-full border-t border-gray-400"
+              className="flex w-full items-center border-t border-stroke px-3 py-2 text-sm"
               key={item.itemId}
             >
-              <div className="grow p-2">{item.itemLookup.name}</div>
-              <div className="w-32 text-right p-2 flex justify-end">
+              <div className="grow">{item.itemLookup.name}</div>
+              <div className="w-28 flex items-center justify-center gap-2">
                 <CircleMinus
-                  className="w-4 -top-1 relative cursor-pointer"
+                  size={16}
+                  className="cursor-pointer text-body hover:text-black"
                   onClick={() => onMinusIconClick(item)}
                 />
-                <span className="mx-2">{item.quantity}</span>
+                <span className="w-6 text-center font-medium">{item.quantity}</span>
                 <CirclePlus
-                  className="w-4 -top-1 relative cursor-pointer"
+                  size={16}
+                  className="cursor-pointer text-body hover:text-black"
                   onClick={() => onPlusIconClick(item)}
                 />
               </div>
-              <div
-                className="w-8 p-2 flex relative -top-1 cursor-pointer"
-                onClick={() => onDeleteItem(item)}
-              >
-                <X className="w-4 text-red" />
+              <div className="w-8 flex justify-center cursor-pointer" onClick={() => onDeleteItem(item)}>
+                <X size={14} className="text-danger" />
               </div>
             </div>
-          );
-        })}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

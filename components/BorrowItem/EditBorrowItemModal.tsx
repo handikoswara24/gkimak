@@ -1,6 +1,8 @@
+'use client'
 import { BorrowItemInput } from "@/types/borrowItem";
 import React from "react";
 import BorrowItemForm from "./BorrowItemForm";
+import EditModalShell from "../UI/EditModalShell";
 
 type EditBorrowItemModalProps = {
   id: string;
@@ -9,12 +11,9 @@ type EditBorrowItemModalProps = {
 
 const EditBorrowItemModal = ({ id, borrowItem }: EditBorrowItemModalProps) => {
   return (
-    <div className="max-w-xl mx-auto">
-      <h1 className="text-xl font-semibold">Edit Borrow Item</h1>
-      <div>
-        <BorrowItemForm id={id} input={borrowItem} />
-      </div>
-    </div>
+    <EditModalShell title="Edit Peminjaman" maxWidth="lg">
+      <BorrowItemForm id={id} input={borrowItem} />
+    </EditModalShell>
   );
 };
 

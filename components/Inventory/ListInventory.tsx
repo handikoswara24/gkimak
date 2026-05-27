@@ -8,9 +8,11 @@ import SearchBox from "../UI/SearchBox";
 import { useGetAllInventory } from "@/service/inventory-query";
 import InventoryButtons from "./InventoryButtons";
 import { InventoryType } from "@/types/inventory";
-import { Locations, Status } from "@/constants/inventoryConstant";
-import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
+import { Status } from "@/constants/inventoryConstant";
 import AutocompleteLocationList from "./AutocompleteLocationList";
+import AdminCard from "../UI/AdminCard";
+import Link from "next/link";
+import { PackagePlus } from "lucide-react";
 
 const ListInventory = () => {
   const [page, setPage] = useState(1);
@@ -24,74 +26,92 @@ const ListInventory = () => {
     location
   );
 
-  const ButtonInventory = (data: InventoryType) => {
-    return <InventoryButtons data={data} />;
+  const ButtonInventory = (rowData: InventoryType) => {
+    return <InventoryButtons data={rowData} />;
   };
 
-  const Category = (data: InventoryType) => {
-    return <span>{data.categoryLookup ? data.categoryLookup.name : "-"}</span>;
+  const Category = (rowData: InventoryType) => {
+    return <span>{rowData.categoryLookup ? rowData.categoryLookup.name : "-"}</span>;
   };
 
-  const statusComponent = (data: InventoryType) => {
+  const statusComponent = (rowData: InventoryType) => {
+    const statusLabel = Status.find((e) => e.value == rowData.status)?.label ?? "-";
+    const isAvailable = Status.find((e) => e.value == rowData.status)?.label === "Available";
     return (
-      <span>{Status.find((e) => e.value == data.status)?.label ?? "-"}</span>
+      <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
+        isAvailable ? "bg-meta-3/10 text-meta-3" : "bg-meta-7/10 text-meta-7"
+      }`}>
+        {statusLabel}
+      </span>
     );
   };
 
-  const Location = (data: InventoryType) => {
-    return <span>{data.locationLookup?.name ?? "-"}</span>;
+  const LocationCell = (rowData: InventoryType) => {
+    return <span>{rowData.locationLookup?.name ?? "-"}</span>;
   };
 
   const onSearch = (input: string) => {
+    setPage(1);
     setSearch(input);
   };
+
+  const total = data?.pagination?.total ?? 0;
+
   return (
-    <div>
-      <h1 className="mb-4 font-semibold text-xl">Inventory</h1>
-      <div className="flex gap-4 mb-4 flex-col md:flex-row">
-        <SearchBox onClickSearch={onSearch} />
-        <div className="flex items-center space-x-2">
-          <div className="text-xs">Location :</div>
-          <div>
-            <AutocompleteLocationList
-              input={location}
-              setFilter={setLocation}
+    <AdminCard
+      title="Inventaris"
+      description={total > 0 ? `${total} item terdaftar` : undefined}
+      action={
+        <Link
+          href="/admin/addinventory"
+          className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary/90 transition-colors"
+        >
+          <PackagePlus size={15} />
+          Tambah Inventaris
+        </Link>
+      }
+    >
+      <div className="flex flex-wrap gap-3 mb-4">
+        <SearchBox onClickSearch={onSearch} placeholder="Cari nama atau kode..." />
+        <div className="flex items-center gap-2">
+          <span className="text-sm text-body">Lokasi:</span>
+          <AutocompleteLocationList input={location} setFilter={setLocation} />
+        </div>
+      </div>
+
+      {(isFetching || isLoading) ? (
+        <div className="w-full flex justify-center py-12">
+          <ProgressSpinner className="w-8 h-8" />
+        </div>
+      ) : (
+        <div>
+          <DataTable
+            value={data?.inventory}
+            className="text-sm"
+            emptyMessage="Tidak ada data inventaris"
+            stripedRows
+          >
+            <Column field="name" header="Nama" />
+            <Column field="code" header="Kode" style={{ width: '120px' }} />
+            <Column field="qty" header="Qty" style={{ width: '70px' }} />
+            <Column body={Category} header="Kategori" style={{ width: '140px' }} />
+            <Column body={statusComponent} header="Status" style={{ width: '120px' }} />
+            <Column body={LocationCell} header="Lokasi" style={{ width: '130px' }} />
+            <Column header="Aksi" body={ButtonInventory} style={{ width: '100px' }} />
+          </DataTable>
+          <div className="mt-4 flex items-center justify-between text-xs text-body">
+            <span>Menampilkan {data?.inventory?.length ?? 0} dari {total} data</span>
+            <Paginator
+              first={(page - 1) * numberPerPage}
+              rows={numberPerPage}
+              totalRecords={total}
+              onPageChange={(event) => setPage(event.page + 1)}
+              className="!p-0"
             />
           </div>
         </div>
-      </div>
-      {(isFetching || isLoading) && (
-        <div className="w-full flex justify-center">
-          <ProgressSpinner className="w-8 h-8" />
-        </div>
       )}
-      {!(isFetching || isLoading) && (
-        <div>
-          <DataTable value={data?.inventory} className="text-xs">
-            <Column field="name" header="Name"></Column>
-            <Column field="code" header="Code"></Column>
-            <Column field="qty" header="Quantity"></Column>
-            <Column body={Category} header="Category"></Column>
-            <Column body={statusComponent} header="Status"></Column>
-            <Column body={Location} header="Location"></Column>
-            <Column
-              header="Action"
-              body={ButtonInventory}
-              className="w-24"
-            ></Column>
-          </DataTable>
-          <Paginator
-            first={page - 1}
-            style={{ scale: 0.8 }}
-            rows={numberPerPage}
-            totalRecords={data?.pagination.total}
-            onPageChange={(event) => {
-              setPage(event.page + 1);
-            }}
-          />
-        </div>
-      )}
-    </div>
+    </AdminCard>
   );
 };
 

@@ -1,6 +1,8 @@
+'use client'
 import { InventoryInput } from '@/types/inventory'
 import React from 'react'
 import InventoryForm from './InventoryForm'
+import EditModalShell from '../UI/EditModalShell'
 
 type EditInventoryModalProps = {
     id: string,
@@ -9,12 +11,9 @@ type EditInventoryModalProps = {
 
 const EditInventoryModal = ({ id, inventory }: EditInventoryModalProps) => {
     return (
-        <div className='max-w-xl mx-auto'>
-            <h1 className='text-xl font-semibold'>Edit Inventory</h1>
-            <div>
-                <InventoryForm input={inventory} id={id} />
-            </div>
-        </div>
+        <EditModalShell title="Edit Inventaris" maxWidth="lg">
+            <InventoryForm input={inventory} id={id} />
+        </EditModalShell>
     )
 }
 

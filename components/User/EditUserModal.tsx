@@ -1,6 +1,8 @@
+'use client'
 import React from 'react'
 import UserForm from './UserForm'
 import { UserInput } from '@/types/user'
+import EditModalShell from '../UI/EditModalShell'
 
 type EditUserModalProps = {
     id: string,
@@ -9,12 +11,9 @@ type EditUserModalProps = {
 
 const EditUserModal = ({ id, user }: EditUserModalProps) => {
     return (
-        <div className='max-w-xl mx-auto'>
-            <h1 className='text-xl font-semibold'>Edit User</h1>
-            <div>
-                <UserForm user={user} id={id} />
-            </div>
-        </div>
+        <EditModalShell title="Edit User">
+            <UserForm user={user} id={id} />
+        </EditModalShell>
     )
 }
 

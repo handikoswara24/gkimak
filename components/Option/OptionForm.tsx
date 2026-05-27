@@ -7,10 +7,8 @@ import { useModalAction } from "../utils/ModalProvider";
 import { useAddOption, useUpdateOption } from "@/service/option-query";
 import { toast } from "react-toastify";
 import { DefaultOptionInput, OptionTypeList } from "@/constants/optionConstant";
-import { FloatLabel } from "primereact/floatlabel";
-import { InputText } from "primereact/inputtext";
 import Button from "../UI/Button";
-import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
+import FormField from "../UI/FormField";
 
 type OptionFormProps = {
   id?: string;
@@ -22,111 +20,83 @@ const OptionForm = ({ id, option }: OptionFormProps) => {
   const { closeModal } = useModalAction();
   const [optionData, setOptionData] = useState(option);
   const { mutate: addOption, isLoading } = useAddOption();
-  const { mutate: updateOption, isLoading: isLoadingUpdate } = useUpdateOption(
-    id ?? ""
-  );
+  const { mutate: updateOption, isLoading: isLoadingUpdate } = useUpdateOption(id ?? "");
+
+  const isDisabled = !optionData.name || !optionData.type;
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (
-      (!id && !optionData.name) ||
-      (!!id && !optionData.type) ||
-      !optionData.name ||
-      !optionData.type
-    ) {
-      toast.error("Please Fill All Fields");
+    if (isDisabled) {
+      toast.error("Mohon isi semua field yang wajib");
       return;
     }
-
     if (id) {
       updateOption(optionData, {
-        onSuccess: (data) => {
-          toast.success("Success update option!");
+        onSuccess: () => {
+          toast.success("Option berhasil diperbarui!");
           queryClient.invalidateQueries({ queryKey: ["allOptions"] });
           closeModal();
         },
-        onError: (err: any) => {
-          toast.error(err?.message ?? "An Error occured");
-        },
+        onError: (err: any) => { toast.error(err?.message ?? "Terjadi kesalahan"); },
       });
     } else {
       addOption(optionData, {
-        onSuccess: (data) => {
-          toast.success("Success create option!");
+        onSuccess: () => {
+          toast.success("Option berhasil ditambahkan!");
           setOptionData(DefaultOptionInput);
         },
-        onError: (err: any) => {
-          toast.error(err?.message ?? "An Error occured");
-        },
+        onError: (err: any) => { toast.error(err?.message ?? "Terjadi kesalahan"); },
       });
     }
   };
+
   return (
-    <form className="mt-12 space-y-8 text-xs" onSubmit={onSubmit}>
-      <div className="">
-        <FloatLabel>
-          <InputText
-            className="rounded-xl w-full text-xs border border-slate-300 px-4 py-3"
-            id="name"
-            value={optionData?.name}
-            onChange={(e) =>
-              setOptionData({ ...optionData, name: e.target.value })
-            }
-            autoComplete="off"
-          />
-          <label htmlFor="username" className="-mt-[0.35rem]">
-            Name
-          </label>
-        </FloatLabel>
-      </div>
-      <div>
-        <FloatLabel>
-          <Dropdown
-            inputId="type"
-            value={Number(optionData?.type ?? 1)}
-            onChange={(e: DropdownChangeEvent) =>
-              setOptionData({ ...optionData, type: e.value.toString() })
-            }
-            options={OptionTypeList}
-            optionLabel="label"
-            panelClassName="text-xs"
-            className="rounded-xl w-full text-xs border border-slate-300 px-2 py-1"
-          />
-          <label htmlFor="type">Type</label>
-        </FloatLabel>
-      </div>
-      <div className="">
-        <FloatLabel>
-          <InputText
-            className="rounded-xl w-full text-xs border border-slate-300 px-4 py-3"
-            id="description"
-            value={optionData?.description}
-            onChange={(e) =>
-              setOptionData({ ...optionData, description: e.target.value })
-            }
-            autoComplete="off"
-          />
-          <label htmlFor="description" className="-mt-[0.35rem]">
-            Description
-          </label>
-        </FloatLabel>
-      </div>
-      <div>
+    <form className="admin-form space-y-5" onSubmit={onSubmit}>
+      <FormField label="Nama Option" htmlFor="name" required>
+        <input
+          id="name"
+          className="admin-input"
+          value={optionData?.name}
+          onChange={(e) => setOptionData({ ...optionData, name: e.target.value })}
+          autoComplete="off"
+          placeholder="Masukkan nama option"
+        />
+      </FormField>
+
+      <FormField label="Tipe" htmlFor="type" required>
+        <select
+          id="type"
+          className="admin-input"
+          value={optionData?.type ?? ""}
+          onChange={(e) => setOptionData({ ...optionData, type: e.target.value })}
+        >
+          <option value="">Pilih Tipe</option>
+          {OptionTypeList.map((t) => (
+            <option key={t.value} value={t.value}>{t.label}</option>
+          ))}
+        </select>
+      </FormField>
+
+      <FormField label="Deskripsi" htmlFor="description">
+        <input
+          id="description"
+          className="admin-input"
+          value={optionData?.description}
+          onChange={(e) => setOptionData({ ...optionData, description: e.target.value })}
+          autoComplete="off"
+          placeholder="Masukkan deskripsi (opsional)"
+        />
+      </FormField>
+
+      <div className="pt-2">
         <Button
           type="submit"
-          disabled={
-            (!id && !optionData.name) ||
-            (!!id && !optionData.type) ||
-            !optionData.name ||
-            !optionData.type ||
-            isLoading ||
-            isLoadingUpdate
-          }
+          disabled={isDisabled}
           loading={isLoading || isLoadingUpdate}
-          className="w-full border border-blue-400 text-blue-400 py-2 rounded-xl disabled:border-slate-300 disabled:text-slate-300 disabled:hover:bg-transparent disabled:hover:text-slate-300 hover:text-white hover:bg-blue-400"
+          fullWidth
+          size="lg"
         >
-          Submit
+          {id ? "Simpan Perubahan" : "Tambah Option"}
         </Button>
       </div>
     </form>

@@ -1,6 +1,8 @@
+'use client'
 import { JemaatInput } from '@/types/jemaat'
 import React from 'react'
 import JemaatForm from './JemaatForm'
+import EditModalShell from '../UI/EditModalShell'
 
 type EditJemaatModalProps = {
     id: string,
@@ -9,12 +11,9 @@ type EditJemaatModalProps = {
 
 const EditJemaatModal = ({ id, jemaat }: EditJemaatModalProps) => {
     return (
-        <div className='max-w-xl mx-auto'>
-            <h1 className='text-xl font-semibold'>Edit Jemaat</h1>
-            <div>
-                <JemaatForm input={jemaat} id={id} />
-            </div>
-        </div>
+        <EditModalShell title="Edit Jemaat">
+            <JemaatForm input={jemaat} id={id} />
+        </EditModalShell>
     )
 }
 

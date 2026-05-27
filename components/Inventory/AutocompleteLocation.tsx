@@ -58,19 +58,17 @@ const AutocompleteLocation = ({
     setSelectedValue(e.value);
   };
   return (
-    <span className="p-float-label w-full">
-      <AutoComplete
-        inputId="ac-loc"
-        field="name"
-        className="w-full"
-        inputClassName="rounded-xl w-full text-xs border border-slate-300 px-4 py-3"
-        value={selectedValue}
-        suggestions={filteredLocation}
-        completeMethod={search}
-        onChange={(e) => OnChangeAutocomplete(e)}
-      />
-      <label htmlFor="ac-loc">Location</label>
-    </span>
+    <AutoComplete
+      inputId="ac-loc"
+      field="name"
+      className="w-full"
+      inputClassName="admin-input"
+      value={selectedValue}
+      suggestions={filteredLocation}
+      completeMethod={search}
+      onChange={(e) => OnChangeAutocomplete(e)}
+      placeholder="Ketik untuk mencari lokasi..."
+    />
   );
 };
 

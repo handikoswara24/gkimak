@@ -1,3 +1,5 @@
+'use client'
+
 import { UserInput } from '@/types/user'
 import React, { useState } from 'react'
 import { useQueryClient } from 'react-query'
@@ -5,14 +7,19 @@ import { useModalAction } from '../utils/ModalProvider'
 import { useAddUserMutation, useUpdateUserMutation } from '@/service/user-query'
 import { toast } from 'react-toastify'
 import { DefaultUserInput } from '@/constants/userConstant'
-import { FloatLabel } from 'primereact/floatlabel'
-import { InputText } from 'primereact/inputtext'
 import Button from '../UI/Button'
+import FormField from '../UI/FormField'
 
 type UserFormProps = {
   id?: string,
   user: UserInput
 }
+
+const ROLE_OPTIONS = [
+  { value: 'admin', label: 'Admin' },
+  { value: 'user', label: 'User' },
+  { value: 'wo', label: 'WO' },
+]
 
 const UserForm = ({ id, user }: UserFormProps) => {
   const queryClient = useQueryClient();
@@ -20,73 +27,99 @@ const UserForm = ({ id, user }: UserFormProps) => {
   const [userData, setUserData] = useState(user);
   const { mutate: addUser, isLoading } = useAddUserMutation();
   const { mutate: updateUser, isLoading: isLoadingUpdate } = useUpdateUserMutation(id ?? "");
+
+  const isDisabled = (!id && !userData.password) || !userData.username || !userData.name;
+
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    if ((!id && !userData.password) || (!!id && !userData.role) || !userData.username || !userData.name) {
-      toast.error("Please Fill All Fields");
+    if (isDisabled) {
+      toast.error("Mohon isi semua field yang wajib");
       return;
     }
-
     if (id) {
       updateUser(userData, {
-        onSuccess: (data) => {
-          toast.success("Success update user!");
+        onSuccess: () => {
+          toast.success("User berhasil diperbarui!");
           queryClient.invalidateQueries({ queryKey: ["alluser"] })
           closeModal();
         },
-        onError: (err: any) => {
-          toast.error(err?.message ?? "An Error occured")
-        }
+        onError: (err: any) => { toast.error(err?.message ?? "Terjadi kesalahan"); }
       })
-    }
-    else {
+    } else {
       addUser(userData, {
-        onSuccess: (data) => {
-          toast.success("Success create user!");
+        onSuccess: () => {
+          toast.success("User berhasil ditambahkan!");
           setUserData(DefaultUserInput);
         },
-        onError: (err: any) => {
-          toast.error(err?.message ?? "An Error occured")
-        }
+        onError: (err: any) => { toast.error(err?.message ?? "Terjadi kesalahan"); }
       })
     }
   }
+
   return (
-    <form className='mt-12 space-y-8 text-xs' onSubmit={onSubmit}>
-      <div className=''>
-        <FloatLabel>
-          <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="username"
-            value={userData?.username} onChange={(e) => setUserData({ ...userData, username: e.target.value })} autoComplete='off' />
-          <label htmlFor="username" className='-mt-[0.35rem]'>Username</label>
-        </FloatLabel>
-      </div>
-      <div className=''>
-        <FloatLabel>
-          <InputText className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="name"
-            value={userData?.name} onChange={(e) => setUserData({ ...userData, name: e.target.value })} autoComplete='off' />
-          <label htmlFor="name" className='-mt-[0.35rem]'>Name</label>
-        </FloatLabel>
-      </div>
-      <div className=''>
-        <FloatLabel>
-          <InputText type='password' className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="password"
-            value={userData?.password} onChange={(e) => setUserData({ ...userData, password: e.target.value })} autoComplete='off' />
-          <label htmlFor="password" className='-mt-[0.35rem]'>Password</label>
-        </FloatLabel>
-      </div>
-      <div className=''>
-        <FloatLabel>
-          <InputText type="text" className='rounded-xl w-full text-xs border border-slate-300 px-4 py-3' id="role"
-            value={userData?.role ?? ""} onChange={(e) => setUserData({ ...userData, role: e.target.value })} autoComplete='off' />
-          <label htmlFor="role" className='-mt-[0.35rem]'>Role</label>
-        </FloatLabel>
-      </div>
-      <div>
-        <Button type='submit' disabled={(!id && !userData.password) || (!!id && !userData.role) || !userData.name || !userData.username || isLoading || isLoadingUpdate}
+    <form className="admin-form space-y-5" onSubmit={onSubmit}>
+      <FormField label="Username" htmlFor="username" required>
+        <input
+          id="username"
+          className="admin-input"
+          value={userData?.username}
+          onChange={(e) => setUserData({ ...userData, username: e.target.value })}
+          autoComplete="off"
+          placeholder="Masukkan username"
+        />
+      </FormField>
+
+      <FormField label="Nama Lengkap" htmlFor="name" required>
+        <input
+          id="name"
+          className="admin-input"
+          value={userData?.name}
+          onChange={(e) => setUserData({ ...userData, name: e.target.value })}
+          autoComplete="off"
+          placeholder="Masukkan nama lengkap"
+        />
+      </FormField>
+
+      <FormField
+        label="Password"
+        htmlFor="password"
+        required={!id}
+        hint={id ? "Kosongkan jika tidak ingin mengubah password" : undefined}
+      >
+        <input
+          id="password"
+          type="password"
+          className="admin-input"
+          value={userData?.password}
+          onChange={(e) => setUserData({ ...userData, password: e.target.value })}
+          autoComplete="new-password"
+          placeholder={id ? "Kosongkan jika tidak diubah" : "Masukkan password"}
+        />
+      </FormField>
+
+      <FormField label="Role" htmlFor="role" required>
+        <select
+          id="role"
+          className="admin-input"
+          value={userData?.role ?? ""}
+          onChange={(e) => setUserData({ ...userData, role: e.target.value })}
+        >
+          <option value="">Pilih Role</option>
+          {ROLE_OPTIONS.map(r => (
+            <option key={r.value} value={r.value}>{r.label}</option>
+          ))}
+        </select>
+      </FormField>
+
+      <div className="pt-2">
+        <Button
+          type="submit"
+          disabled={isDisabled}
           loading={isLoading || isLoadingUpdate}
-          className='w-full border border-blue-400 text-blue-400 py-2 rounded-xl disabled:border-slate-300 disabled:text-slate-300 disabled:hover:bg-transparent disabled:hover:text-slate-300 hover:text-white hover:bg-blue-400'>
-          Submit
+          fullWidth
+          size="lg"
+        >
+          {id ? "Simpan Perubahan" : "Tambah User"}
         </Button>
       </div>
     </form>

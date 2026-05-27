@@ -2,6 +2,7 @@
 import { RenunganHarianInput } from '@/types/renunganharian'
 import React from 'react'
 import RenunganHarianForm from './RenunganHarianForm'
+import EditModalShell from '../UI/EditModalShell'
 
 type EditRenunganModalProps = {
     id: string,
@@ -10,12 +11,9 @@ type EditRenunganModalProps = {
 
 const EditRenunganModal = ({ id, renungan }: EditRenunganModalProps) => {
     return (
-        <div className='max-w-xl mx-auto'>
-            <h1 className='text-xl font-semibold'>Edit User</h1>
-            <div>
-                <RenunganHarianForm data={renungan} id={id} />
-            </div>
-        </div>
+        <EditModalShell title="Edit Renungan Harian" maxWidth="lg">
+            <RenunganHarianForm data={renungan} id={id} />
+        </EditModalShell>
     )
 }
 

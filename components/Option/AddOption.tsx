@@ -2,13 +2,13 @@
 import React from "react";
 import OptionForm from "./OptionForm";
 import { DefaultOptionInput } from "@/constants/optionConstant";
+import FormCard from "../UI/FormCard";
 
 const AddOption = () => {
   return (
-    <div>
-      <h1 className="mb-4 text-xl font-semibold">Add Option</h1>
+    <FormCard title="Tambah Option" backHref="/admin/option">
       <OptionForm option={DefaultOptionInput} />
-    </div>
+    </FormCard>
   );
 };
 

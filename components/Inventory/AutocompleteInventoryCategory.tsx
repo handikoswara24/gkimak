@@ -60,19 +60,17 @@ const AutocompleteInventoryCategory = ({
   };
 
   return (
-    <span className="p-float-label w-full">
-      <AutoComplete
-        inputId="ac"
-        field="name"
-        className="w-full"
-        inputClassName="rounded-xl w-full text-xs border border-slate-300 px-4 py-3"
-        value={selectedValue}
-        suggestions={filteredCategory}
-        completeMethod={search}
-        onChange={(e) => OnChangeAutocomplete(e)}
-      />
-      <label htmlFor="ac">Category</label>
-    </span>
+    <AutoComplete
+      inputId="ac"
+      field="name"
+      className="w-full"
+      inputClassName="admin-input"
+      value={selectedValue}
+      suggestions={filteredCategory}
+      completeMethod={search}
+      onChange={(e) => OnChangeAutocomplete(e)}
+      placeholder="Ketik untuk mencari kategori..."
+    />
   );
 };
 

@@ -2,13 +2,13 @@
 import React from "react";
 import BorrowItemForm from "./BorrowItemForm";
 import { BorrowItemDefault } from "@/constants/borrowItemConstant";
+import FormCard from "../UI/FormCard";
 
 const AddBorrowItem = () => {
   return (
-    <div>
-      <h1 className="mb-4 text-xl font-semibold">Add Borrow Item</h1>
+    <FormCard title="Tambah Peminjaman" backHref="/admin/borrowitem" maxWidth="lg">
       <BorrowItemForm input={structuredClone(BorrowItemDefault)} />
-    </div>
+    </FormCard>
   );
 };
 

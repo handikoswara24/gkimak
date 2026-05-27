@@ -37,6 +37,7 @@ const ManagedModal = () => {
       fullScreen
       onHide={closeModal}
       blockScroll
+      showCloseIcon={false}
       className={view?.toLocaleLowerCase() + "modalcustom"}
     >
       {view == "USERFORM" && (

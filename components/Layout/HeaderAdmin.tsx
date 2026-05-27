@@ -2,60 +2,66 @@
 
 import React from 'react'
 import DropdownUser from './DropDownUser';
+import { usePathname } from 'next/navigation';
+import { Menu } from 'lucide-react';
+
+const routeTitles: Record<string, string> = {
+  '/admin': 'Dashboard',
+  '/admin/listuser': 'List Users',
+  '/admin/adduser': 'Tambah User',
+  '/admin/renunganharian': 'Renungan Harian',
+  '/admin/addrenunganharian': 'Tambah Renungan',
+  '/admin/jemaat': 'Data Jemaat',
+  '/admin/addjemaat': 'Tambah Jemaat',
+  '/admin/inventorycategory': 'Kategori Inventaris',
+  '/admin/addinventorycategory': 'Tambah Kategori',
+  '/admin/inventory': 'Inventaris',
+  '/admin/addinventory': 'Tambah Inventaris',
+  '/admin/scaninventory': 'Scan Inventaris',
+  '/admin/borrowitem': 'Peminjaman',
+  '/admin/addborrowitem': 'Tambah Peminjaman',
+  '/admin/option': 'Options',
+  '/admin/addoption': 'Tambah Option',
+  '/admin/setting': 'Pengaturan',
+};
 
 const HeaderAdmin = (props: {
     sidebarOpen: string | boolean | undefined;
     setSidebarOpen: (arg0: boolean) => void;
 }) => {
+    const pathname = usePathname();
+    const pageTitle = routeTitles[pathname] ?? 'Admin';
+
     return (
-        <header className="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
-            <div className="flex flex-grow items-center justify-between px-4 py-4 shadow-2 md:px-6 2xl:px-11">
-                <div className="flex items-center gap-2 sm:gap-4 lg:hidden">
-                    {/* <!-- Hamburger Toggle BTN --> */}
+        <header className="sticky top-0 z-999 flex w-full bg-white border-b border-stroke">
+            <div className="flex flex-grow items-center justify-between px-4 py-3 md:px-6">
+                {/* Kiri: Hamburger + Judul Halaman */}
+                <div className="flex items-center gap-4">
                     <button
                         aria-controls="sidebar"
                         onClick={(e) => {
                             e.stopPropagation();
                             props.setSidebarOpen(!props.sidebarOpen);
                         }}
-                        className="z-99999 block rounded-sm border border-stroke bg-white p-1.5 shadow-sm dark:border-strokedark dark:bg-boxdark lg:hidden"
+                        className="lg:hidden flex items-center justify-center w-9 h-9 rounded-lg border border-stroke text-body hover:bg-gray hover:text-black transition-colors"
                     >
-                        <span className="relative block h-5.5 w-5.5 cursor-pointer">
-                            <span className="du-block absolute right-0 h-full w-full">
-                                <span
-                                    className={`relative left-0 top-0 my-1 block h-0.5 w-0 rounded-sm bg-black delay-[0] duration-200 ease-in-out dark:bg-white ${!props.sidebarOpen && "!w-full delay-300"
-                                        }`}
-                                ></span>
-                                <span
-                                    className={`relative left-0 top-0 my-1 block h-0.5 w-0 rounded-sm bg-black delay-150 duration-200 ease-in-out dark:bg-white ${!props.sidebarOpen && "delay-400 !w-full"
-                                        }`}
-                                ></span>
-                                <span
-                                    className={`relative left-0 top-0 my-1 block h-0.5 w-0 rounded-sm bg-black delay-200 duration-200 ease-in-out dark:bg-white ${!props.sidebarOpen && "!w-full delay-500"
-                                        }`}
-                                ></span>
-                            </span>
-                            <span className="absolute right-0 h-full w-full rotate-45">
-                                <span
-                                    className={`absolute left-2.5 top-0 block h-full w-0.5 rounded-sm bg-black delay-300 duration-200 ease-in-out dark:bg-white ${!props.sidebarOpen && "!h-0 !delay-[0]"
-                                        }`}
-                                ></span>
-                                <span
-                                    className={`delay-400 absolute left-0 top-2.5 block h-0.5 w-full rounded-sm bg-black duration-200 ease-in-out dark:bg-white ${!props.sidebarOpen && "!h-0 !delay-200"
-                                        }`}
-                                ></span>
-                            </span>
-                        </span>
+                        <Menu size={18} />
                     </button>
-                    {/* <!-- Hamburger Toggle BTN --> */}
-                </div>
-                <div className='h-8'>
 
+                    <div className="hidden lg:flex items-center gap-2 text-sm text-body">
+                        <span className="text-bodydark2">Admin</span>
+                        <span className="text-bodydark2">/</span>
+                        <span className="text-black font-semibold">{pageTitle}</span>
+                    </div>
+
+                    <div className="lg:hidden">
+                        <h1 className="text-sm font-semibold text-black">{pageTitle}</h1>
+                    </div>
                 </div>
-                <div className="flex items-center gap-3 2xsm:gap-7">
-                    <ul className="flex items-center gap-2 2xsm:gap-4">
-                        <DropdownUser />
-                    </ul>
+
+                {/* Kanan: User Dropdown */}
+                <div className="flex items-center gap-3">
+                    <DropdownUser />
                 </div>
             </div>
         </header>

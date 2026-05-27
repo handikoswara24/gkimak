@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import SidebarDropdown from "./SidebarDropdown";
+import { ChevronDown } from "lucide-react";
 
 const SidebarItem = ({ item, pageName, setPageName }: any) => {
   const handleClick = () => {
@@ -14,7 +15,7 @@ const SidebarItem = ({ item, pageName, setPageName }: any) => {
 
   const pathname = usePathname();
 
-  const isActive = (item: any) => {
+  const isActive = (item: any): boolean => {
     if (item.route === pathname) return true;
     if (item.children) {
       return item.children.some((child: any) => isActive(child));
@@ -23,49 +24,48 @@ const SidebarItem = ({ item, pageName, setPageName }: any) => {
   };
 
   const isItemActive = isActive(item);
+  const isOpen = pageName === item.label.toLowerCase();
 
   return (
-    <>
-      <li>
-        <Link
-          href={item.route}
-          onClick={handleClick}
-          className={`${isItemActive ? "bg-graydark dark:bg-meta-4" : ""} group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4`}
-        >
+    <li>
+      <Link
+        href={item.route}
+        onClick={handleClick}
+        className={`group relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium duration-200 ease-in-out
+          ${isItemActive
+            ? "bg-primary/20 text-white"
+            : "text-bodydark1 hover:bg-white/5 hover:text-white"
+          }`}
+      >
+        {/* Indikator aktif di kiri */}
+        {isItemActive && (
+          <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 rounded-r-full bg-primary" />
+        )}
+
+        <span className={`flex-shrink-0 ${isItemActive ? "text-primary" : "text-bodydark2 group-hover:text-white"}`}>
           {item.icon}
-          {item.label}
-          {item.children && (
-            <svg
-              className={`absolute right-4 top-1/2 -translate-y-1/2 fill-current ${
-                pageName === item.label.toLowerCase()? "rotate-180" : ""
-              }`}
-              width="20"
-              height="20"
-              viewBox="0 0 20 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M4.41107 6.9107C4.73651 6.58527 5.26414 6.58527 5.58958 6.9107L10.0003 11.3214L14.4111 6.91071C14.7365 6.58527 15.2641 6.58527 15.5896 6.91071C15.915 7.23614 15.915 7.76378 15.5896 8.08922L10.5896 13.0892C10.2641 13.4147 9.73651 13.4147 9.41107 13.0892L4.41107 8.08922C4.08563 7.76378 4.08563 7.23614 4.41107 6.9107Z"
-                fill=""
-              />
-            </svg>
-          )}
-        </Link>
+        </span>
+
+        <span className="flex-1 leading-snug">{item.label}</span>
 
         {item.children && (
-          <div
-            className={`translate transform overflow-hidden ${
-              pageName !== item.label.toLowerCase() && "hidden"
-            }`}
-          >
-            <SidebarDropdown item={item.children} />
-          </div>
+          <ChevronDown
+            size={14}
+            className={`flex-shrink-0 text-bodydark2 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+          />
         )}
-      </li>
-    </>
+      </Link>
+
+      {item.children && (
+        <div
+          className={`overflow-hidden transition-all duration-200 ease-in-out ${
+            isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+          }`}
+        >
+          <SidebarDropdown item={item.children} />
+        </div>
+      )}
+    </li>
   );
 };
 
