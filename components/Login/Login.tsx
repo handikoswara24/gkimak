@@ -7,6 +7,7 @@ import React, { useState } from 'react'
 import { toast } from 'react-toastify';
 import Button from '../UI/Button';
 import { useRouter } from 'next/navigation';
+import { Lock, User } from 'lucide-react';
 
 const Login = () => {
     const [, setToken] = useAtom(accessTokenAtom);
@@ -20,13 +21,13 @@ const Login = () => {
         e.preventDefault();
 
         if (!password || !username) {
-            toast.error("Please fill all fields");
+            toast.error("Harap isi semua field");
             return;
         }
 
         login(loginInput, {
             onSuccess: (data) => {
-                toast.success("Success");
+                toast.success("Login berhasil");
                 setLoginInput({ password: "", username: "" });
                 setToken(data?.token);
                 setUserData({
@@ -38,35 +39,70 @@ const Login = () => {
                 router.push("/admin/listuser");
             },
             onError: (error: any) => {
-                toast.error(error?.data?.errMessage);
+                toast.error(error?.data?.errMessage ?? "Login gagal");
             }
         })
     }
 
     return (
-        <form onSubmit={(e) => onLogin(e)}>
-            <div className="m-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
-                    Username
-                </label>
-                <input value={username} onChange={(e) => setLoginInput({ ...loginInput, username: e.target.value })}
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="username" type="text" placeholder="Username" autoComplete='off' />
+        <form onSubmit={onLogin} className="space-y-6">
+            <div>
+                <h2 className="text-2xl font-bold text-black">Masuk ke Admin Panel</h2>
+                <p className="mt-1 text-sm text-body">Masukkan kredensial Anda untuk melanjutkan</p>
             </div>
-            <div className="m-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-                    Password
-                </label>
-                <input value={password} onChange={(e) => setLoginInput({ ...loginInput, password: e.target.value })}
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="username" type="password" placeholder="Password" autoComplete='off' />
+
+            <div className="space-y-4">
+                <div>
+                    <label className="block text-sm font-medium text-black mb-1.5" htmlFor="username">
+                        Username
+                    </label>
+                    <div className="relative">
+                        <span className="absolute inset-y-0 left-3 flex items-center pointer-events-none text-body">
+                            <User size={16} />
+                        </span>
+                        <input
+                            id="username"
+                            type="text"
+                            value={username}
+                            onChange={(e) => setLoginInput({ ...loginInput, username: e.target.value })}
+                            className="admin-input pl-9"
+                            placeholder="Masukkan username"
+                            autoComplete="off"
+                        />
+                    </div>
+                </div>
+
+                <div>
+                    <label className="block text-sm font-medium text-black mb-1.5" htmlFor="password">
+                        Password
+                    </label>
+                    <div className="relative">
+                        <span className="absolute inset-y-0 left-3 flex items-center pointer-events-none text-body">
+                            <Lock size={16} />
+                        </span>
+                        <input
+                            id="password"
+                            type="password"
+                            value={password}
+                            onChange={(e) => setLoginInput({ ...loginInput, password: e.target.value })}
+                            className="admin-input pl-9"
+                            placeholder="Masukkan password"
+                            autoComplete="off"
+                        />
+                    </div>
+                </div>
             </div>
-            <div className="flex items-center justify-between m-4">
-                <Button type='submit' className='bg-blue-500 min-h-[2.5rem] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full text-center disabled:bg-gray-400 cursor-not-allowed'
-                    loading={isLoading} disabled={isLoading || (!password || !username)}>
-                    Sign In
-                </Button>
-            </div>
+
+            <Button
+                type="submit"
+                variant="primary"
+                size="lg"
+                fullWidth
+                loading={isLoading}
+                disabled={isLoading || !password || !username}
+            >
+                Masuk
+            </Button>
         </form>
     )
 }
