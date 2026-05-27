@@ -15,10 +15,10 @@ const RenunganCardWrapper = () => {
         )
     }
     return (
-        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 p-4 gap-4'>
-            {data?.renungan && data.renungan.map((d) => {
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
+            {data?.renungan && data.renungan.map((d, i) => {
                 return (
-                    <RenunganCard data={d} />
+                    <RenunganCard data={d} key={d._id} isFirst={i === 0} />
                 )
             })}
         </div>
